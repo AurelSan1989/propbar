@@ -1,0 +1,998 @@
+/* ==========================================================================
+   L'Impondérable — feuille de style unique
+   Mobile d'abord, un seul point de rupture à 768px.
+   Sommaire :
+     1.  Polices auto-hébergées
+     2.  Variables
+     3.  Base et réinitialisation
+     4.  Typographie
+     5.  Icônes SVG
+     6.  Boutons et focus
+     7.  En-tête
+     8.  Premier écran (hero)
+     9.  Présentation (story)
+     10. Ambiance (cartes)
+     11. Avis
+     12. Privatisation
+     13. Pied de page
+     14. Point de rupture 768px
+     15. Invitation au clic
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Polices auto-hébergées — jeu latin, graisses réellement utilisées
+   ========================================================================== */
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("../fonts/barlow-condensed-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Barlow Condensed";
+    src: url("../fonts/barlow-condensed-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("../fonts/plus-jakarta-sans-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("../fonts/plus-jakarta-sans-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* ==========================================================================
+   2. Variables
+   ========================================================================== */
+
+:root {
+    --fond: #121A2B;
+    --fond-carte: #1A2438;
+    --creme: #F2EBDD;
+    --creme-doux: #C3CAD8;
+    --orange: #F5824A;
+    --rouge: #E03020;
+    --ligne: #2A3549;
+
+    --titre: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --texte: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --rayon: 10px;
+    --rayon-sm: 6px;
+
+    --xs: 0.5rem;
+    --sm: 0.75rem;
+    --md: 1rem;
+    --lg: 1.5rem;
+    --xl: 2.5rem;
+
+    --cible: 44px;
+    --conteneur: 1100px;
+}
+
+
+/* ==========================================================================
+   3. Base et réinitialisation
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: var(--fond);
+    color: var(--creme);
+    font-family: var(--texte);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+}
+
+address {
+    font-style: normal;
+}
+
+section {
+    padding: var(--xl) var(--md);
+}
+
+
+/* ==========================================================================
+   4. Typographie
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    font-family: var(--titre);
+    color: var(--creme);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+}
+
+h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.625rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Surtitre de section : label court, jamais une information isolée */
+.eyebrow {
+    display: block;
+    font-family: var(--texte);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+strong {
+    font-weight: 600;
+    color: var(--orange);
+}
+
+a {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   5. Icônes SVG — dimensionnées ici, couleur héritée via stroke="currentColor"
+   ========================================================================== */
+
+.lucide {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+}
+
+.iconlogo {
+    width: 22px;
+    height: 22px;
+}
+
+
+/* ==========================================================================
+   6. Boutons et focus
+   ========================================================================== */
+
+/* Action dominante : un seul bouton plein par écran */
+.cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--xs);
+    min-height: 48px;
+    padding: var(--sm) var(--lg);
+    background-color: var(--orange);
+    color: var(--fond);
+    font-family: var(--titre);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: var(--rayon-sm);
+    text-align: center;
+}
+
+.cta:hover {
+    background-color: color-mix(in srgb, var(--orange) 82%, var(--creme));
+    text-decoration: none;
+}
+
+/* Action secondaire : contour seul, jamais de fond plein */
+.cta-secondaire {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: var(--sm) var(--lg);
+    border: 2px solid var(--orange);
+    border-radius: var(--rayon-sm);
+    color: var(--orange);
+    font-family: var(--titre);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+}
+
+/* Bouton contour (dont « Nous téléphoner ») : le contour se remplit */
+.cta-secondaire:hover {
+    background-color: var(--orange);
+    color: var(--fond);
+    text-decoration: none;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--cible);
+    min-height: var(--cible);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon-sm);
+    color: var(--orange);
+}
+
+.btn-icon:hover {
+    border-color: var(--orange);
+}
+
+:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   7. En-tête
+   ========================================================================== */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sm);
+    padding: var(--xs) var(--md);
+    background-color: var(--fond);
+    border-bottom: 1px solid var(--ligne);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    min-height: var(--cible);
+    color: var(--creme);
+    font-family: var(--titre);
+    font-size: 1.375rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.brand:hover {
+    text-decoration: none;
+    color: var(--orange);
+}
+
+
+/* ==========================================================================
+   8. Premier écran — compact pour garder « Voir la carte » visible sur 390x670
+   ========================================================================== */
+
+.hero {
+    padding: 0;
+}
+
+.hero-media {
+    height: 180px;
+    overflow: hidden;
+    background-color: var(--fond-carte);
+}
+
+/* Recadrage volontaire de la photo d'accroche, d'où l'exception à height:auto */
+.hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    padding: var(--md) var(--md) var(--lg);
+}
+
+.hero-content .eyebrow {
+    margin-bottom: 0.25rem;
+}
+
+.hero-content h1 {
+    margin-bottom: var(--sm);
+}
+
+.info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sm);
+    align-items: start;
+    padding: var(--sm);
+    margin-bottom: var(--xs);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+}
+
+.info .center-icon {
+    color: var(--orange);
+    padding-top: 2px;
+}
+
+.info-text p {
+    font-weight: 600;
+}
+
+.info-text span {
+    display: block;
+    color: var(--creme);
+}
+
+.hero-content .cta {
+    margin-top: var(--sm);
+}
+
+
+/* ==========================================================================
+   9. Présentation
+   ========================================================================== */
+
+.story {
+    background-color: var(--fond-carte);
+}
+
+.eyebrow-row {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    margin-bottom: var(--xs);
+}
+
+.story h2 {
+    margin-bottom: var(--md);
+}
+
+.story p {
+    margin-bottom: var(--md);
+}
+
+.story .lead {
+    font-size: 1.0625rem;
+}
+
+/* Phrase mise en avant : filet d'accent, pas de changement de couleur du texte */
+.text-important {
+    padding: var(--sm) var(--md);
+    background-color: var(--fond);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 var(--rayon-sm) var(--rayon-sm) 0;
+}
+
+.tags {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--xs);
+    margin-top: var(--lg);
+}
+
+.tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--xs);
+    padding: var(--sm) var(--xs);
+    background-color: var(--fond);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+    text-align: center;
+}
+
+.tag svg {
+    width: 24px;
+    height: 24px;
+    color: var(--orange);
+}
+
+.tag p {
+    font-family: var(--titre);
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+
+/* ==========================================================================
+   10. Ambiance — cartes photo
+   ========================================================================== */
+
+.ambiance-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--md);
+    margin-bottom: var(--lg);
+}
+
+.ambiance-header .center-icon {
+    color: var(--orange);
+}
+
+.ambiance-header .lucide-camera {
+    width: 26px;
+    height: 26px;
+}
+
+.ambiance-title .eyebrow {
+    margin-bottom: 0.25rem;
+}
+
+.card {
+    margin-bottom: var(--md);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+    overflow: hidden;
+}
+
+.card:last-child {
+    margin-bottom: 0;
+}
+
+.card-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background-color: var(--fond);
+    overflow: hidden;
+}
+
+/* Recadrage volontaire des photos de carte, d'où l'exception à height:auto */
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Emplacement encore sans photo : trame discrète plutôt qu'un bloc vide */
+.card-media:not(:has(img)) {
+    background-image: repeating-linear-gradient(
+        135deg,
+        var(--fond),
+        var(--fond) 12px,
+        var(--fond-carte) 12px,
+        var(--fond-carte) 24px
+    );
+}
+
+/* Crème sur --rouge : taille et graisse choisies pour rester au-dessus
+   du seuil de contraste AA applicable aux grands caractères */
+.tag-picture {
+    position: absolute;
+    top: var(--xs);
+    left: var(--xs);
+    padding: 2px 10px;
+    background-color: var(--rouge);
+    color: var(--creme);
+    font-family: var(--titre);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: var(--rayon-sm);
+}
+
+.card-body {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--xs);
+    padding: var(--sm) var(--md);
+}
+
+.card-body span {
+    font-family: var(--titre);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   11. Avis
+   ========================================================================== */
+
+.avis {
+    background-color: var(--fond-carte);
+}
+
+.avis h2 {
+    margin-bottom: var(--sm);
+}
+
+.avis p {
+    margin-bottom: var(--lg);
+}
+
+
+/* ==========================================================================
+   12. Privatisation
+   ========================================================================== */
+
+.privatisation h2 {
+    margin-bottom: var(--sm);
+}
+
+.privatisation > p {
+    margin-bottom: var(--lg);
+}
+
+.privatisation-reperes li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sm);
+    align-items: start;
+    padding: var(--sm);
+    margin-bottom: var(--xs);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+}
+
+.privatisation-reperes .center-icon {
+    color: var(--orange);
+    padding-top: 2px;
+}
+
+/* Repères encore à confirmer : traités comme mention provisoire */
+.privatisation-reperes span {
+    color: var(--creme-doux);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm);
+    margin-top: var(--lg);
+}
+
+
+/* ==========================================================================
+   13. Pied de page
+   ========================================================================== */
+
+footer {
+    padding: var(--xl) var(--md);
+    background-color: var(--fond-carte);
+    border-top: 1px solid var(--ligne);
+}
+
+.footer-marque {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    margin-bottom: var(--md);
+}
+
+.footer-marque span {
+    font-family: var(--titre);
+    font-size: 1.375rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+footer address {
+    margin-bottom: var(--lg);
+}
+
+.footer-horaires {
+    margin-bottom: var(--lg);
+}
+
+.footer-horaires h2 {
+    font-size: 1.25rem;
+    margin-bottom: var(--xs);
+}
+
+/* Horaires encore à confirmer : mentions provisoires */
+.footer-horaires p:nth-child(2),
+.footer-horaires p:nth-child(3) {
+    color: var(--creme-doux);
+}
+
+/* Lien au fil du texte : cible tactile portée à 44px sans casser le paragraphe */
+.footer-horaires p a {
+    position: relative;
+}
+
+.footer-horaires p a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: var(--cible);
+    transform: translateY(-50%);
+}
+
+.footer-liens {
+    margin-bottom: var(--lg);
+    border-top: 1px solid var(--ligne);
+}
+
+.footer-liens a {
+    display: flex;
+    align-items: center;
+    min-height: var(--cible);
+    border-bottom: 1px solid var(--ligne);
+}
+
+.message-sanitaire {
+    color: var(--creme-doux);
+    margin-bottom: var(--md);
+}
+
+.retour-haut a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--cible);
+    color: var(--creme-doux);
+}
+
+
+/* ==========================================================================
+   14. Point de rupture 768px
+   ========================================================================== */
+
+@media (min-width: 768px) {
+
+    /* Typographie */
+    h1 {
+        font-size: 3.25rem;
+    }
+
+    h2 {
+        font-size: 2.125rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Gabarit */
+    header {
+        padding: var(--xs) var(--lg);
+    }
+
+    section {
+        padding: var(--xl) var(--lg);
+    }
+
+    header {
+        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+    }
+
+    .story,
+    .avis,
+    .privatisation,
+    .ambiance,
+    .hero {
+        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+    }
+
+    /* Premier écran sur deux colonnes */
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--xl);
+        align-items: center;
+        padding-top: var(--xl);
+        padding-bottom: var(--xl);
+    }
+
+    .hero-media {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        border-radius: var(--rayon);
+        border: 1px solid var(--ligne);
+    }
+
+    .hero-content {
+        padding: 0;
+    }
+
+    .info {
+        padding: var(--md);
+        margin-bottom: var(--sm);
+    }
+
+    .hero-content .cta {
+        margin-top: var(--md);
+        display: inline-flex;
+    }
+
+    /* Longueur de ligne confortable sur grand écran */
+    .story p {
+        max-width: 68ch;
+    }
+
+    /* Ambiance sur trois colonnes */
+    .ambiance {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--md);
+        align-items: start;
+    }
+
+    .ambiance-header {
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+    }
+
+    .card {
+        margin-bottom: 0;
+    }
+
+    /* Avis et privatisation centrés */
+    .avis,
+    .privatisation {
+        text-align: center;
+    }
+
+    .avis .cta,
+    .privatisation .actions {
+        max-width: 26rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .privatisation-reperes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--md);
+        text-align: left;
+    }
+
+    .privatisation-reperes li {
+        margin-bottom: 0;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .actions .cta,
+    .actions .cta-secondaire {
+        flex: 1 1 0;
+    }
+
+    /* Pied de page sur trois colonnes */
+    footer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: var(--xl);
+        row-gap: var(--md);
+        align-items: start;
+        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+    }
+
+    .footer-marque {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 0;
+    }
+
+    footer address {
+        grid-column: 1;
+        grid-row: 2;
+        margin-bottom: 0;
+    }
+
+    .footer-horaires {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        margin-bottom: 0;
+    }
+
+    .footer-liens {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        margin-bottom: 0;
+        border-top: 0;
+    }
+
+    .footer-liens a {
+        border-bottom: 0;
+    }
+
+    .message-sanitaire {
+        grid-column: 1 / -1;
+        padding-top: var(--md);
+        border-top: 1px solid var(--ligne);
+        margin-bottom: 0;
+    }
+
+    .retour-haut {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* ==========================================================================
+   15. Invitation au clic
+   Au pointeur : survol. Au toucher : rejoué une fois à l'entrée à l'écran,
+   la classe .en-vue étant posée par js/app.js.
+   ========================================================================== */
+
+.cta,
+.cta-secondaire,
+.btn-icon {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cta svg,
+.btn-icon svg {
+    transition: transform 0.2s ease;
+}
+
+/* L'icône avance dans le sens de la lecture */
+.cta:hover svg {
+    transform: translateX(3px);
+}
+
+.btn-icon:hover {
+    border-color: var(--orange);
+}
+
+/* Le combiné sonne : oscillation amortie */
+@keyframes sonnerie {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-9deg); }
+    40% { transform: rotate(7deg); }
+    60% { transform: rotate(-5deg); }
+    80% { transform: rotate(3deg); }
+}
+
+/* Rappel périodique : deux oscillations, puis repos jusqu'au cycle suivant.
+   Le mouvement tient dans les 12 premiers pour cent, soit 0,7 s sur 6 s. */
+@keyframes rappel-telephone {
+    0%, 12%, 100% { transform: rotate(0); }
+    2% { transform: rotate(-9deg); }
+    4% { transform: rotate(8deg); }
+    6% { transform: rotate(-7deg); }
+    8% { transform: rotate(5deg); }
+    10% { transform: rotate(-3deg); }
+}
+
+.btn-icon svg {
+    animation: rappel-telephone 6s ease-in-out infinite;
+}
+
+.btn-icon:hover svg {
+    animation: sonnerie 0.5s ease;
+}
+
+.footer-liens a:hover {
+    color: var(--creme);
+}
+
+/* Équivalent tactile : seuls les appareils sans survol rejouent l'effet */
+@media (hover: none) {
+
+    @keyframes invite-fond {
+        35%, 65% { background-color: color-mix(in srgb, var(--orange) 82%, var(--creme)); }
+    }
+
+    @keyframes invite-contour {
+        35%, 65% {
+            background-color: var(--orange);
+            color: var(--fond);
+        }
+    }
+
+    @keyframes invite-icone {
+        35%, 65% { transform: translateX(3px); }
+    }
+
+    .cta.en-vue {
+        animation: invite-fond 0.9s ease;
+    }
+
+    .cta.en-vue svg {
+        animation: invite-icone 0.9s ease;
+    }
+
+    .cta-secondaire.en-vue {
+        animation: invite-contour 0.9s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cta,
+    .cta-secondaire,
+    .btn-icon,
+    .cta svg,
+    .btn-icon svg,
+    .btn-icon:hover svg,
+    .cta.en-vue,
+    .cta.en-vue svg,
+    .cta-secondaire.en-vue {
+        transition: none;
+        animation: none;
+    }
+
+    .cta:hover svg {
+        transform: none;
+    }
+}
