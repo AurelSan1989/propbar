@@ -1,0 +1,611 @@
+{
+  "sections": [
+    {
+      "id": "boissons",
+      "nom": "Boissons",
+      "categories": [
+        {
+            "id" : "boissons-fraiches",
+            "nom": "Boissons fraîches",
+            "articles" : [
+                {
+                    "nom" : "Coca-Cola",
+                    "contenance" : "33 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Coca-Cola sans sucres",
+                    "contenance" : "33 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Coca-Cola cherry",
+                    "contenance" : "33 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Fanta orange",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Sprite",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Fuzetea (pêche)",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Minute Maid orange",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Minute Maid pomme",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Minute Maid ananas",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Minute Maid abricot",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Minute Maid tomate",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Monster",
+                    "contenance" : "50 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Orangina",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Perrier",
+                    "contenance" : "25 cl",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Diabolo bouteille",
+                    "prix" : 4.10
+                },
+                {
+                    "nom": "Diabolo verre",
+                    "prix" : 3.50
+                },
+                {
+                    "nom": "Vittel",
+                    "contenance" : "33 cl",
+                    "prix" : 4.10
+                },{
+                    "nom": "Vittel",
+                    "contenance" : "1 litre",
+                    "prix" : 6.90
+                },
+                {
+                    "nom": "Badoit",
+                    "contenance" : "50 cl",
+                    "prix" : 6.90
+                }
+            ]
+        }, 
+        {
+            "id" : "boissons-chaudes",
+            "nom" : "Boissons chaudes",
+            "articles" : [
+                {
+                    "nom" : "Café / Café décaféiné",
+                    "prix" : 2.20
+                }, 
+                {
+                    "nom" : "Café noisette",
+                    "prix" : 2.30
+                },
+                {
+                    "nom": "Café double",
+                    "prix" : 3.90
+                },
+                {
+                    "nom": "Chocolat chaud",
+                    "prix" : 3.50
+                },
+                {
+                    "nom": "Cappuccino",
+                    "prix" : 4.00
+                },
+                {
+                    "nom": "Thé / Infusion",
+                    "prix" : 2.80
+                },
+                {
+                    "nom": "Café frappé",
+                    "prix" : 4.00
+                },
+                {
+                    "nom": "Chocolat frappé",
+                    "prix" : 4.00
+                },
+                {
+                    "nom": "Thé menthe maison",
+                    "prix" : 4.00
+                }
+            ]
+        },
+        {
+          "id": "bieres-bouteilles",
+          "nom": "Bières bouteilles",
+          "articles": [
+            { "nom": "Desperados", "prix": 6.00 },
+            { "nom": "Corona", "prix": 6.00 },
+            { "nom": "Super Bock", "prix": 3.00 },
+            { "nom": "Pelforth", "prix": 5.00 }
+          ]
+        }, 
+        {
+            "id" : "aperitifs",
+            "nom" : "Apéritifs",
+            "articles" : [
+                {
+                    "nom" : "Pastis ou Ricard",
+                    "prix" : 3.50
+                },
+                {
+                    "nom" : "Kir sirop au choix",
+                    "prix" : 4.30
+                },
+                {
+                    "nom" : "Porto rouge ou blanc",
+                    "prix" : 4.50 ,
+                    "contenance" : "5 cl"
+                },
+                {
+                    "nom" : "Martini au choix",
+                    "prix" : 5.00
+                }
+            ]
+        }, 
+        {
+            "id" : "digestifs-liqueurs",
+            "nom" : "Digestifs et liqueurs",
+            "articles" : [
+                {
+                    "nom" : "Cognac",
+                    "prix" : 5.00 
+                },
+                {
+                    "nom" : "Armagnac",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "Calvados",
+                    "prix" : 4.50
+                },
+                {
+                    "nom" : "Poire Williams",
+                    "prix" : 5.90
+                },
+                {
+                    "nom" : "Prune / Mirabelle",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "Baileys",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "Cointreau",
+                    "prix" : 5.50
+                },
+                {
+                    "nom" : "Vodka",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Vodka Absolut",
+                    "prix" : 6.90
+                },
+                {
+                    "nom" : "Rhum blanc",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "Rhum ambré",
+                    "prix" : 7.00
+                },
+                {
+                    "nom" : "Gin To",
+                    "prix" : 6.50
+                },
+                {
+                    "nom" : "Amaretto",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "Get 27 ou 31",
+                    "prix" : 5.00
+                }
+            ]
+        }, {
+            "id" : "whiskys-bourbons",
+            "nom" : "Whiskys et bourbons",
+            "articles" : [
+                {
+                    "nom" : "JB, Clan Campbell, Jameson",
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Chivas",
+                    "contenance" : "4 cl",
+                    "prix" : 8.00
+                },
+                {
+                    "nom" : "Ballantine's",
+                    "prix" : 7.00
+                },
+                {
+                    "nom" : "Jack Daniel's",
+                    "contenance" : "4 cl",
+                    "prix" : 9.00
+                },
+                {
+                    "nom" : "Irish Coffee",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Whisky japonais",
+                    "contenance" : "4 cl",
+                    "prix" : 12.00
+                }
+            ]
+        }, 
+        {
+            "id" : "vins-blancs",
+            "nom" : "Vins blancs",
+            "groupe" : "Vins",
+            "articles" : [
+                {
+                    "nom" : "Petit-Chablis",
+                    "prix" : 26.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Viognier",
+                    "prix" : 28.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Chardonnay",
+                    "prix" : 19.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Quincy",
+                    "prix" : 32.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Chablis 1er cru",
+                    "prix" : 35.00,
+                    "contenance" : "75 cl"
+                }
+            ]
+        },
+        {
+            "id" : "vins-rouges",
+            "nom" : "Vins rouges",
+            "groupe" : "Vins",
+            "articles" : [
+                {
+                    "nom" : "Syrah",
+                    "prix" : 25.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Pinot",
+                    "prix" : 25.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Brouilly",
+                    "prix" : 28.00,
+                    "contenance" : "75 cl"
+                },
+                {
+                    "nom" : "Côtes du rhône Bio",
+                    "prix" : 28.00,
+                    "contenance" : "75 cl"
+                }
+            ]
+        },
+        {
+            "id" : "vins-roses",
+            "nom" : "Rosés",
+            "groupe" : "Vins",
+            "articles" : [
+                {
+                    "nom" : "Rosé du moment (consultez le serveur)",
+                    "prix" : 22.00,
+                    "contenance" : "75 cl"
+                }
+            ]
+        },
+        {
+            "id" : "prosecco",
+            "nom" : "Prosecco",
+            "groupe" : "Vins",
+            "articles" : [
+                {
+                    "nom" : "Verre",
+                    "prix" : 5.00
+                },
+                {
+                    "nom" : "bouteille",
+                    "prix" : 22.00
+                }
+            ]
+        },
+        {
+            "id" : "vins-au-verre",
+            "nom" : "Vins au verre",
+            "groupe" : "Vins",
+            "articles" : [
+                {
+                    "nom" : "Merlot",
+                    "prix" : 4.00
+                },
+                {
+                    "nom" : "Côtes du rhône",
+                    "prix" : 4.00
+                }
+            ]
+        },
+        {
+            "id" : "cocktails",
+            "nom" : "Cocktails",
+            "articles" : [
+                {
+                    "nom" : "Caïpirinha",
+                    "description" : "Cachaça, citron vert, sucre de canne",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Sex and the Beach",
+                    "description" : "Vodka, crème de pêche, cranberries",
+                    "prix" :6.00
+                }, 
+                {
+                    "nom" : "Piña Colada",
+                    "description" : "Rhum, jus d'ananas, lait de coco",
+                    "prix": 6.00
+                },
+                {
+                    "nom" : "Mojito",
+                    "description" :"Citron, menthe, limonade, rhum",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Original Cuba Libre",
+                    "description" : "Rhum brun, Coca-Cola, citron vert",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" :"Moscow Mule",
+                    "description" : "Vodka, ginger beer, citron vert, sucre",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "London Mule",
+                    "prix" : 6.00
+                },{
+                    "nom" : "Spritz Aperol/Campari",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Cocktail signature",
+                    "prix" : 7.50
+                },
+                {
+                    "nom" : "Double Ricard",
+                    "prix" : 4.50
+                }
+            ]
+        }
+      ]
+    },
+    {
+        "id" : "restauration",
+        "nom" : "Restauration",
+        "categories" : [
+            {
+                "id" : "entrees",
+                "nom" : "Entrées",
+                "articles" : [
+                    {
+                        "nom" : "Oeuf cocotte",
+                        "prix" : 6.00
+                    },
+                    {
+                        "nom" : "Salade de gésiers",
+                        "prix" : 6.00
+                    },
+                    {
+                        "nom" : "Oeuf poché",
+                        "prix" : 6.00
+                    },
+                    {
+                        "nom" : "Velouté de légumes",
+                        "prix" : 6.00
+                    }
+                ]
+            },
+            {
+                "id" : "plats-express",
+                "nom" : "Plats express",
+                "articles" : [
+                    {
+                        "nom" : "Confit de canard",
+                        "prix" : 15.50
+                    },
+                    {
+                        "nom" : "Pavé de Saumon",
+                        "prix" : 16.00
+                    },
+                    {
+                        "nom" : "Entrecôte",
+                        "prix" : 17.90
+                    },
+                    {
+                        "nom" : "Cuisse de poulet rôtie",
+                        "prix" : 14.50
+                    },
+                    {
+                        "nom" : "Saucisse de Toulouse",
+                        "prix" : 15.00
+                    }
+                ]
+            },
+            {
+                "id" : "couscous",
+                "nom" : "Couscous",
+                "articles" : [
+                    {
+                        "nom": "Couscous végé",
+                        "prix" : 12.00
+                    },
+                    {
+                        "nom": "Couscous merguez",
+                        "prix" : 13.50
+                    },
+                    {
+                        "nom": "Couscous poulet fermier",
+                        "prix" : 14.50
+                    },
+                    {
+                        "nom": "Couscous brochettes",
+                        "prix" : 15.00
+                    },
+                    {
+                        "nom": "Couscous mixte",
+                        "description": "Boeuf, poulet, merguez",
+                        "prix" : 18.90
+                    }
+                ]
+            },
+            {
+                "id" : "suggestions",
+                "nom" : "Suggestions",
+                "articles" : [
+                    {
+                        "nom": "Grillades du jour",
+                        "prix" : 13.90
+                    },
+                    {
+                        "nom": "Poissons du jour",
+                        "prix" : 15.00
+                    },
+                    {
+                        "nom": "Burger du jour",
+                        "prix" : 14.50
+                    },
+                    {
+                        "nom": "Dessert du jour",
+                        "prix" : 4.50
+                    }
+                ]
+            },
+            {
+                "id" : "omelettes",
+                "nom" : "Omelettes",
+                "articles" : [
+                    {
+                        "nom": "Omelette nature",
+                        "prix" : 10.50
+                    },
+                    {
+                        "nom": "Omelette jambon fromage",
+                        "prix" : 11.50
+                    },
+                    {
+                        "nom": "Omelette légumes",
+                        "prix" : 12.50
+                    }
+                ]
+            },
+            {
+                "id" : "snacks",
+                "nom" : "Snacks",
+                "articles" : [
+                    {
+                        "nom" : "Croque-monsieur",
+                        "prix" : 12.00
+                    },
+                    {
+                        "nom" : "Croque-madame",
+                        "prix" : 12.90
+                    }
+                ]
+            },
+            {
+                "id" : "pizza",
+                "nom" : "Pizza",
+                "articles" : [
+                    {
+                        "nom" : "Margarita",
+                        "description" : "Sauce tomate, mozzarella, basilic",
+                        "prix" : 9.90
+                    },
+                    {
+                        "nom" : "Regina",
+                        "description" : "Sauce tomate, mozzarella, jambon blanc, champignon",
+                        "prix" : 14.90
+                    },
+                    {
+                        "nom" : "Calzone",
+                        "description" : "Sauce tomate, mozzarella, jambon, oeuf, basilic",
+                        "prix" : 14.90
+                    },
+                    {
+                        "nom" : "5 fromages",
+                        "description" : "Chèvre, roquefort, bleu, camembert, parmesan",
+                        "prix" : 15.90
+                    },
+                    {
+                        "nom" : "Végé",
+                        "description" : "Chèvre, courgette, mozzarella, champignons, oignons, poivrons, basilic ",
+                        "prix" : 15.90
+                    },
+                    {
+                        "nom" : "Napolitaine",
+                        "description" : "Sauce tomate, mozzarella, olives, oignons, anchois",
+                        "prix" : 14.90
+                    },
+                    {
+                        "nom" : "Buffala",
+                        "description" : "Burrata, tomate cerise, jambon cru ?, roquette",
+                        "prix" : 15.90
+                    },
+                    {
+                        "nom" : "Tartufata",
+                        "description" : "Crème de truffe, champignons, jambon, basilic",
+                        "prix" : 15.90
+                    }
+                ]
+            }
+        ]
+    }
+  ]
+}
