@@ -20,6 +20,8 @@
      16. Page des tarifs
 
    Classes produites par js/tarifs.js, toutes stylées en section 16 :
+     .categories-nav-lien     puce de la bande de catégories (tarifs.html)
+                              .est-actif quand sa catégorie est celle lue
      .tarifs-groupe           intertitre coiffant les catégories d'un même groupe
      .tarifs-categorie        bloc d'une catégorie
      .tarifs-categorie-titre  titre de catégorie, porte l'id servant d'ancre
@@ -104,6 +106,12 @@
 
     --cible: 44px;
     --conteneur: 1100px;
+
+    /* Hauteurs réelles des barres collantes de tarifs.html (mesurées, pas
+       estimées) : servent à caler la bande sous l'en-tête, et les ancres
+       sous les deux à la fois. Recalculer si l'une des deux barres change. */
+    --hauteur-entete: 61px;
+    --hauteur-nav-categories: 76px;
 }
 
 
@@ -153,6 +161,14 @@ address {
 
 section {
     padding: var(--xl) var(--md);
+}
+
+/* Défilement adouci vers les ancres (bande de catégories, retour en haut),
+   seulement si la personne n'a pas demandé de réduire les animations. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 
@@ -1036,6 +1052,72 @@ footer address {
     display: none !important;
 }
 
+/* Bande de catégories : collante juste sous l'en-tête, défile horizontalement. */
+.categories-nav {
+    position: sticky;
+    top: var(--hauteur-entete);
+    z-index: 9;
+    background-color: var(--fond);
+    border-bottom: 1px solid var(--ligne);
+}
+
+/* Dégradé de sortie : signale qu'il reste des puces hors champ, sans gêner le clic. */
+.categories-nav::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 28px;
+    background: linear-gradient(to right, transparent, var(--fond));
+    pointer-events: none;
+}
+
+.categories-nav-liste {
+    display: flex;
+    gap: var(--xs);
+    padding: var(--xs) var(--md);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+}
+
+.categories-nav-lien {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-height: var(--cible);
+    padding: 0 var(--md);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: 999px;
+    color: var(--creme-doux);
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    scroll-snap-align: start;
+}
+
+.categories-nav-lien:hover {
+    border-color: var(--orange);
+    text-decoration: none;
+}
+
+/* Catégorie actuellement lue, posée par le scrollspy dans js/tarifs.js. */
+.categories-nav-lien.est-actif {
+    background-color: var(--orange);
+    border-color: var(--orange);
+    color: var(--fond);
+}
+
+/* Les cibles des puces ne doivent pas atterrir sous l'en-tête ni la bande. */
+#ardoise-titre,
+.tarifs-categorie-titre,
+.tarifs-groupe {
+    scroll-margin-top: calc(var(--hauteur-entete) + var(--hauteur-nav-categories) + var(--sm));
+}
+
 .carte-happy,
 .carte-section {
     padding-top: var(--lg);
@@ -1050,12 +1132,12 @@ footer address {
 }
 
 /* Intertitre coiffant plusieurs catégories (les vins, par exemple) :
-   plus grand que les titres qu'il rassemble, pour que le rang se lise. */
+   plus grand que les titres qu'il rassemble, pour que le rang se lise.
+   scroll-margin-top est posé plus haut, avec celui des autres ancres. */
 .tarifs-groupe {
     font-size: 1.5rem;
     margin-bottom: var(--md);
     color: var(--orange);
-    scroll-margin-top: 72px;
 }
 
 .tarifs-categorie {
@@ -1066,8 +1148,7 @@ footer address {
     padding-bottom: var(--xs);
     margin-bottom: var(--sm);
     border-bottom: 1px solid var(--ligne);
-    /* L'en-tête collant ne doit pas masquer la cible d'une ancre. */
-    scroll-margin-top: 72px;
+    /* scroll-margin-top est posé plus haut, avec celui des autres ancres. */
 }
 
 .tarifs-note {

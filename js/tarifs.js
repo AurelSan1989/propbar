@@ -11,6 +11,15 @@ const ESPACE_INSECABLE = " ";
 // Précède le prix le plus bas d'une catégorie sur les cartes de l'accueil.
 const LIBELLE_PRIX_MINIMUM = "à partir de";
 
+// Étiquette de la puce renvoyant à l'ardoise, plus courte que le titre affiché.
+const LIBELLE_NAV_ARDOISE = "Happy Hour";
+
+// Distance à laisser au-dessus d'une catégorie visée par une ancre, pour qu'elle
+// n'atterrisse pas sous l'en-tête et la bande de catégories, tous deux collants.
+// Doit rester égale à --hauteur-entete + --hauteur-nav-categories + --sm dans le CSS
+// (61 + 76 + 12 mesurés) : à ajuster si l'une de ces trois valeurs change.
+const DECALAGE_ANCRE_PX = 149;
+
 
 /* --------------------------------------------------------------------------
    Formatage
@@ -41,6 +50,15 @@ function creerElement(balise, classe, texte) {
         element.textContent = texte;
     }
     return element;
+}
+
+// Transforme un intitulé libre (ex. « Vins ») en id d'ancre stable, sans accents.
+function creerIdDepuisTexte(texte) {
+    return "groupe-" + texte
+        .normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 }
 
 
@@ -158,18 +176,21 @@ function masquerSection(conteneur) {
     (section || conteneur).hidden = true;
 }
 
+// Renvoie true si l'ardoise a du contenu, pour que l'appelant sache si une
+// entrée de navigation doit lui être consacrée.
 function construireArdoise(conteneur, donnees) {
     const groupes = collecterGroupesReduits(donnees);
 
     if (groupes.length === 0) {
         masquerSection(conteneur);
-        return;
+        return false;
     }
 
     groupes.forEach(function (groupe) {
         // Pas d'ancre ici : les ids de catégorie appartiennent aux sections d'origine.
         conteneur.appendChild(creerBlocCategorie(groupe, { champPrix: "prixReduit" }));
     });
+    return true;
 }
 
 
@@ -186,14 +207,26 @@ function trouverSection(donnees, idSection) {
 // Les catégories partageant un même champ « groupe » sont coiffées d'un intertitre
 // unique, posé à la première d'entre elles. Elles passent alors d'un cran dans la
 // hiérarchie des titres pour que le regroupement se lise aussi hors du visuel.
+//
+// Renvoie la liste des entrées de navigation correspondant à ce qui vient d'être
+// construit (une entrée par catégorie isolée, une seule par groupe) : c'est ici,
+// pendant la construction réelle du DOM, que ce regroupement est décidé, donc
+// c'est aussi ici qu'il doit être lu plutôt que recalculé ailleurs.
 function construireSection(conteneur, section) {
+    const entreesNav = [];
     let groupeCourant = null;
 
     (section.categories || []).forEach(function (categorie) {
         const groupe = categorie.groupe || null;
 
         if (groupe && groupe !== groupeCourant) {
-            conteneur.appendChild(creerElement("h3", "tarifs-groupe", groupe));
+            const idGroupe = creerIdDepuisTexte(groupe);
+            const intertitre = creerElement("h3", "tarifs-groupe", groupe);
+            intertitre.id = idGroupe;
+            conteneur.appendChild(intertitre);
+            entreesNav.push({ id: idGroupe, nom: groupe });
+        } else if (!groupe) {
+            entreesNav.push({ id: categorie.id, nom: categorie.nom });
         }
         groupeCourant = groupe;
 
@@ -203,6 +236,95 @@ function construireSection(conteneur, section) {
             niveauTitre: groupe ? "h4" : "h3"
         }));
     });
+
+    return entreesNav;
+}
+
+
+/* --------------------------------------------------------------------------
+   Bande de catégories : une puce par entrée, la puce de la catégorie lue
+   se met en évidence pendant le défilement.
+   -------------------------------------------------------------------------- */
+
+function construireNavCategories(conteneur, entrees) {
+    const nav = conteneur.closest("nav");
+
+    if (entrees.length === 0) {
+        if (nav) {
+            nav.hidden = true;
+        }
+        return;
+    }
+
+    entrees.forEach(function (entree) {
+        const lien = creerElement("a", "categories-nav-lien", entree.nom);
+        lien.href = "#" + entree.id;
+        conteneur.appendChild(lien);
+    });
+}
+
+// Met en évidence, parmi les puces, celle de la catégorie actuellement lue.
+//
+// La catégorie active est la dernière, dans l'ordre du document, dont le
+// titre a déjà franchi la ligne de déclenchement (juste sous l'en-tête et la
+// bande collants) : à chaque défilement, on la recalcule entièrement à partir
+// des positions réelles à l'écran, plutôt que d'accumuler un état au fil du
+// temps — un état accumulé se trompe dès que deux titres courts se suivent
+// d'assez près pour tenir tous les deux dans une même bande de détection.
+//
+// Ce recalcul est déclenché par l'événement scroll (cadencé à une fois par
+// image), pas par IntersectionObserver : ce dernier ne prévient qu'aux
+// franchissements d'une bande étroite, et un défilement rapide peut faire
+// traverser cette bande à un titre court entre deux images affichées, sans
+// jamais déclencher de recalcul. L'événement scroll, lui, ne peut pas être
+// « sauté » de cette façon.
+function activerScrollspyCategories(entrees) {
+    const cibles = entrees
+        .map(function (entree) { return document.getElementById(entree.id); })
+        .filter(Boolean);
+
+    if (cibles.length === 0) {
+        return;
+    }
+
+    function activerPuce(idActif) {
+        document.querySelectorAll(".categories-nav-lien").forEach(function (lien) {
+            const estActif = lien.getAttribute("href") === "#" + idActif;
+            lien.classList.toggle("est-actif", estActif);
+            if (estActif) {
+                lien.setAttribute("aria-current", "true");
+            } else {
+                lien.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    function categorieActive() {
+        let idActif = cibles[0].id;
+        cibles.forEach(function (cible) {
+            if (cible.getBoundingClientRect().top <= DECALAGE_ANCRE_PX) {
+                idActif = cible.id;
+            }
+        });
+        return idActif;
+    }
+
+    let recalculPlanifie = false;
+    function planifierRecalcul() {
+        if (recalculPlanifie) {
+            return;
+        }
+        recalculPlanifie = true;
+        requestAnimationFrame(function () {
+            activerPuce(categorieActive());
+            recalculPlanifie = false;
+        });
+    }
+
+    window.addEventListener("scroll", planifierRecalcul, { passive: true });
+
+    // État initial, avant le premier défilement.
+    activerPuce(categorieActive());
 }
 
 
@@ -259,15 +381,20 @@ function conteneursTarifs() {
     return {
         ardoise: document.getElementById("ardoise"),
         boissons: document.getElementById("boissons"),
-        restauration: document.getElementById("restauration")
+        restauration: document.getElementById("restauration"),
+        navCategories: document.getElementById("categories-nav")
     };
 }
 
 function construirePageTarifs(donnees) {
     const conteneurs = conteneursTarifs();
+    const entreesNav = [];
 
     if (conteneurs.ardoise) {
-        construireArdoise(conteneurs.ardoise, donnees);
+        const ardoiseVisible = construireArdoise(conteneurs.ardoise, donnees);
+        if (ardoiseVisible) {
+            entreesNav.push({ id: "ardoise-titre", nom: LIBELLE_NAV_ARDOISE });
+        }
     }
 
     [["boissons", conteneurs.boissons], ["restauration", conteneurs.restauration]]
@@ -279,9 +406,14 @@ function construirePageTarifs(donnees) {
             }
             const section = trouverSection(donnees, idSection);
             if (section) {
-                construireSection(conteneur, section);
+                entreesNav.push.apply(entreesNav, construireSection(conteneur, section));
             }
         });
+
+    if (conteneurs.navCategories) {
+        construireNavCategories(conteneurs.navCategories, entreesNav);
+        activerScrollspyCategories(entreesNav);
+    }
 }
 
 
@@ -296,6 +428,14 @@ function afficherErreur() {
     // Sur l'accueil, aucun conteneur de tarifs : le prix reste simplement vide.
     if (!premier) {
         return;
+    }
+
+    // Une bande de catégories vide, sans rien à montrer en dessous, n'a pas lieu d'être.
+    if (conteneurs.navCategories) {
+        const nav = conteneurs.navCategories.closest("nav");
+        if (nav) {
+            nav.hidden = true;
+        }
     }
 
     const message = creerElement(
