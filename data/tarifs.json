@@ -606,6 +606,73 @@
                 ]
             }
         ]
+    },
+    {
+        "id" : "happyhour",
+        "nom" : "Happy Hour",
+        "categories" : [
+            {
+                "id" : "bieres-pression",
+                "nom": "Bières pression",
+                "articles" : [
+                    {
+                        "nom" : "Pinte de bonde",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 3.50
+                    },
+                    {
+                        "nom" : "Pinte de Monaco",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 4.50
+                    },
+                    {
+                        "nom" : "Pinte de Chouffe",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.00
+                    },
+                    {
+                        "nom" : "Pinte IPA artisanale",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.50
+                    },
+                    {
+                        "nom" : "Pinte de blonde artisanale",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.00
+                    },
+                    {
+                        "nom" : "Pinte de blanche",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 6.00
+                    },
+                    {
+                        "nom" : "Pinte Abbaye",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.00
+                    },
+                    {
+                        "nom" : "Pinte de Leffe",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.00
+                    },
+                    {
+                        "nom" : "Pinte de Tongerio",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 7.50
+                    },
+                    {
+                        "nom" : "Pinte de Picon",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 5.00
+                    },
+                    {
+                        "nom" : "Pinte de blonde avec sirop au choix",
+                        "contenance" : "50 cl",
+                        "prixReduit" : 4.00
+                    }
+                ]
+            }
+        ]
     }
   ]
 }

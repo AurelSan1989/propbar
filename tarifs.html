@@ -3,9 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages tarifs</title>
+    <title>L'impondérable Notre carte</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
+    <meta property="og:title" content="L'impondérable Notre carte">
+    <meta property="og:description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="TODO">
+    <meta property="og:image" content="TODO">
+    <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>En construction</h1>
+    <header id="top">
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
+        <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        </a>
+    </header>
+    <main>
+        <section class="carte-intro">
+            <h1>Notre carte</h1>
+        </section>
+
+        <section class="carte-happy">
+            <h2>Notre Happy Hour</h2>
+            <div id="ardoise"></div>
+        </section>
+
+        <section class="carte-section">
+            <h2>Boissons</h2>
+            <div id="boissons"></div>
+        </section>
+
+        <section class="carte-section">
+            <h2>Restauration</h2>
+            <div id="restauration"></div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-marque">
+            <img src="img/logo.svg" alt="" class="logo">
+            <span>L'Impondérable</span>
+        </div>
+
+        <address>
+            320 rue des Pyrénées, 75020 Paris<br>
+            Métro Jourdain
+        </address>
+
+        <div class="footer-horaires">
+            <h2>Horaires</h2>
+            <p>TODO — horaires habituels à confirmer</p>
+            <p>Happy hour : TODO — créneau à confirmer</p>
+            <p>
+                Horaires du jour et fermetures exceptionnelles sur
+                <a href="TODO-lien-fiche-google" target="_blank" rel="noopener">notre fiche Google</a>.
+            </p>
+        </div>
+
+        <ul class="footer-liens">
+            <li><a href="tel:+33983233914">TODO — numéro de téléphone</a></li>
+            <li><a href="TODO-lien-instagram" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+
+        <p class="message-sanitaire">
+            L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
+        </p>
+
+        <p class="retour-haut"><a href="#top">Retour en haut</a></p>
+    </footer>
+    <script src="js/app.js" defer></script>
+    <script src="js/tarifs.js" defer></script>
 </body>
 </html>

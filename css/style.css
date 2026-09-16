@@ -17,6 +17,26 @@
      13. Pied de page
      14. Point de rupture 768px
      15. Invitation au clic
+     16. Page des tarifs
+
+   Classes produites par js/tarifs.js, toutes stylées en section 16 :
+     .tarifs-groupe           intertitre coiffant les catégories d'un même groupe
+     .tarifs-categorie        bloc d'une catégorie
+     .tarifs-categorie-titre  titre de catégorie, porte l'id servant d'ancre
+     .tarifs-note             note de catégorie
+     .tarifs-lien-ardoise     renvoi discret vers l'ardoise
+     .tarifs-liste            liste des articles
+     .tarifs-article          une ligne d'article
+     .tarifs-article-texte    nom, contenance et description regroupés
+     .tarifs-nom              nom de l'article
+     .tarifs-contenance       contenance, quand elle existe
+     .tarifs-description      description, quand elle existe
+     .tarifs-prix             prix affiché, un seul par ligne
+     .tarifs-erreur           message affiché si la carte ne se charge pas
+     .card-prix               prix minimum sur les cartes de l'accueil
+                              (apparence héritée de « .card-body span »)
+     .card-prix-libelle       mention « à partir de » précédant ce prix
+     .card-prix-valeur        le montant lui-même
    ========================================================================== */
 
 
@@ -142,7 +162,8 @@ section {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
     margin: 0;
     font-family: var(--titre);
     color: var(--creme);
@@ -163,6 +184,11 @@ h2 {
 
 h3 {
     font-size: 1.25rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.125rem;
     font-weight: 600;
 }
 
@@ -546,13 +572,16 @@ header {
 
 .card-body {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
     gap: var(--xs);
     padding: var(--sm) var(--md);
 }
 
-.card-body span {
+/* Enfant direct seulement : les éléments imbriqués (le prix minimum et son
+   libellé) héritent de ce style sans spécificité, et peuvent donc l'ajuster. */
+.card-body > span {
     font-family: var(--titre);
     font-size: 1.125rem;
     font-weight: 600;
@@ -994,5 +1023,133 @@ footer address {
 
     .cta:hover svg {
         transform: none;
+    }
+}
+
+
+/* ==========================================================================
+   16. Page des tarifs — contenu construit par js/tarifs.js
+   ========================================================================== */
+
+/* La section ardoise se retire quand aucun prix réduit n'existe. */
+[hidden] {
+    display: none !important;
+}
+
+.carte-happy,
+.carte-section {
+    padding-top: var(--lg);
+}
+
+.carte-intro {
+    padding-bottom: 0;
+}
+
+.carte-happy {
+    background-color: var(--fond-carte);
+}
+
+/* Intertitre coiffant plusieurs catégories (les vins, par exemple) :
+   plus grand que les titres qu'il rassemble, pour que le rang se lise. */
+.tarifs-groupe {
+    font-size: 1.5rem;
+    margin-bottom: var(--md);
+    color: var(--orange);
+    scroll-margin-top: 72px;
+}
+
+.tarifs-categorie {
+    margin-bottom: var(--lg);
+}
+
+.tarifs-categorie-titre {
+    padding-bottom: var(--xs);
+    margin-bottom: var(--sm);
+    border-bottom: 1px solid var(--ligne);
+    /* L'en-tête collant ne doit pas masquer la cible d'une ancre. */
+    scroll-margin-top: 72px;
+}
+
+.tarifs-note {
+    margin-bottom: var(--sm);
+    color: var(--creme-doux);
+}
+
+.tarifs-lien-ardoise {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--cible);
+}
+
+.tarifs-liste {
+    display: flex;
+    flex-direction: column;
+}
+
+.tarifs-article {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--md);
+    padding: var(--xs) 0;
+    border-bottom: 1px solid var(--ligne);
+}
+
+.tarifs-article:last-child {
+    border-bottom: 0;
+}
+
+.tarifs-contenance {
+    color: var(--creme-doux);
+}
+
+.tarifs-nom + .tarifs-contenance::before {
+    content: " · ";
+}
+
+.tarifs-description {
+    color: var(--creme-doux);
+}
+
+.tarifs-prix {
+    font-family: var(--titre);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--orange);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.tarifs-erreur {
+    padding: var(--md);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-left: 3px solid var(--orange);
+    border-radius: var(--rayon);
+}
+
+/* .card-prix et .card-prix-valeur reçoivent leur apparence de « .card-body span »
+   (section 10), pour rester identiques au « 7j/7 » de la carte voisine. Vide,
+   .card-prix n'occupe aucune place tant que le prix n'est pas chargé. */
+.card-prix {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+
+/* Le libellé accompagne le prix sans lui disputer la vedette. */
+.card-prix-libelle {
+    font-family: var(--texte);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--creme-doux);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+@media (min-width: 768px) {
+
+    .tarifs-categorie {
+        margin-bottom: var(--xl);
     }
 }
