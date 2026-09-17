@@ -17,10 +17,23 @@
 <body>
     <header id="top">
         <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
-        <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon">
-            <svg xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-        </a>
+        <nav id="nav-principale" class="nav-principale">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="tarifs.html">Notre carte</a></li>
+                <li><a href="privatisation.html" aria-current="page">Privatiser</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon btn-appel">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            </a>
+            <button type="button" id="bouton-menu" class="btn-icon btn-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
+                <svg class="icone-menu-ouvrir lucide lucide-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+                <svg class="icone-menu-fermer lucide lucide-x" hidden xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
     </header>
     <main>
         <section class="privatisation-intro">
@@ -133,9 +146,11 @@
                 <p class="formulaire-rgpd">
                     Les informations de ce formulaire sont utilisées uniquement pour traiter
                     votre demande de privatisation et vous recontacter. Elles sont conservées
-                    TODO — durée à confirmer avec le gérant, puis supprimées. Conformément au
+                    3 ans, puis supprimées. Conformément au
                     RGPD, vous disposez d'un droit d'accès, de rectification et de suppression
-                    de vos données, à exercer TODO — adresse de contact à confirmer.
+                    de vos données, à exercer par courrier à l'adresse suivante :
+                    320 rue des Pyrénées, 75020 Paris. Nous nous engageons à répondre
+                    à toute demande dans un délai d'un mois.
                 </p>
 
                 <button type="submit" class="cta">Envoyer la demande</button>
@@ -145,7 +160,7 @@
                 <h3>Demande envoyée</h3>
                 <p>Nous avons bien reçu votre demande de privatisation pour le <strong id="confirmation-date"></strong>.</p>
                 <p>Pour toute question, appelez-nous au <a href="tel:+33983233914">09 83 23 39 14</a>.</p>
-                <p>Délai de réponse habituel : TODO — à confirmer avec le gérant.</p>
+                <p>Délai de réponse habituel : sous 48h.</p>
             </div>
 
             <p class="formulaire-panel formulaire-erreur-envoi" id="erreur-envoi" role="alert" hidden>
@@ -177,13 +192,13 @@
             <p>Happy hour : TODO — créneau à confirmer</p>
             <p>
                 Horaires du jour et fermetures exceptionnelles sur
-                <a href="TODO-lien-fiche-google" target="_blank" rel="noopener">notre fiche Google</a>.
+                <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener">notre fiche Google</a>.
             </p>
         </div>
 
         <ul class="footer-liens">
-            <li><a href="tel:+33983233914">TODO — numéro de téléphone</a></li>
-            <li><a href="TODO-lien-instagram" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="tel:+33983233914">09 83 23 39 14</a></li>
+            <li><a href="https://www.facebook.com/barlimponderable/" target="_blank" rel="noopener">Facebook</a></li>
             <li><a href="mentions-legales.html">Mentions légales</a></li>
         </ul>
 

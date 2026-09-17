@@ -20,6 +20,13 @@
      16. Page des tarifs
      17. Formulaire de privatisation
 
+   Classes du menu de navigation, communes aux trois pages et pilotées par
+   js/app.js, stylées en section 7 (et sa surcharge en section 14) :
+     .nav-principale.est-ouvert  panneau plein écran du menu mobile, affiché
+                                 tant que le bouton n'est pas refermé
+     body.menu-ouvert            bloque le défilement du fond derrière le
+                                 panneau ouvert
+
    Classes de privatisation.html dont le contenu change avec js/formulaire.js,
    stylées en section 17 :
      .champ-erreur          message d'erreur sous un champ (texte posé par le
@@ -385,6 +392,65 @@ header {
 .brand:hover {
     text-decoration: none;
     color: var(--orange);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+}
+
+/* Panneau plein écran sous l'en-tête, masqué tant que le menu n'est pas ouvert */
+.nav-principale {
+    display: none;
+    position: fixed;
+    top: var(--hauteur-entete);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    overflow-y: auto;
+    background-color: var(--fond);
+}
+
+.nav-principale.est-ouvert {
+    display: block;
+}
+
+.nav-principale ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--xs);
+    margin: 0;
+    padding: var(--lg) var(--md);
+    list-style: none;
+}
+
+.nav-principale a {
+    display: flex;
+    align-items: center;
+    min-height: var(--cible);
+    padding: 0 var(--sm);
+    border-radius: var(--rayon-sm);
+    color: var(--creme);
+    font-family: var(--titre);
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.nav-principale a:hover {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+.nav-principale a[aria-current="page"] {
+    color: var(--orange);
+}
+
+/* Empêche le fond de défiler derrière le panneau ouvert */
+body.menu-ouvert {
+    overflow: hidden;
 }
 
 
@@ -797,6 +863,38 @@ footer address {
     header {
         padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
         padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        justify-content: flex-start;
+        gap: var(--lg);
+    }
+
+    /* Nav classique en ligne, plus de panneau ni de bouton menu */
+    .btn-menu {
+        display: none;
+    }
+
+    .nav-principale {
+        display: block;
+        position: static;
+        overflow: visible;
+        background-color: transparent;
+        z-index: auto;
+    }
+
+    .nav-principale ul {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--md);
+        padding: 0;
+    }
+
+    .nav-principale a {
+        min-height: auto;
+        padding: var(--xs) 0;
+        font-size: 1rem;
+    }
+
+    .header-actions {
+        margin-left: auto;
     }
 
     .story,
@@ -994,11 +1092,11 @@ footer address {
     10% { transform: rotate(-3deg); }
 }
 
-.btn-icon svg {
+.btn-appel svg {
     animation: rappel-telephone 6s ease-in-out infinite;
 }
 
-.btn-icon:hover svg {
+.btn-appel:hover svg {
     animation: sonnerie 0.5s ease;
 }
 
