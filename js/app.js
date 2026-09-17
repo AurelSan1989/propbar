@@ -19,6 +19,30 @@ if ("IntersectionObserver" in window) {
     });
 }
 
+// Fondu d'apparition des sections au défilement. L'état masqué est posé ici,
+// en JS, plutôt que dans le CSS de base : si le script ne s'exécute pas (JS
+// coupé, erreur), les sections restent simplement visibles — cet effet est
+// un ajout, jamais une condition d'affichage.
+const preferenceReduite = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!preferenceReduite && "IntersectionObserver" in window) {
+    const sections = document.querySelectorAll("main > section");
+
+    const observateurSections = new IntersectionObserver(function (entrees) {
+        entrees.forEach(function (entree) {
+            if (entree.isIntersecting) {
+                entree.target.classList.add("section-visible");
+                observateurSections.unobserve(entree.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(function (section) {
+        section.classList.add("section-en-attente");
+        observateurSections.observe(section);
+    });
+}
+
 // Menu mobile : panneau plein écran ouvert/fermé par le bouton hamburger.
 // Sur desktop (768px+), le CSS affiche la nav en ligne et cache ce bouton :
 // le script n'a alors plus rien à faire.

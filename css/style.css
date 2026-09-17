@@ -20,6 +20,7 @@
      16. Page des tarifs
      17. Formulaire de privatisation
      18. Page des mentions légales
+     19. Barre d'action flottante (mobile)
 
    Classes du menu de navigation, communes aux trois pages et pilotées par
    js/app.js, stylées en section 7 (et sa surcharge en section 14) :
@@ -138,6 +139,7 @@
        sous les deux à la fois. Recalculer si l'une des deux barres change. */
     --hauteur-entete: 61px;
     --hauteur-nav-categories: 76px;
+    --hauteur-barre-flottante: 81px;
 }
 
 
@@ -280,6 +282,14 @@ a:hover {
 .logo {
     width: 32px;
     height: 32px;
+    transition: transform 0.2s ease;
+}
+
+/* La feuille est une <img> (fichier SVG externe) : elle ne peut pas hériter
+   d'un changement de couleur CSS comme le ferait un SVG intégré au HTML,
+   d'où ce léger agrandissement plutôt qu'un changement de teinte. */
+.brand:hover .logo {
+    transform: scale(1.08);
 }
 
 .iconlogo {
@@ -376,8 +386,21 @@ header {
     justify-content: space-between;
     gap: var(--sm);
     padding: var(--xs) var(--md);
-    background-color: var(--fond);
     border-bottom: 1px solid var(--ligne);
+}
+
+/* Le flou vit sur ce calque séparé plutôt que sur <header> lui-même : un
+   filtre CSS sur un ancêtre devient le repère de positionnement de ses
+   descendants en position fixed — ça écraserait le panneau du menu mobile
+   (posé plus bas dans ce même <header>) à une hauteur de 0. */
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: color-mix(in srgb, var(--fond) 88%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 .brand {
@@ -641,6 +664,14 @@ body.menu-ouvert {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Réservé aux appareils à survol réel : un doigt ne « survole » pas une carte. */
+@media (hover: hover) {
+    .card:hover .card-media img {
+        transform: scale(1.05);
+    }
 }
 
 /* Emplacement encore sans photo : trame discrète plutôt qu'un bloc vide */
@@ -1193,6 +1224,18 @@ footer address {
     color: var(--creme);
 }
 
+/* Fondu d'apparition des sections au défilement, posé par js/app.js. */
+.section-en-attente {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-en-attente.section-visible {
+    opacity: 1;
+    transform: none;
+}
+
 /* Équivalent tactile : seuls les appareils sans survol rejouent l'effet */
 @media (hover: none) {
 
@@ -1234,9 +1277,19 @@ footer address {
     .btn-icon:hover svg,
     .cta.en-vue,
     .cta.en-vue svg,
-    .cta-secondaire.en-vue {
+    .cta-secondaire.en-vue,
+    .categories-nav-lien,
+    .formulaire-panel-fermer,
+    .logo,
+    .card-media img {
         transition: none;
         animation: none;
+    }
+
+    .section-en-attente {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 
     .cta:hover svg {
@@ -1295,6 +1348,10 @@ footer address {
     border: 1px solid var(--ligne);
     border-radius: 999px;
     color: var(--creme-doux);
+    /* Même douceur que les boutons du reste du site (section 15) : le
+       changement de puce active au défilement ne doit pas être plus sec
+       qu'un simple survol de bouton. */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
@@ -1656,12 +1713,42 @@ footer address {
 /* --- Confirmation et échec d'envoi : même gabarit de panneau --- */
 
 .formulaire-panel {
+    position: relative;
     margin-top: var(--md);
     padding: var(--md);
+    padding-right: calc(var(--cible) + var(--sm));
     background-color: var(--fond-carte);
     border: 1px solid var(--ligne);
     border-left: 3px solid var(--orange);
     border-radius: var(--rayon);
+}
+
+/* Cible tactile pleine (44px) mais icône discrète : le panneau reste lisible
+   sans qu'un deuxième bouton bordé ne fasse concurrence au bouton d'envoi. */
+.formulaire-panel-fermer {
+    position: absolute;
+    top: var(--xs);
+    right: var(--xs);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--cible);
+    height: var(--cible);
+    background: none;
+    border: none;
+    border-radius: var(--rayon-sm);
+    color: var(--creme-doux);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.formulaire-panel-fermer:hover {
+    background-color: var(--fond);
+    color: var(--orange);
+}
+
+.formulaire-panel-fermer svg {
+    width: 18px;
+    height: 18px;
 }
 
 .formulaire-panel h3 {
@@ -1749,4 +1836,54 @@ footer address {
 
 .mentions-legales p {
     margin-bottom: var(--sm);
+}
+
+
+/* ==========================================================================
+   19. Barre d'action flottante (mobile uniquement)
+   ========================================================================== */
+
+.barre-flottante {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    padding: var(--sm) var(--md);
+    padding-bottom: calc(var(--sm) + env(safe-area-inset-bottom, 0px));
+    background-color: color-mix(in srgb, var(--fond) 92%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--ligne);
+}
+
+.barre-flottante .cta {
+    width: 100%;
+}
+
+/* Le panneau du menu mobile occupe déjà tout l'écran sous l'en-tête : la
+   barre ne doit pas rester visible par-dessus pendant qu'il est ouvert. */
+body.menu-ouvert .barre-flottante {
+    display: none;
+}
+
+/* Laisse la place à la barre en bas de page, seulement sur les pages qui en
+   ont une (:has cible le pied de page d'après le frère qui le suit dans le
+   HTML). C'est le pied de page qui reçoit cet espace, pas <main> : il vient
+   après dans le document, c'est donc son propre bas qui finirait sinon
+   masqué derrière la barre fixe. */
+footer:has(~ .barre-flottante) {
+    padding-bottom: calc(var(--xl) + var(--hauteur-barre-flottante));
+}
+
+@media (min-width: 768px) {
+    /* La nav du bureau, toujours visible dans l'en-tête, remplit déjà ce
+       rôle en permanence : la barre flottante n'a plus lieu d'être. */
+    .barre-flottante {
+        display: none;
+    }
+
+    footer {
+        padding-bottom: var(--xl);
+    }
 }

@@ -154,6 +154,22 @@ if (formulaire) {
         blocErreurEnvoi.hidden = true;
     }
 
+    // Croix de fermeture, commune aux deux panneaux : fermer la confirmation
+    // réinitialise aussi le formulaire, pour repartir sur une demande neuve
+    // plutôt que de laisser les anciennes valeurs affichées en arrière-plan.
+    // Fermer le message d'échec, lui, garde le formulaire et ses valeurs tel
+    // quel : la personne n'a pas à tout retaper pour réessayer.
+    document.querySelectorAll(".formulaire-panel-fermer").forEach(function (bouton) {
+        bouton.addEventListener("click", function () {
+            const panneau = bouton.closest(".formulaire-panel");
+            panneau.hidden = true;
+            if (panneau === blocConfirmation) {
+                formulaire.hidden = false;
+                formulaire.reset();
+            }
+        });
+    });
+
 
     /* ----------------------------------------------------------------------
        Envoi par EmailJS

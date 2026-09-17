@@ -14,8 +14,8 @@
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <header id="top">
+<body id="top">
+    <header>
         <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
         <nav id="nav-principale" class="nav-principale">
             <ul>
@@ -154,16 +154,24 @@
             </form>
 
             <div class="formulaire-panel formulaire-confirmation" id="confirmation" role="status" hidden>
+                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
                 <h3>Demande envoyée</h3>
                 <p>Nous avons bien reçu votre demande de privatisation pour le <strong id="confirmation-date"></strong>.</p>
                 <p>Pour toute question, appelez-nous au <a href="tel:+33983233914">09 83 23 39 14</a>.</p>
                 <p>Délai de réponse habituel : sous 48h.</p>
             </div>
 
-            <p class="formulaire-panel formulaire-erreur-envoi" id="erreur-envoi" role="alert" hidden>
-                L'envoi a échoué. Vous pouvez réessayer, ou nous appeler directement au
-                <a href="tel:+33983233914">09 83 23 39 14</a>.
-            </p>
+            <div class="formulaire-panel formulaire-erreur-envoi" id="erreur-envoi" role="alert" hidden>
+                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <p>
+                    L'envoi a échoué. Vous pouvez réessayer, ou nous appeler directement au
+                    <a href="tel:+33983233914">09 83 23 39 14</a>.
+                </p>
+            </div>
         </section>
 
         <section class="privatisation-contact-direct">
