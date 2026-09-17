@@ -706,6 +706,55 @@ body.menu-ouvert {
     margin-bottom: var(--lg);
 }
 
+.avis-note {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    margin-bottom: var(--lg);
+}
+
+/* Décoratif : la note exacte est donnée en texte juste à côté, jamais par la couleur ou l'icône seule */
+.avis-etoiles {
+    color: var(--orange);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+}
+
+.avis-note p {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.avis-note p span {
+    color: var(--creme-doux);
+    font-weight: 400;
+}
+
+.avis-liste {
+    display: grid;
+    gap: var(--md);
+    margin-bottom: var(--lg);
+}
+
+.avis-carte {
+    margin: 0;
+    padding: var(--md);
+    background-color: var(--fond);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+    text-align: left;
+}
+
+.avis-carte p {
+    margin-bottom: var(--xs);
+}
+
+.avis-carte cite {
+    color: var(--creme-doux);
+    font-style: normal;
+    font-size: 1rem;
+}
+
 
 /* ==========================================================================
    12. Privatisation
@@ -973,6 +1022,14 @@ footer address {
         max-width: 26rem;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .avis-note {
+        justify-content: center;
+    }
+
+    .avis-liste {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .privatisation-reperes {
