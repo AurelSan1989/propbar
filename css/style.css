@@ -45,6 +45,9 @@
                               devient un lien de colonne latérale au-delà
                               de 768px. .est-actif quand sa catégorie est
                               celle lue
+     .categories-nav-rubrique étiquette de rubrique (Happy Hour / Boissons /
+                              Restauration) au-dessus d'un groupe de puces ;
+                              visible seulement dans la colonne latérale
      .tarifs-groupe           intertitre coiffant les catégories d'un même groupe
      .tarifs-categorie        bloc d'une catégorie
      .tarifs-categorie-titre  titre de catégorie, porte l'id servant d'ancre
@@ -1272,6 +1275,12 @@ footer address {
     scroll-snap-align: start;
 }
 
+/* Repère de rubrique : seule la colonne latérale du bureau a la place de le
+   montrer sans nuire à la bande de puces défilante du mobile (voir plus bas). */
+.categories-nav-rubrique {
+    display: none;
+}
+
 .categories-nav-lien:hover {
     border-color: var(--orange);
     text-decoration: none;
@@ -1453,6 +1462,22 @@ footer address {
         width: 100%;
         border-radius: var(--rayon-sm);
         scroll-snap-align: none;
+    }
+
+    .categories-nav-rubrique {
+        display: block;
+        margin: var(--md) 0 var(--xs);
+        padding: 0 var(--sm);
+        color: var(--creme-doux);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    /* La première rubrique n'a pas besoin de l'écart qui sépare les suivantes. */
+    .categories-nav-rubrique:first-child {
+        margin-top: 0;
     }
 
     /* La colonne latérale ne consomme plus de hauteur en haut de l'écran

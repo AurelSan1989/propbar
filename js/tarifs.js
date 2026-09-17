@@ -14,6 +14,12 @@ const LIBELLE_PRIX_MINIMUM = "à partir de";
 // Étiquette de la puce renvoyant à l'ardoise, plus courte que le titre affiché.
 const LIBELLE_NAV_ARDOISE = "Happy Hour";
 
+// Un saut d'ancre n'atterrit jamais tout à fait au pixel près sur la valeur CSS
+// visée (arrondi sous-pixel du navigateur pendant le défilement, de l'ordre
+// du demi-pixel) : sans cette tolérance, la comparaison stricte du scrollspy
+// échoue au hasard selon le sens de l'arrondi, et la puce cliquée ne s'allume pas.
+const TOLERANCE_ANCRE_PX = 2;
+
 // Distance à laisser au-dessus d'une catégorie visée par une ancre, pour
 // qu'elle n'atterrisse pas sous l'en-tête (et, sur mobile, sous la bande de
 // catégories qui lui est propre). Cette distance diffère entre mobile et
@@ -261,7 +267,15 @@ function construireNavCategories(conteneur, entrees) {
         return;
     }
 
+    // Étiquette au-dessus de chaque rubrique (Happy Hour / Boissons / Restauration) :
+    // n'apparaît visuellement que dans la colonne latérale du bureau (voir le CSS),
+    // la bande horizontale du mobile reste une simple suite de puces.
+    let rubriqueCourante = null;
     entrees.forEach(function (entree) {
+        if (entree.rubrique && entree.rubrique !== rubriqueCourante) {
+            conteneur.appendChild(creerElement("p", "categories-nav-rubrique", entree.rubrique));
+            rubriqueCourante = entree.rubrique;
+        }
         const lien = creerElement("a", "categories-nav-lien", entree.nom);
         lien.href = "#" + entree.id;
         conteneur.appendChild(lien);
@@ -310,9 +324,20 @@ function activerScrollspyCategories(entrees) {
     let decalageAncrePx = lireDecalageAncrePx(cibles[0]);
 
     function categorieActive() {
+        // La dernière catégorie peut n'avoir jamais assez de place en dessous
+        // (juste le pied de page) pour que son titre atteigne la ligne de
+        // déclenchement, même une fois la page défilée au maximum : sans ce
+        // cas particulier, sa puce ne s'allumerait alors jamais. Arrivé en
+        // bas de la page, c'est donc elle qui fait foi.
+        const enBasDePage = window.scrollY + window.innerHeight
+            >= document.documentElement.scrollHeight - TOLERANCE_ANCRE_PX;
+        if (enBasDePage) {
+            return cibles[cibles.length - 1].id;
+        }
+
         let idActif = cibles[0].id;
         cibles.forEach(function (cible) {
-            if (cible.getBoundingClientRect().top <= decalageAncrePx) {
+            if (cible.getBoundingClientRect().top <= decalageAncrePx + TOLERANCE_ANCRE_PX) {
                 idActif = cible.id;
             }
         });
@@ -407,20 +432,27 @@ function construirePageTarifs(donnees) {
     if (conteneurs.ardoise) {
         const ardoiseVisible = construireArdoise(conteneurs.ardoise, donnees);
         if (ardoiseVisible) {
-            entreesNav.push({ id: "ardoise-titre", nom: LIBELLE_NAV_ARDOISE });
+            entreesNav.push({ id: "ardoise-titre", nom: LIBELLE_NAV_ARDOISE, rubrique: LIBELLE_NAV_ARDOISE });
         }
     }
 
-    [["boissons", conteneurs.boissons], ["restauration", conteneurs.restauration]]
-        .forEach(function (paire) {
-            const idSection = paire[0];
-            const conteneur = paire[1];
+    // Le nom de rubrique reprend le h2 déjà affiché au-dessus de chaque section
+    // dans tarifs.html : distinct du champ « groupe » des catégories (les vins,
+    // par exemple), qui organise l'intérieur d'une seule section.
+    [["boissons", conteneurs.boissons, "Boissons"], ["restauration", conteneurs.restauration, "Restauration"]]
+        .forEach(function (triplet) {
+            const idSection = triplet[0];
+            const conteneur = triplet[1];
+            const rubrique = triplet[2];
             if (!conteneur) {
                 return;
             }
             const section = trouverSection(donnees, idSection);
             if (section) {
-                entreesNav.push.apply(entreesNav, construireSection(conteneur, section));
+                construireSection(conteneur, section).forEach(function (entree) {
+                    entree.rubrique = rubrique;
+                    entreesNav.push(entree);
+                });
             }
         });
 
