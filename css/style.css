@@ -18,10 +18,25 @@
      14. Point de rupture 768px
      15. Invitation au clic
      16. Page des tarifs
+     17. Formulaire de privatisation
+
+   Classes de privatisation.html dont le contenu change avec js/formulaire.js,
+   stylées en section 17 :
+     .champ-erreur          message d'erreur sous un champ (texte posé par le
+                            script, jamais vide dans le HTML de départ) ;
+                            un repère visuel (le point rouge) s'ajoute au
+                            texte dès qu'elle en contient, jamais à sa place
+     .formulaire-panel      confirmation d'envoi ou message d'échec, les deux
+                            masqués par défaut (attribut hidden) et révélés
+                            par le script
 
    Classes produites par js/tarifs.js, toutes stylées en section 16 :
-     .categories-nav-lien     puce de la bande de catégories (tarifs.html)
-                              .est-actif quand sa catégorie est celle lue
+     .page-carte              colonne latérale + contenu (desktop), simple
+                              empilement sur mobile — posée dans tarifs.html
+     .categories-nav-lien     puce de la bande de catégories (tarifs.html) ;
+                              devient un lien de colonne latérale au-delà
+                              de 768px. .est-actif quand sa catégorie est
+                              celle lue
      .tarifs-groupe           intertitre coiffant les catégories d'un même groupe
      .tarifs-categorie        bloc d'une catégorie
      .tarifs-categorie-titre  titre de catégorie, porte l'id servant d'ancre
@@ -1232,5 +1247,272 @@ footer address {
 
     .tarifs-categorie {
         margin-bottom: var(--xl);
+    }
+
+    /* Sur grand écran, la bande devient une colonne latérale fixe plutôt qu'un
+       défilement horizontal : plus naturelle à la souris, et tout y tient
+       sans avoir à faire glisser quoi que ce soit. */
+    .page-carte {
+        display: grid;
+        grid-template-columns: minmax(200px, 240px) 1fr;
+        align-items: start;
+        gap: var(--xl);
+        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+    }
+
+    .page-carte > main {
+        min-width: 0;
+    }
+
+    .page-carte main section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .categories-nav {
+        max-height: calc(100vh - var(--hauteur-entete));
+        overflow-y: auto;
+        background-color: transparent;
+        border-bottom: 0;
+        border-right: 1px solid var(--ligne);
+    }
+
+    .categories-nav::after {
+        display: none;
+    }
+
+    .categories-nav-liste {
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--md) var(--sm) var(--md) 0;
+        overflow-x: visible;
+        scroll-snap-type: none;
+    }
+
+    .categories-nav-lien {
+        justify-content: flex-start;
+        width: 100%;
+        border-radius: var(--rayon-sm);
+        scroll-snap-align: none;
+    }
+
+    /* La colonne latérale ne consomme plus de hauteur en haut de l'écran
+       (contrairement à la bande horizontale sur mobile) : le décalage des
+       ancres n'a donc plus besoin d'y faire de place. */
+    #ardoise-titre,
+    .tarifs-categorie-titre,
+    .tarifs-groupe {
+        scroll-margin-top: calc(var(--hauteur-entete) + var(--sm));
+    }
+}
+
+
+/* ==========================================================================
+   17. Formulaire de privatisation
+   ========================================================================== */
+
+.privatisation-intro {
+    padding-bottom: 0;
+}
+
+.privatisation-photos {
+    display: grid;
+    gap: var(--md);
+}
+
+.privatisation-photos .card-media {
+    border-radius: var(--rayon);
+    overflow: hidden;
+}
+
+.privatisation-savoir,
+.privatisation-contact-direct {
+    background-color: var(--fond-carte);
+}
+
+.privatisation-savoir h2 {
+    margin-bottom: var(--md);
+}
+
+.privatisation-contact-direct h2 {
+    margin-bottom: var(--sm);
+}
+
+.privatisation-contact-direct p {
+    margin-bottom: var(--lg);
+}
+
+.formulaire-section h2 {
+    margin-bottom: var(--lg);
+}
+
+/* --- Champs : une seule colonne, libellé au-dessus, pleine largeur --- */
+
+.champ {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: var(--md);
+}
+
+.champ label {
+    font-weight: 600;
+    color: var(--creme);
+}
+
+.champ input,
+.champ select,
+.champ textarea {
+    width: 100%;
+    min-height: var(--cible);
+    padding: var(--sm);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon-sm);
+    color: var(--creme);
+    font-family: var(--texte);
+    font-size: 1rem;
+}
+
+.champ textarea {
+    min-height: calc(var(--cible) * 2);
+    resize: vertical;
+}
+
+/* Le sélecteur suit la même hauteur tactile que les champs texte. */
+.champ select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C3CAD8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--sm) center;
+    background-size: 20px;
+    padding-right: calc(var(--sm) + 24px);
+}
+
+/* Mention utile (pas secondaire) : reste en --creme, jamais en --creme-doux. */
+.champ-aide {
+    margin-top: -0.35rem;
+    margin-bottom: var(--md);
+    color: var(--creme);
+    font-size: 1rem;
+}
+
+/* Message d'erreur : le texte porte l'information à lui seul (lu par tout
+   lecteur d'écran), le point n'est qu'un renfort visuel — jamais l'inverse.
+   --rouge y reste un aplat (ce point), jamais la couleur du texte. */
+.champ-erreur {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    color: var(--creme);
+    font-size: 1rem;
+}
+
+.champ-erreur:empty {
+    display: none;
+}
+
+.champ-erreur:not(:empty)::before {
+    content: "";
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 0.45rem;
+    background-color: var(--rouge);
+    border-radius: 50%;
+}
+
+/* Honeypot : hors écran, jamais display:none (un robot peu regardant doit
+   pouvoir « le voir » et le remplir), et retiré de l'ordre de tabulation. */
+.champ-honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    left: -9999px;
+}
+
+.formulaire-rgpd {
+    margin-bottom: var(--md);
+    color: var(--creme-doux);
+    font-size: 1rem;
+}
+
+/* Le bouton d'envoi est la seule action dominante de la page. */
+.formulaire-section .cta {
+    width: 100%;
+}
+
+/* --- Confirmation et échec d'envoi : même gabarit de panneau --- */
+
+.formulaire-panel {
+    margin-top: var(--md);
+    padding: var(--md);
+    background-color: var(--fond-carte);
+    border: 1px solid var(--ligne);
+    border-left: 3px solid var(--orange);
+    border-radius: var(--rayon);
+}
+
+.formulaire-panel h3 {
+    margin-bottom: var(--sm);
+}
+
+.formulaire-panel p {
+    margin-bottom: var(--sm);
+}
+
+.formulaire-panel p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lien au fil du texte (le numéro de téléphone) : cible tactile portée à
+   44px sans casser le paragraphe — même technique qu'en pied de page.
+   Ciblé sur .formulaire-panel lui-même (pas « p a ») car le panneau
+   d'échec d'envoi est un <p> à même de porter la classe, sans <p> imbriqué. */
+.formulaire-panel a {
+    position: relative;
+}
+
+.formulaire-panel a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: var(--cible);
+    transform: translateY(-50%);
+}
+
+@media (min-width: 768px) {
+
+    .privatisation-photos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .privatisation-savoir,
+    .privatisation-contact-direct,
+    .formulaire-section {
+        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+    }
+
+    .privatisation-contact-direct {
+        text-align: center;
+    }
+
+    .privatisation-contact-direct .cta-secondaire {
+        max-width: 26rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Toujours une seule colonne : juste plus confortable à lire, pas de
+       champs côte à côte. Aligné à gauche comme le titre au-dessus, pas
+       centré isolément dans la largeur de la section. */
+    .formulaire-section form,
+    .formulaire-panel {
+        max-width: 640px;
     }
 }

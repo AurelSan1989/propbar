@@ -14,11 +14,16 @@ const LIBELLE_PRIX_MINIMUM = "à partir de";
 // Étiquette de la puce renvoyant à l'ardoise, plus courte que le titre affiché.
 const LIBELLE_NAV_ARDOISE = "Happy Hour";
 
-// Distance à laisser au-dessus d'une catégorie visée par une ancre, pour qu'elle
-// n'atterrisse pas sous l'en-tête et la bande de catégories, tous deux collants.
-// Doit rester égale à --hauteur-entete + --hauteur-nav-categories + --sm dans le CSS
-// (61 + 76 + 12 mesurés) : à ajuster si l'une de ces trois valeurs change.
-const DECALAGE_ANCRE_PX = 149;
+// Distance à laisser au-dessus d'une catégorie visée par une ancre, pour
+// qu'elle n'atterrisse pas sous l'en-tête (et, sur mobile, sous la bande de
+// catégories qui lui est propre). Cette distance diffère entre mobile et
+// desktop (la colonne latérale du bureau ne mange pas de hauteur en haut de
+// l'écran) : plutôt que de la dupliquer ici, on lit celle que le CSS a déjà
+// posée en scroll-margin-top sur les titres, seule source de vérité.
+function lireDecalageAncrePx(cible) {
+    const valeur = parseFloat(getComputedStyle(cible).scrollMarginTop);
+    return Number.isFinite(valeur) ? valeur : 0;
+}
 
 
 /* --------------------------------------------------------------------------
@@ -299,10 +304,15 @@ function activerScrollspyCategories(entrees) {
         });
     }
 
+    // Relu au redimensionnement : la colonne latérale du bureau et la bande
+    // du mobile n'imposent pas le même décalage, et une fenêtre peut changer
+    // de gabarit sans recharger la page.
+    let decalageAncrePx = lireDecalageAncrePx(cibles[0]);
+
     function categorieActive() {
         let idActif = cibles[0].id;
         cibles.forEach(function (cible) {
-            if (cible.getBoundingClientRect().top <= DECALAGE_ANCRE_PX) {
+            if (cible.getBoundingClientRect().top <= decalageAncrePx) {
                 idActif = cible.id;
             }
         });
@@ -322,6 +332,10 @@ function activerScrollspyCategories(entrees) {
     }
 
     window.addEventListener("scroll", planifierRecalcul, { passive: true });
+    window.addEventListener("resize", function () {
+        decalageAncrePx = lireDecalageAncrePx(cibles[0]);
+        planifierRecalcul();
+    }, { passive: true });
 
     // État initial, avant le premier défilement.
     activerPuce(categorieActive());
