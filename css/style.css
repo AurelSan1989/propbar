@@ -654,6 +654,23 @@ body.menu-ouvert {
     );
 }
 
+/* Précise que l'espace attend une photo plutôt que de laisser croire à une
+   image cassée. Généré en CSS, pas posé dans le HTML : disparaît de lui-même
+   dès qu'une <img> est ajoutée, sans légende oubliée à retirer à la main. */
+.card-media:not(:has(img))::after {
+    content: "Photo à venir";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sm);
+    color: var(--creme-doux);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+}
+
 /* Crème sur --rouge : taille et graisse choisies pour rester au-dessus
    du seuil de contraste AA applicable aux grands caractères */
 .tag-picture {
@@ -1012,6 +1029,15 @@ footer address {
 
     .card {
         margin-bottom: 0;
+    }
+
+    /* Le prix (ou « 7j/7 ») passe systématiquement sous le titre plutôt que de
+       partager sa ligne : les trois cartes gardent ainsi la même hauteur,
+       quelle que soit la longueur du titre ou du prix de chacune. */
+    .card-body {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     /* Avis et privatisation centrés */
