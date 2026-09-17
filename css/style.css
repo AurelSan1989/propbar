@@ -19,6 +19,7 @@
      15. Invitation au clic
      16. Page des tarifs
      17. Formulaire de privatisation
+     18. Page des mentions légales
 
    Classes du menu de navigation, communes aux trois pages et pilotées par
    js/app.js, stylées en section 7 (et sa surcharge en section 14) :
@@ -901,7 +902,8 @@ footer address {
     .avis,
     .privatisation,
     .ambiance,
-    .hero {
+    .hero,
+    .mentions-legales {
         padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
         padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
     }
@@ -938,7 +940,8 @@ footer address {
     }
 
     /* Longueur de ligne confortable sur grand écran */
-    .story p {
+    .story p,
+    .mentions-legales p {
         max-width: 68ch;
     }
 
@@ -1613,4 +1616,29 @@ footer address {
     .formulaire-panel {
         max-width: 640px;
     }
+}
+
+
+/* ==========================================================================
+   18. Page des mentions légales
+   ========================================================================== */
+
+.mentions-legales h1 {
+    margin-bottom: var(--lg);
+}
+
+.mentions-legales h2 {
+    margin-top: var(--xl);
+    margin-bottom: var(--sm);
+    /* Un lien externe peut cibler cette section (ex. depuis privatisation.html) :
+       évite qu'elle ne se retrouve masquée sous l'en-tête collant à l'arrivée */
+    scroll-margin-top: calc(var(--hauteur-entete) + var(--sm));
+}
+
+.mentions-legales h2:first-of-type {
+    margin-top: 0;
+}
+
+.mentions-legales p {
+    margin-bottom: var(--sm);
 }
