@@ -934,6 +934,7 @@ footer address {
 .retour-haut a {
     display: inline-flex;
     align-items: center;
+    gap: var(--xs);
     min-height: var(--cible);
     color: var(--texte-doux);
 }
