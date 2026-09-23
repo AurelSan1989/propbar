@@ -782,7 +782,9 @@ body.menu-ouvert {
     font-weight: 600;
 }
 
-.avis-note p span {
+/* :last-child cible seulement le compte d'avis (le second span, une fois le
+   premier ajouté pour porter data-i18n="avis_note" côté HTML). */
+.avis-note p span:last-child {
     color: var(--texte-doux);
     font-weight: 400;
 }
@@ -1897,6 +1899,73 @@ footer:has(~ .barre-flottante) {
 
     footer {
         padding-bottom: var(--xl);
+    }
+}
+
+
+/* ==========================================================================
+   20. Sélecteur de langue FR/EN
+   ========================================================================== */
+
+/* Posé par js/i18n.js comme <li> de #nav-principale > ul, sur le même
+   principe que le sélecteur de thème temporaire ci-dessous : panneau plein
+   écran du menu burger sur mobile, rangée en ligne dans l'en-tête sur
+   desktop. Contrairement au thème, ce sélecteur est permanent. */
+
+.selecteur-langue-item {
+    border-top: 1px solid var(--ligne);
+    margin-top: var(--sm);
+    padding-top: var(--sm);
+}
+
+@media (min-width: 768px) {
+    .selecteur-langue-item {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+        border-left: 1px solid var(--ligne);
+        margin-left: var(--sm);
+        padding-left: var(--md);
+    }
+}
+
+.selecteur-langue {
+    display: flex;
+    gap: var(--xs);
+}
+
+.selecteur-langue-bouton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--cible);
+    min-height: var(--cible);
+    padding: 0 var(--sm);
+    background-color: transparent;
+    border: 1px solid var(--ligne);
+    border-radius: 999px;
+    color: var(--texte-doux);
+    font-family: var(--police);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.selecteur-langue-bouton:hover {
+    border-color: var(--accent);
+    color: var(--texte);
+}
+
+.selecteur-langue-bouton[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--fond);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .selecteur-langue-bouton {
+        transition: none;
     }
 }
 

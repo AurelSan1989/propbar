@@ -63,11 +63,17 @@ if (boutonMenu && navPrincipale) {
         icone.removeAttribute("hidden");
     }
 
+    // window.I18N n'existe que sur les pages où js/i18n.js est chargé
+    // (pas sur mentions-legales.html, restée en français uniquement).
+    function libelleMenu(cle, repli) {
+        return window.I18N ? window.I18N.t(cle) : repli;
+    }
+
     function ouvrirMenu() {
         navPrincipale.classList.add("est-ouvert");
         document.body.classList.add("menu-ouvert");
         boutonMenu.setAttribute("aria-expanded", "true");
-        boutonMenu.setAttribute("aria-label", "Fermer le menu");
+        boutonMenu.setAttribute("aria-label", libelleMenu("menu_fermer_aria", "Fermer le menu"));
         masquer(iconeOuvrir);
         afficher(iconeFermer);
         navPrincipale.querySelector("a").focus();
@@ -77,7 +83,7 @@ if (boutonMenu && navPrincipale) {
         navPrincipale.classList.remove("est-ouvert");
         document.body.classList.remove("menu-ouvert");
         boutonMenu.setAttribute("aria-expanded", "false");
-        boutonMenu.setAttribute("aria-label", "Ouvrir le menu");
+        boutonMenu.setAttribute("aria-label", libelleMenu("menu_ouvrir_aria", "Ouvrir le menu"));
         afficher(iconeOuvrir);
         masquer(iconeFermer);
     }

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'impondérable Notre carte</title>
+    <title data-i18n="titre_page_carte">L'impondérable Notre carte</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
-    <meta property="og:title" content="L'impondérable Notre carte">
-    <meta property="og:description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
+    <meta name="description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_carte">
+    <meta property="og:title" content="L'impondérable Notre carte" data-i18n-content="og_titre_carte">
+    <meta property="og:description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_carte">
     <meta property="og:type" content="website">
     <meta property="og:url" content="TODO">
     <meta property="og:image" content="TODO">
@@ -20,17 +20,17 @@
         <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
         <nav id="nav-principale" class="nav-principale">
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="tarifs.html" aria-current="page">Notre carte</a></li>
-                <li><a href="privatisation.html">Privatiser</a></li>
+                <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+                <li><a href="tarifs.html" aria-current="page" data-i18n="nav_carte">Notre carte</a></li>
+                <li><a href="privatisation.html" data-i18n="nav_privatiser">Privatiser</a></li>
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon btn-appel">
+            <a href="tel:+33983233914" aria-label="Appeler le bar" data-i18n-aria-label="appeler_aria" class="btn-icon btn-appel">
                 <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
             </a>
-            <button type="button" id="bouton-menu" class="btn-icon btn-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
+            <button type="button" id="bouton-menu" class="btn-icon btn-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu" data-i18n-aria-label="menu_ouvrir_aria">
                 <svg class="icone-menu-ouvrir lucide lucide-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
                 <svg class="icone-menu-fermer lucide lucide-x" hidden xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
@@ -42,21 +42,21 @@
         </nav>
         <main>
             <section class="carte-intro">
-                <h1>Notre carte</h1>
+                <h1 data-i18n="carte_h1">Notre carte</h1>
             </section>
 
             <section class="carte-happy">
-                <h2 id="ardoise-titre">Notre Happy Hour</h2>
+                <h2 id="ardoise-titre" data-i18n="carte_happy_h2">Notre Happy Hour</h2>
                 <div id="ardoise"></div>
             </section>
 
             <section class="carte-section">
-                <h2>Boissons</h2>
+                <h2 data-i18n="carte_boissons_h2">Boissons</h2>
                 <div id="boissons"></div>
             </section>
 
             <section class="carte-section">
-                <h2>Restauration</h2>
+                <h2 data-i18n="carte_restauration_h2">Restauration</h2>
                 <div id="restauration"></div>
             </section>
         </main>
@@ -69,16 +69,16 @@
 
         <address>
             320 rue des Pyrénées, 75020 Paris<br>
-            Métro Jourdain
+            <span data-i18n="hero_metro">Métro Jourdain</span>
         </address>
 
         <div class="footer-horaires">
-            <h2>Horaires</h2>
-            <p>TODO — horaires habituels à confirmer</p>
-            <p>Happy hour : TODO — créneau à confirmer</p>
+            <h2 data-i18n="footer_horaires_titre">Horaires</h2>
+            <p data-i18n="footer_horaires_habituels">TODO — horaires habituels à confirmer</p>
+            <p data-i18n="footer_horaires_happy_hour">Happy hour : TODO — créneau à confirmer</p>
             <p>
-                Horaires du jour et fermetures exceptionnelles sur
-                <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener">notre fiche Google</a>.
+                <span data-i18n="footer_horaires_note_avant">Horaires du jour et fermetures exceptionnelles sur</span>
+                <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener" data-i18n="footer_horaires_lien">notre fiche Google</a>.
             </p>
         </div>
 
@@ -86,21 +86,22 @@
             <li><a href="tel:+33983233914">09 83 23 39 14</a></li>
             <li><a href="https://www.facebook.com/barlimponderable/" target="_blank" rel="noopener">Facebook</a></li>
             <li><a href="https://www.instagram.com/limponderable2021/" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="mentions-legales.html">Mentions légales</a></li>
+            <li><a href="mentions-legales.html" data-i18n="footer_lien_mentions">Mentions légales</a></li>
         </ul>
 
         <p class="message-sanitaire">
             L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
         </p>
 
-        <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg>Retour en haut</a></p>
+        <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg><span data-i18n="footer_retour_haut">Retour en haut</span></a></p>
     </footer>
     <div class="barre-flottante">
         <a href="tel:+33983233914" class="cta">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-            Appeler
+            <span data-i18n="barre_flottante_appeler">Appeler</span>
         </a>
     </div>
+    <script src="js/i18n.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/tarifs.js" defer></script>
     <!-- SÉLECTEUR DE THÈME TEMPORAIRE — À SUPPRIMER -->

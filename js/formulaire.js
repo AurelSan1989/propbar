@@ -64,8 +64,9 @@ if (formulaire) {
     }
 
     function formaterDateLisible(valeurIso) {
+        const langue = window.I18N ? window.I18N.langue() : "fr";
         const date = new Date(valeurIso + "T00:00:00");
-        return new Intl.DateTimeFormat("fr-FR", {
+        return new Intl.DateTimeFormat(langue === "en" ? "en-GB" : "fr-FR", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -84,29 +85,33 @@ if (formulaire) {
 
     // Chaque erreur porte le champ à mettre en évidence, l'id de son
     // conteneur de message, et le texte à afficher.
+    function traduire(cle) {
+        return window.I18N ? window.I18N.t(cle) : cle;
+    }
+
     function validerFormulaire() {
         const erreurs = [];
 
         if (!champRempli(champNom)) {
-            erreurs.push({ champ: champNom, id: "erreur-nom", message: "Merci d'indiquer votre nom." });
+            erreurs.push({ champ: champNom, id: "erreur-nom", message: traduire("erreur_nom") });
         }
 
         // Le HTML ne sait pas exprimer « l'un des deux champs, au choix » :
         // cette règle ne peut être vérifiée qu'ici.
         if (!champRempli(champEmail) && !champRempli(champTelephone)) {
-            erreurs.push({ champ: champEmail, id: "erreur-email", message: "Renseignez au moins un e-mail ou un numéro de téléphone." });
+            erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_contact") });
         }
 
         if (!champRempli(champDate)) {
-            erreurs.push({ champ: champDate, id: "erreur-date", message: "Merci d'indiquer une date souhaitée." });
+            erreurs.push({ champ: champDate, id: "erreur-date", message: traduire("erreur_date_manquante") });
         } else if (dateEstPassee(champDate.value)) {
-            erreurs.push({ champ: champDate, id: "erreur-date", message: "Cette date est déjà passée." });
+            erreurs.push({ champ: champDate, id: "erreur-date", message: traduire("erreur_date_passee") });
         }
 
         if (!champRempli(champConvives)) {
-            erreurs.push({ champ: champConvives, id: "erreur-convives", message: "Merci d'indiquer le nombre de convives." });
+            erreurs.push({ champ: champConvives, id: "erreur-convives", message: traduire("erreur_convives_manquant") });
         } else if (Number(champConvives.value) < 1) {
-            erreurs.push({ champ: champConvives, id: "erreur-convives", message: "Le nombre de convives doit être d'au moins 1." });
+            erreurs.push({ champ: champConvives, id: "erreur-convives", message: traduire("erreur_convives_minimum") });
         }
 
         return erreurs;
@@ -235,6 +240,23 @@ if (formulaire) {
             afficherErreurEnvoi();
         } finally {
             boutonEnvoyer.disabled = false;
+        }
+    });
+
+
+    /* ----------------------------------------------------------------------
+       Changement de langue : retraduit ce que js/i18n.js ne voit pas
+       (messages d'erreur déjà affichés, date déjà formatée en toutes lettres).
+       ---------------------------------------------------------------------- */
+
+    window.addEventListener("langue-changee", function () {
+        const desErreursAffichees = Array.from(formulaire.querySelectorAll(".champ-erreur"))
+            .some(function (conteneur) { return conteneur.textContent !== ""; });
+        if (desErreursAffichees) {
+            afficherErreurs(validerFormulaire());
+        }
+        if (!blocConfirmation.hidden) {
+            document.getElementById("confirmation-date").textContent = formaterDateLisible(champDate.value);
         }
     });
 

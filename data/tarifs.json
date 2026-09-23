@@ -3,10 +3,12 @@
     {
       "id": "boissons",
       "nom": "Boissons",
+      "nomEn": "Drinks",
       "categories": [
         {
             "id" : "boissons-fraiches",
             "nom": "Boissons fraîches",
+            "nomEn": "Soft drinks",
             "articles" : [
                 {
                     "nom" : "Coca-Cola",
@@ -105,6 +107,7 @@
         {
             "id" : "boissons-chaudes",
             "nom" : "Boissons chaudes",
+            "nomEn" : "Hot drinks",
             "articles" : [
                 {
                     "nom" : "Café / Café décaféiné",
@@ -147,6 +150,7 @@
         {
           "id": "bieres-bouteilles",
           "nom": "Bières bouteilles",
+          "nomEn": "Bottled beers",
           "articles": [
             { "nom": "Desperados", "prix": 6.00 },
             { "nom": "Corona", "prix": 6.00 },
@@ -157,6 +161,7 @@
         {
             "id" : "aperitifs",
             "nom" : "Apéritifs",
+            "nomEn" : "Aperitifs",
             "articles" : [
                 {
                     "nom" : "Pastis ou Ricard",
@@ -180,6 +185,7 @@
         {
             "id" : "digestifs-liqueurs",
             "nom" : "Digestifs et liqueurs",
+            "nomEn" : "Digestifs & spirits",
             "articles" : [
                 {
                     "nom" : "Cognac",
@@ -241,6 +247,7 @@
         }, {
             "id" : "whiskys-bourbons",
             "nom" : "Whiskys et bourbons",
+            "nomEn" : "Whiskies & bourbons",
             "articles" : [
                 {
                     "nom" : "JB, Clan Campbell, Jameson",
@@ -275,7 +282,9 @@
         {
             "id" : "vins-blancs",
             "nom" : "Vins blancs",
+            "nomEn" : "White wines",
             "groupe" : "Vins",
+            "groupeEn" : "Wines",
             "articles" : [
                 {
                     "nom" : "Petit-Chablis",
@@ -307,7 +316,9 @@
         {
             "id" : "vins-rouges",
             "nom" : "Vins rouges",
+            "nomEn" : "Red wines",
             "groupe" : "Vins",
+            "groupeEn" : "Wines",
             "articles" : [
                 {
                     "nom" : "Syrah",
@@ -334,7 +345,9 @@
         {
             "id" : "vins-roses",
             "nom" : "Rosés",
+            "nomEn" : "Rosé wines",
             "groupe" : "Vins",
+            "groupeEn" : "Wines",
             "articles" : [
                 {
                     "nom" : "Rosé du moment (consultez le serveur)",
@@ -347,6 +360,7 @@
             "id" : "prosecco",
             "nom" : "Prosecco",
             "groupe" : "Vins",
+            "groupeEn" : "Wines",
             "articles" : [
                 {
                     "nom" : "Verre",
@@ -361,7 +375,9 @@
         {
             "id" : "vins-au-verre",
             "nom" : "Vins au verre",
+            "nomEn" : "Wine by the glass",
             "groupe" : "Vins",
+            "groupeEn" : "Wines",
             "articles" : [
                 {
                     "nom" : "Merlot",
@@ -380,31 +396,37 @@
                 {
                     "nom" : "Caïpirinha",
                     "description" : "Cachaça, citron vert, sucre de canne",
+                    "descriptionEn" : "Cachaça, lime, cane sugar",
                     "prix" : 6.00
                 },
                 {
                     "nom" : "Sex and the Beach",
                     "description" : "Vodka, crème de pêche, cranberries",
+                    "descriptionEn" : "Vodka, peach liqueur, cranberry juice",
                     "prix" :6.00
-                }, 
+                },
                 {
                     "nom" : "Piña Colada",
                     "description" : "Rhum, jus d'ananas, lait de coco",
+                    "descriptionEn" : "Rum, pineapple juice, coconut milk",
                     "prix": 6.00
                 },
                 {
                     "nom" : "Mojito",
                     "description" :"Citron, menthe, limonade, rhum",
+                    "descriptionEn" : "Lime, mint, soda, rum",
                     "prix" : 6.00
                 },
                 {
                     "nom" : "Original Cuba Libre",
                     "description" : "Rhum brun, Coca-Cola, citron vert",
+                    "descriptionEn" : "Dark rum, Coca-Cola, lime",
                     "prix" : 6.00
                 },
                 {
                     "nom" :"Moscow Mule",
                     "description" : "Vodka, ginger beer, citron vert, sucre",
+                    "descriptionEn" : "Vodka, ginger beer, lime, sugar",
                     "prix" : 6.00
                 },
                 {
@@ -429,10 +451,12 @@
     {
         "id" : "restauration",
         "nom" : "Restauration",
+        "nomEn" : "Food",
         "categories" : [
             {
                 "id" : "entrees",
                 "nom" : "Entrées",
+                "nomEn" : "Starters",
                 "articles" : [
                     {
                         "nom" : "Oeuf cocotte",
@@ -455,6 +479,7 @@
             {
                 "id" : "plats-express",
                 "nom" : "Plats express",
+                "nomEn" : "Quick dishes",
                 "articles" : [
                     {
                         "nom" : "Confit de canard",
@@ -501,6 +526,7 @@
                     {
                         "nom": "Couscous mixte",
                         "description": "Boeuf, poulet, merguez",
+                        "descriptionEn" : "Beef, chicken, merguez sausage",
                         "prix" : 18.90
                     }
                 ]
@@ -508,6 +534,7 @@
             {
                 "id" : "suggestions",
                 "nom" : "Suggestions",
+                "nomEn" : "Chef's suggestions",
                 "articles" : [
                     {
                         "nom": "Grillades du jour",
@@ -566,41 +593,49 @@
                     {
                         "nom" : "Margarita",
                         "description" : "Sauce tomate, mozzarella, basilic",
+                        "descriptionEn" : "Tomato sauce, mozzarella, basil",
                         "prix" : 9.90
                     },
                     {
                         "nom" : "Regina",
                         "description" : "Sauce tomate, mozzarella, jambon blanc, champignon",
+                        "descriptionEn" : "Tomato sauce, mozzarella, ham, mushroom",
                         "prix" : 14.90
                     },
                     {
                         "nom" : "Calzone",
                         "description" : "Sauce tomate, mozzarella, jambon, oeuf, basilic",
+                        "descriptionEn" : "Tomato sauce, mozzarella, ham, egg, basil",
                         "prix" : 14.90
                     },
                     {
                         "nom" : "5 fromages",
                         "description" : "Chèvre, roquefort, bleu, camembert, parmesan",
+                        "descriptionEn" : "Goat cheese, roquefort, blue cheese, camembert, parmesan",
                         "prix" : 15.90
                     },
                     {
                         "nom" : "Végé",
                         "description" : "Chèvre, courgette, mozzarella, champignons, oignons, poivrons, basilic ",
+                        "descriptionEn" : "Goat cheese, zucchini, mozzarella, mushrooms, onions, peppers, basil",
                         "prix" : 15.90
                     },
                     {
                         "nom" : "Napolitaine",
                         "description" : "Sauce tomate, mozzarella, olives, oignons, anchois",
+                        "descriptionEn" : "Tomato sauce, mozzarella, olives, onions, anchovies",
                         "prix" : 14.90
                     },
                     {
                         "nom" : "Buffala",
                         "description" : "Burrata, tomate cerise, jambon cru ?, roquette",
+                        "descriptionEn" : "Burrata, cherry tomato, cured ham?, arugula",
                         "prix" : 15.90
                     },
                     {
                         "nom" : "Tartufata",
                         "description" : "Crème de truffe, champignons, jambon, basilic",
+                        "descriptionEn" : "Truffle cream, mushrooms, ham, basil",
                         "prix" : 15.90
                     }
                 ]
@@ -614,6 +649,7 @@
             {
                 "id" : "bieres-pression",
                 "nom": "Bières pression",
+                "nomEn": "Draft beers",
                 "articles" : [
                     {
                         "nom" : "Pinte de bonde",

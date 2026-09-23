@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'impondérable Privatisation</title>
+    <title data-i18n="titre_page_privatisation">L'impondérable Privatisation</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris.">
-    <meta property="og:title" content="L'impondérable Privatisation">
-    <meta property="og:description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris.">
+    <meta name="description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_privatisation">
+    <meta property="og:title" content="L'impondérable Privatisation" data-i18n-content="og_titre_privatisation">
+    <meta property="og:description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_privatisation">
     <meta property="og:type" content="website">
     <meta property="og:url" content="TODO">
     <meta property="og:image" content="TODO">
@@ -20,17 +20,17 @@
         <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
         <nav id="nav-principale" class="nav-principale">
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="tarifs.html">Notre carte</a></li>
-                <li><a href="privatisation.html" aria-current="page">Privatiser</a></li>
+                <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
+                <li><a href="tarifs.html" data-i18n="nav_carte">Notre carte</a></li>
+                <li><a href="privatisation.html" aria-current="page" data-i18n="nav_privatiser">Privatiser</a></li>
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon btn-appel">
+            <a href="tel:+33983233914" aria-label="Appeler le bar" data-i18n-aria-label="appeler_aria" class="btn-icon btn-appel">
                 <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
             </a>
-            <button type="button" id="bouton-menu" class="btn-icon btn-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
+            <button type="button" id="bouton-menu" class="btn-icon btn-menu" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu" data-i18n-aria-label="menu_ouvrir_aria">
                 <svg class="icone-menu-ouvrir lucide lucide-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
                 <svg class="icone-menu-fermer lucide lucide-x" hidden xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
@@ -38,8 +38,8 @@
     </header>
     <main>
         <section class="privatisation-intro">
-            <h1>Privatiser le bar</h1>
-            <p>
+            <h1 data-i18n="privatisation_h1">Privatiser le bar</h1>
+            <p data-i18n="privatisation_intro">
                 Anniversaire, pot de départ, after-work : la salle et la terrasse
                 se privatisent pour vos occasions.
             </p>
@@ -47,7 +47,7 @@
 
         <section class="privatisation-photos">
             <div class="card-media">
-                <img src="img/bar.webp" alt="Salle de L'Impondérable, le bar et les tables">
+                <img src="img/bar.webp" alt="Salle de L'Impondérable, le bar et les tables" data-i18n-alt="privatisation_photo_salle_alt">
             </div>
             <div class="card-media">
                 <!-- photo attendue : la terrasse privatisée en soirée, à insérer -->
@@ -55,84 +55,84 @@
         </section>
 
         <section class="privatisation-savoir">
-            <h2>Ce qu'il faut savoir</h2>
+            <h2 data-i18n="privatisation_savoir_h2">Ce qu'il faut savoir</h2>
             <ul class="privatisation-reperes">
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-group"><path d="M17 21a5 5 0 00-10 0"/><path d="M22 10.5a3.5 3.5 0 00-5.507-2.868"/><path d="M7.507 7.632A3.5 3.5 0 002 10.5"/><circle cx="12" cy="13" r="3"/><circle cx="18.5" cy="4.5" r="2.5"/><circle cx="5.5" cy="4.5" r="2.5"/></svg>
                     </div>
-                    <span>Capacité : TODO — à confirmer avec le gérant</span>
+                    <span data-i18n="privatisation_capacite">Capacité : TODO — à confirmer avec le gérant</span>
                 </li>
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                     </div>
-                    <span>Espaces disponibles : TODO — salle, terrasse, ou les deux</span>
+                    <span data-i18n="privatisation_espaces">Espaces disponibles : TODO — salle, terrasse, ou les deux</span>
                 </li>
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
                     </div>
-                    <span>Jours et créneaux possibles : TODO — à confirmer avec le gérant</span>
+                    <span data-i18n="privatisation_jours">Jours et créneaux possibles : TODO — à confirmer avec le gérant</span>
                 </li>
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                     </div>
-                    <span>Conditions : TODO — minimum de consommation, acompte, à confirmer avec le gérant</span>
+                    <span data-i18n="privatisation_conditions">Conditions : TODO — minimum de consommation, acompte, à confirmer avec le gérant</span>
                 </li>
             </ul>
         </section>
 
         <section class="formulaire-section">
-            <h2>Votre demande</h2>
+            <h2 data-i18n="formulaire_h2">Votre demande</h2>
 
             <form id="form-privatisation" novalidate>
                 <div class="champ">
-                    <label for="nom">Nom</label>
+                    <label for="nom" data-i18n="champ_nom">Nom</label>
                     <input type="text" id="nom" name="nom" required autocomplete="name" aria-describedby="erreur-nom">
                     <p class="champ-erreur" id="erreur-nom" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="email">E-mail</label>
+                    <label for="email" data-i18n="champ_email">E-mail</label>
                     <input type="email" id="email" name="email" inputmode="email" autocomplete="email" aria-describedby="aide-contact erreur-email">
                     <p class="champ-erreur" id="erreur-email" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="telephone">Téléphone</label>
+                    <label for="telephone" data-i18n="champ_telephone">Téléphone</label>
                     <input type="tel" id="telephone" name="telephone" inputmode="tel" autocomplete="tel" aria-describedby="aide-contact erreur-telephone">
                     <p class="champ-erreur" id="erreur-telephone" aria-live="polite"></p>
                 </div>
-                <p class="champ-aide" id="aide-contact">Renseignez au moins l'un des deux.</p>
+                <p class="champ-aide" id="aide-contact" data-i18n="champ_aide_contact">Renseignez au moins l'un des deux.</p>
 
                 <div class="champ">
-                    <label for="date">Date souhaitée</label>
+                    <label for="date" data-i18n="champ_date">Date souhaitée</label>
                     <input type="date" id="date" name="date" required aria-describedby="erreur-date">
                     <p class="champ-erreur" id="erreur-date" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="convives">Nombre de convives</label>
+                    <label for="convives" data-i18n="champ_convives">Nombre de convives</label>
                     <input type="number" id="convives" name="convives" min="1" required inputmode="numeric" aria-describedby="erreur-convives">
                     <p class="champ-erreur" id="erreur-convives" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="evenement">Type d'événement</label>
+                    <label for="evenement" data-i18n="champ_evenement">Type d'événement</label>
                     <select id="evenement" name="evenement" aria-describedby="erreur-evenement">
-                        <option value="">Sélectionnez (facultatif)</option>
-                        <option value="anniversaire">Anniversaire</option>
-                        <option value="pot-de-depart">Pot de départ</option>
-                        <option value="after-work">After-work</option>
-                        <option value="autre">Autre</option>
+                        <option value="" data-i18n="option_evenement_vide">Sélectionnez (facultatif)</option>
+                        <option value="anniversaire" data-i18n="option_evenement_anniversaire">Anniversaire</option>
+                        <option value="pot-de-depart" data-i18n="option_evenement_depart">Pot de départ</option>
+                        <option value="after-work" data-i18n="option_evenement_afterwork">After-work</option>
+                        <option value="autre" data-i18n="option_evenement_autre">Autre</option>
                     </select>
                     <p class="champ-erreur" id="erreur-evenement" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="message">Message</label>
+                    <label for="message" data-i18n="champ_message">Message</label>
                     <textarea id="message" name="message" rows="4" aria-describedby="erreur-message"></textarea>
                     <p class="champ-erreur" id="erreur-message" aria-live="polite"></p>
                 </div>
@@ -145,39 +145,39 @@
                 </div>
 
                 <p class="formulaire-rgpd">
-                    Les informations de ce formulaire sont utilisées uniquement pour traiter
-                    votre demande de privatisation et vous recontacter.
-                    <a href="mentions-legales.html#donnees-personnelles">En savoir plus sur le
+                    <span data-i18n="rgpd_texte">Les informations de ce formulaire sont utilisées uniquement pour traiter
+                    votre demande de privatisation et vous recontacter.</span>
+                    <a href="mentions-legales.html#donnees-personnelles" data-i18n="rgpd_lien">En savoir plus sur le
                     traitement de vos données</a>.
                 </p>
 
-                <button type="submit" class="cta">Envoyer la demande</button>
+                <button type="submit" class="cta" data-i18n="formulaire_envoyer">Envoyer la demande</button>
             </form>
 
             <div class="formulaire-panel formulaire-confirmation" id="confirmation" role="status" hidden>
-                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer">
+                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer" data-i18n-aria-label="fermer_aria">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
-                <h3>Demande envoyée</h3>
-                <p>Nous avons bien reçu votre demande de privatisation pour le <strong id="confirmation-date"></strong>.</p>
-                <p>Pour toute question, appelez-nous au <a href="tel:+33983233914">09 83 23 39 14</a>.</p>
-                <p>Délai de réponse habituel : sous 48h.</p>
+                <h3 data-i18n="confirmation_titre">Demande envoyée</h3>
+                <p><span data-i18n="confirmation_avant">Nous avons bien reçu votre demande de privatisation pour le</span> <strong id="confirmation-date"></strong>.</p>
+                <p><span data-i18n="confirmation_appel_avant">Pour toute question, appelez-nous au</span> <a href="tel:+33983233914">09 83 23 39 14</a>.</p>
+                <p data-i18n="confirmation_delai">Délai de réponse habituel : sous 48h.</p>
             </div>
 
             <div class="formulaire-panel formulaire-erreur-envoi" id="erreur-envoi" role="alert" hidden>
-                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer">
+                <button type="button" class="formulaire-panel-fermer" aria-label="Fermer" data-i18n-aria-label="fermer_aria">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
                 <p>
-                    L'envoi a échoué. Vous pouvez réessayer, ou nous appeler directement au
+                    <span data-i18n="erreur_envoi_texte">L'envoi a échoué. Vous pouvez réessayer, ou nous appeler directement au</span>
                     <a href="tel:+33983233914">09 83 23 39 14</a>.
                 </p>
             </div>
         </section>
 
         <section class="privatisation-contact-direct">
-            <h2>Une question rapide ?</h2>
-            <p>Plutôt que d'écrire, vous pouvez aussi nous appeler directement.</p>
+            <h2 data-i18n="contact_direct_h2">Une question rapide ?</h2>
+            <p data-i18n="contact_direct_texte">Plutôt que d'écrire, vous pouvez aussi nous appeler directement.</p>
             <a href="tel:+33983233914" class="cta-secondaire">09 83 23 39 14</a>
         </section>
     </main>
@@ -189,16 +189,16 @@
 
         <address>
             320 rue des Pyrénées, 75020 Paris<br>
-            Métro Jourdain
+            <span data-i18n="hero_metro">Métro Jourdain</span>
         </address>
 
         <div class="footer-horaires">
-            <h2>Horaires</h2>
-            <p>TODO — horaires habituels à confirmer</p>
-            <p>Happy hour : TODO — créneau à confirmer</p>
+            <h2 data-i18n="footer_horaires_titre">Horaires</h2>
+            <p data-i18n="footer_horaires_habituels">TODO — horaires habituels à confirmer</p>
+            <p data-i18n="footer_horaires_happy_hour">Happy hour : TODO — créneau à confirmer</p>
             <p>
-                Horaires du jour et fermetures exceptionnelles sur
-                <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener">notre fiche Google</a>.
+                <span data-i18n="footer_horaires_note_avant">Horaires du jour et fermetures exceptionnelles sur</span>
+                <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener" data-i18n="footer_horaires_lien">notre fiche Google</a>.
             </p>
         </div>
 
@@ -206,15 +206,16 @@
             <li><a href="tel:+33983233914">09 83 23 39 14</a></li>
             <li><a href="https://www.facebook.com/barlimponderable/" target="_blank" rel="noopener">Facebook</a></li>
             <li><a href="https://www.instagram.com/limponderable2021/" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="mentions-legales.html">Mentions légales</a></li>
+            <li><a href="mentions-legales.html" data-i18n="footer_lien_mentions">Mentions légales</a></li>
         </ul>
 
         <p class="message-sanitaire">
             L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
         </p>
 
-        <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg>Retour en haut</a></p>
+        <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg><span data-i18n="footer_retour_haut">Retour en haut</span></a></p>
     </footer>
+    <script src="js/i18n.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/formulaire.js" defer></script>
     <!-- SÉLECTEUR DE THÈME TEMPORAIRE — À SUPPRIMER -->

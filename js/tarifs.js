@@ -8,11 +8,29 @@ const CHEMIN_DONNEES = "data/tarifs.json";
 // Espace insécable exigé avant le symbole monétaire en typographie française.
 const ESPACE_INSECABLE = " ";
 
-// Précède le prix le plus bas d'une catégorie sur les cartes de l'accueil.
-const LIBELLE_PRIX_MINIMUM = "à partir de";
+// Traductions de l'interface (nav, libellés) : via window.I18N, posé par
+// js/i18n.js chargé avant ce script. Les noms des articles ne sont eux-mêmes
+// jamais traduits (voir texteSelonLangue plus bas) : seuls les intitulés de
+// catégories/sections et les descriptions le sont, directement dans le JSON.
+function t(cle) {
+    return window.I18N ? window.I18N.t(cle) : cle;
+}
 
-// Étiquette de la puce renvoyant à l'ardoise, plus courte que le titre affiché.
-const LIBELLE_NAV_ARDOISE = "Happy Hour";
+function langueCourante() {
+    return window.I18N ? window.I18N.langue() : "fr";
+}
+
+// Un champ "xxxEn" du JSON prend le pas sur "xxx" quand la langue est
+// l'anglais et que ce champ existe ; sinon on retombe sur le français.
+function texteSelonLangue(objet, champ) {
+    if (!objet) {
+        return undefined;
+    }
+    if (langueCourante() === "en" && objet[champ + "En"]) {
+        return objet[champ + "En"];
+    }
+    return objet[champ];
+}
 
 // Un saut d'ancre n'atterrit jamais tout à fait au pixel près sur la valeur CSS
 // visée (arrondi sous-pixel du navigateur pendant le défilement, de l'ordre
@@ -86,14 +104,17 @@ function creerLigneArticle(article, champPrix) {
     const ligne = creerElement("li", "tarifs-article");
     const bloc = creerElement("div", "tarifs-article-texte");
 
+    // Le nom d'un article n'est jamais traduit (voir texteSelonLangue) : les
+    // noms de plats et de boissons restent les mêmes dans les deux langues.
     bloc.appendChild(creerElement("span", "tarifs-nom", article.nom));
 
     // Les champs optionnels absents ne produisent aucun élément vide.
     if (article.contenance) {
         bloc.appendChild(creerElement("span", "tarifs-contenance", article.contenance));
     }
-    if (article.description) {
-        bloc.appendChild(creerElement("p", "tarifs-description", article.description));
+    const description = texteSelonLangue(article, "description");
+    if (description) {
+        bloc.appendChild(creerElement("p", "tarifs-description", description));
     }
     ligne.appendChild(bloc);
 
@@ -118,7 +139,7 @@ function creerListeArticles(articles, champPrix) {
    -------------------------------------------------------------------------- */
 
 function creerLienArdoise() {
-    const lien = creerElement("a", "tarifs-lien-ardoise", "Voir l'ardoise");
+    const lien = creerElement("a", "tarifs-lien-ardoise", t("carte_lien_ardoise"));
     lien.href = "#ardoise";
     return lien;
 }
@@ -137,14 +158,15 @@ function creerBlocCategorie(categorie, options) {
         bloc.appendChild(creerLienArdoise());
     }
 
-    const titre = creerElement(reglages.niveauTitre || "h3", "tarifs-categorie-titre", categorie.nom);
+    const titre = creerElement(reglages.niveauTitre || "h3", "tarifs-categorie-titre", texteSelonLangue(categorie, "nom"));
     if (reglages.avecAncre && categorie.id) {
         titre.id = categorie.id;
     }
     bloc.appendChild(titre);
 
-    if (categorie.note) {
-        bloc.appendChild(creerElement("p", "tarifs-note", categorie.note));
+    const note = texteSelonLangue(categorie, "note");
+    if (note) {
+        bloc.appendChild(creerElement("p", "tarifs-note", note));
     }
 
     // Une catégorie sans article affiche sa note seule, pas de liste vide.
@@ -168,13 +190,13 @@ function collecterGroupesReduits(donnees) {
         (section.categories || []).forEach(function (categorie) {
             const reduits = (categorie.articles || []).filter(aUnPrixReduit);
             if (reduits.length > 0) {
-                groupes.push({ nom: categorie.nom, articles: reduits });
+                groupes.push({ nom: categorie.nom, nomEn: categorie.nomEn, articles: reduits });
             }
         });
 
         const reduitsDirects = (section.articles || []).filter(aUnPrixReduit);
         if (reduitsDirects.length > 0) {
-            groupes.push({ nom: section.nom, articles: reduitsDirects });
+            groupes.push({ nom: section.nom, nomEn: section.nomEn, articles: reduitsDirects });
         }
     });
 
@@ -190,6 +212,12 @@ function masquerSection(conteneur) {
 // Renvoie true si l'ardoise a du contenu, pour que l'appelant sache si une
 // entrée de navigation doit lui être consacrée.
 function construireArdoise(conteneur, donnees) {
+    conteneur.replaceChildren();
+    const section = conteneur.closest("section");
+    if (section) {
+        section.hidden = false;
+    }
+
     const groupes = collecterGroupesReduits(donnees);
 
     if (groupes.length === 0) {
@@ -228,16 +256,18 @@ function construireSection(conteneur, section) {
     let groupeCourant = null;
 
     (section.categories || []).forEach(function (categorie) {
+        // L'id de l'ancre se fonde toujours sur le texte français, stable
+        // d'une langue à l'autre : seul le libellé affiché est traduit.
         const groupe = categorie.groupe || null;
 
         if (groupe && groupe !== groupeCourant) {
             const idGroupe = creerIdDepuisTexte(groupe);
-            const intertitre = creerElement("h3", "tarifs-groupe", groupe);
+            const intertitre = creerElement("h3", "tarifs-groupe", texteSelonLangue(categorie, "groupe"));
             intertitre.id = idGroupe;
             conteneur.appendChild(intertitre);
-            entreesNav.push({ id: idGroupe, nom: groupe });
+            entreesNav.push({ id: idGroupe, nom: texteSelonLangue(categorie, "groupe") });
         } else if (!groupe) {
-            entreesNav.push({ id: categorie.id, nom: categorie.nom });
+            entreesNav.push({ id: categorie.id, nom: texteSelonLangue(categorie, "nom") });
         }
         groupeCourant = groupe;
 
@@ -259,12 +289,17 @@ function construireSection(conteneur, section) {
 
 function construireNavCategories(conteneur, entrees) {
     const nav = conteneur.closest("nav");
+    conteneur.replaceChildren();
 
     if (entrees.length === 0) {
         if (nav) {
             nav.hidden = true;
         }
         return;
+    }
+
+    if (nav) {
+        nav.hidden = false;
     }
 
     // Étiquette au-dessus de chaque rubrique (Happy Hour / Boissons / Restauration) :
@@ -297,73 +332,88 @@ function construireNavCategories(conteneur, entrees) {
 // traverser cette bande à un titre court entre deux images affichées, sans
 // jamais déclencher de recalcul. L'événement scroll, lui, ne peut pas être
 // « sauté » de cette façon.
+// La carte peut être reconstruite plusieurs fois (changement de langue) :
+// les cibles et le décalage sont donc tenus à part, rafraîchissables à
+// chaque appel, tandis que les écouteurs scroll/resize, eux, ne sont posés
+// qu'une seule fois (les reposer à chaque reconstruction les empilerait).
+let scrollspyCibles = [];
+let scrollspyDecalageAncrePx = 0;
+let scrollspyEcouteursPoses = false;
+
+function activerPuceScrollspy(idActif) {
+    document.querySelectorAll(".categories-nav-lien").forEach(function (lien) {
+        const estActif = lien.getAttribute("href") === "#" + idActif;
+        lien.classList.toggle("est-actif", estActif);
+        if (estActif) {
+            lien.setAttribute("aria-current", "true");
+        } else {
+            lien.removeAttribute("aria-current");
+        }
+    });
+}
+
+function categorieScrollspyActive() {
+    // La dernière catégorie peut n'avoir jamais assez de place en dessous
+    // (juste le pied de page) pour que son titre atteigne la ligne de
+    // déclenchement, même une fois la page défilée au maximum : sans ce
+    // cas particulier, sa puce ne s'allumerait alors jamais. Arrivé en
+    // bas de la page, c'est donc elle qui fait foi.
+    const enBasDePage = window.scrollY + window.innerHeight
+        >= document.documentElement.scrollHeight - TOLERANCE_ANCRE_PX;
+    if (enBasDePage) {
+        return scrollspyCibles[scrollspyCibles.length - 1].id;
+    }
+
+    let idActif = scrollspyCibles[0].id;
+    scrollspyCibles.forEach(function (cible) {
+        if (cible.getBoundingClientRect().top <= scrollspyDecalageAncrePx + TOLERANCE_ANCRE_PX) {
+            idActif = cible.id;
+        }
+    });
+    return idActif;
+}
+
+let scrollspyRecalculPlanifie = false;
+function planifierRecalculScrollspy() {
+    if (scrollspyRecalculPlanifie || scrollspyCibles.length === 0) {
+        return;
+    }
+    scrollspyRecalculPlanifie = true;
+    requestAnimationFrame(function () {
+        activerPuceScrollspy(categorieScrollspyActive());
+        scrollspyRecalculPlanifie = false;
+    });
+}
+
+// Ce recalcul est déclenché par l'événement scroll (cadencé à une fois par
+// image), pas par IntersectionObserver : ce dernier ne prévient qu'aux
+// franchissements d'une bande étroite, et un défilement rapide peut faire
+// traverser cette bande à un titre court entre deux images affichées, sans
+// jamais déclencher de recalcul. L'événement scroll, lui, ne peut pas être
+// « sauté » de cette façon.
 function activerScrollspyCategories(entrees) {
-    const cibles = entrees
+    scrollspyCibles = entrees
         .map(function (entree) { return document.getElementById(entree.id); })
         .filter(Boolean);
 
-    if (cibles.length === 0) {
+    if (scrollspyCibles.length === 0) {
         return;
     }
 
-    function activerPuce(idActif) {
-        document.querySelectorAll(".categories-nav-lien").forEach(function (lien) {
-            const estActif = lien.getAttribute("href") === "#" + idActif;
-            lien.classList.toggle("est-actif", estActif);
-            if (estActif) {
-                lien.setAttribute("aria-current", "true");
-            } else {
-                lien.removeAttribute("aria-current");
-            }
-        });
+    scrollspyDecalageAncrePx = lireDecalageAncrePx(scrollspyCibles[0]);
+    // État initial, avant le premier défilement (et après chaque reconstruction).
+    activerPuceScrollspy(categorieScrollspyActive());
+
+    if (scrollspyEcouteursPoses) {
+        return;
     }
+    scrollspyEcouteursPoses = true;
 
-    // Relu au redimensionnement : la colonne latérale du bureau et la bande
-    // du mobile n'imposent pas le même décalage, et une fenêtre peut changer
-    // de gabarit sans recharger la page.
-    let decalageAncrePx = lireDecalageAncrePx(cibles[0]);
-
-    function categorieActive() {
-        // La dernière catégorie peut n'avoir jamais assez de place en dessous
-        // (juste le pied de page) pour que son titre atteigne la ligne de
-        // déclenchement, même une fois la page défilée au maximum : sans ce
-        // cas particulier, sa puce ne s'allumerait alors jamais. Arrivé en
-        // bas de la page, c'est donc elle qui fait foi.
-        const enBasDePage = window.scrollY + window.innerHeight
-            >= document.documentElement.scrollHeight - TOLERANCE_ANCRE_PX;
-        if (enBasDePage) {
-            return cibles[cibles.length - 1].id;
-        }
-
-        let idActif = cibles[0].id;
-        cibles.forEach(function (cible) {
-            if (cible.getBoundingClientRect().top <= decalageAncrePx + TOLERANCE_ANCRE_PX) {
-                idActif = cible.id;
-            }
-        });
-        return idActif;
-    }
-
-    let recalculPlanifie = false;
-    function planifierRecalcul() {
-        if (recalculPlanifie) {
-            return;
-        }
-        recalculPlanifie = true;
-        requestAnimationFrame(function () {
-            activerPuce(categorieActive());
-            recalculPlanifie = false;
-        });
-    }
-
-    window.addEventListener("scroll", planifierRecalcul, { passive: true });
+    window.addEventListener("scroll", planifierRecalculScrollspy, { passive: true });
     window.addEventListener("resize", function () {
-        decalageAncrePx = lireDecalageAncrePx(cibles[0]);
-        planifierRecalcul();
+        scrollspyDecalageAncrePx = lireDecalageAncrePx(scrollspyCibles[0]);
+        planifierRecalculScrollspy();
     }, { passive: true });
-
-    // État initial, avant le premier défilement.
-    activerPuce(categorieActive());
 }
 
 
@@ -405,7 +455,7 @@ function remplirPrixMinimums(donnees) {
             return;
         }
         cible.replaceChildren(
-            creerElement("span", "card-prix-libelle", LIBELLE_PRIX_MINIMUM),
+            creerElement("span", "card-prix-libelle", t("carte_prix_min")),
             creerElement("span", "card-prix-valeur", formaterPrix(minimum))
         );
     });
@@ -432,21 +482,23 @@ function construirePageTarifs(donnees) {
     if (conteneurs.ardoise) {
         const ardoiseVisible = construireArdoise(conteneurs.ardoise, donnees);
         if (ardoiseVisible) {
-            entreesNav.push({ id: "ardoise-titre", nom: LIBELLE_NAV_ARDOISE, rubrique: LIBELLE_NAV_ARDOISE });
+            const libelleArdoise = t("carte_nav_happy_hour");
+            entreesNav.push({ id: "ardoise-titre", nom: libelleArdoise, rubrique: libelleArdoise });
         }
     }
 
     // Le nom de rubrique reprend le h2 déjà affiché au-dessus de chaque section
     // dans tarifs.html : distinct du champ « groupe » des catégories (les vins,
     // par exemple), qui organise l'intérieur d'une seule section.
-    [["boissons", conteneurs.boissons, "Boissons"], ["restauration", conteneurs.restauration, "Restauration"]]
+    [["boissons", conteneurs.boissons, "carte_boissons_h2"], ["restauration", conteneurs.restauration, "carte_restauration_h2"]]
         .forEach(function (triplet) {
             const idSection = triplet[0];
             const conteneur = triplet[1];
-            const rubrique = triplet[2];
+            const rubrique = t(triplet[2]);
             if (!conteneur) {
                 return;
             }
+            conteneur.replaceChildren();
             const section = trouverSection(donnees, idSection);
             if (section) {
                 construireSection(conteneur, section).forEach(function (entree) {
@@ -487,7 +539,7 @@ function afficherErreur() {
     const message = creerElement(
         "p",
         "tarifs-erreur",
-        "La carte n'a pas pu être chargée. Vous pouvez la consulter sur place."
+        t("carte_erreur_chargement")
     );
     premier.appendChild(message);
 }
@@ -496,6 +548,15 @@ function afficherErreur() {
 /* --------------------------------------------------------------------------
    Démarrage
    -------------------------------------------------------------------------- */
+
+// Gardées pour reconstruire la page (catégories/descriptions traduites)
+// quand la langue change, sans refaire de requête réseau.
+let donneesTarifsChargees = null;
+
+function rendreTarifs(donnees) {
+    construirePageTarifs(donnees);
+    remplirPrixMinimums(donnees);
+}
 
 async function demarrer() {
     try {
@@ -509,12 +570,18 @@ async function demarrer() {
             throw new Error("Structure inattendue : tableau sections introuvable");
         }
 
-        construirePageTarifs(donnees);
-        remplirPrixMinimums(donnees);
+        donneesTarifsChargees = donnees;
+        rendreTarifs(donnees);
     } catch (erreur) {
         console.error("Tarifs : chargement impossible.", erreur);
         afficherErreur();
     }
 }
+
+window.addEventListener("langue-changee", function () {
+    if (donneesTarifsChargees) {
+        rendreTarifs(donneesTarifsChargees);
+    }
+});
 
 demarrer();
