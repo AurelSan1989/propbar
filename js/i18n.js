@@ -36,19 +36,19 @@
 
             // Pied de page, commun aux trois pages
             footer_horaires_titre: "Horaires",
-            footer_horaires_habituels: "TODO — horaires habituels à confirmer",
-            footer_horaires_happy_hour: "Happy hour : TODO — créneau à confirmer",
+            footer_horaires_habituels: "Tous les jours : 9h – 2h",
+            footer_horaires_happy_hour: "Happy hour : 16h – 2h",
             footer_horaires_note_avant: "Horaires du jour et fermetures exceptionnelles sur",
             footer_horaires_lien: "notre fiche Google",
             footer_lien_mentions: "Mentions légales",
             footer_retour_haut: "Retour en haut",
 
             // Accueil
-            meta_description_accueil: "Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 11h à 2h.",
+            meta_description_accueil: "Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h.",
             og_titre_accueil: "L'impondérable",
             hero_eyebrow: "Bar restaurant, terrasse toute l'année, ouvert 7j/7",
-            hero_horaires: "Tous les jours : 11h - 2h00",
-            hero_happy_hour: "Happy Hour 17h00 - 02h00",
+            hero_horaires: "Tous les jours : 9h - 2h00",
+            hero_happy_hour: "Happy Hour 16h00 - 02h00",
             hero_metro: "Métro Jourdain",
             hero_cta: "Voir la Carte",
             story_eyebrow: "L'esprit Impondérable",
@@ -64,6 +64,7 @@
             ambiance_h2: "Gourmandise et ambiance",
             ambiance_pizzas_titre: "Les pizzas",
             ambiance_pizzas_tag: "À emporter",
+            ambiance_pizzas_alt: "Pizza Tartufata : crème de truffe, jambon, champignons et basilic",
             ambiance_couscous_titre: "Les couscous",
             ambiance_couscous_tag: "Spécialité du chef",
             ambiance_terrasse_titre: "La terrasse",
@@ -76,8 +77,9 @@
             avis_cta: "Voir tous les avis sur Google",
             privatisation_h2: "Privatiser L'Impondérable",
             privatisation_intro: "Anniversaire, pot de départ, after-work : la salle et la terrasse se privatisent pour vos occasions.",
-            privatisation_capacite: "Capacité : TODO — à confirmer avec le gérant",
-            privatisation_espaces: "Espaces disponibles : TODO — salle, terrasse, ou les deux",
+            privatisation_offre: "2 pizzas offertes à la réservation, à partir de 20 personnes",
+            privatisation_capacite: "Capacité : jusqu'à 80 personnes",
+            privatisation_espaces: "Espaces : tout le bar est privatisable, salle et terrasse, selon le nombre de convives",
             privatisation_cta_demande: "Faire une demande",
             privatisation_cta_appeler: "Nous téléphoner",
 
@@ -101,14 +103,14 @@
             privatisation_h1: "Privatiser le bar",
             privatisation_photo_salle_alt: "Salle de L'Impondérable, le bar et les tables",
             privatisation_savoir_h2: "Ce qu'il faut savoir",
-            privatisation_jours: "Jours et créneaux possibles : TODO — à confirmer avec le gérant",
-            privatisation_conditions: "Conditions : TODO — minimum de consommation, acompte, à confirmer avec le gérant",
+            privatisation_jours: "Jours : tous les jours sauf le dimanche",
+            privatisation_conditions: "Conditions : communiquées selon le nombre de convives, envoyez-nous votre demande",
             formulaire_h2: "Votre demande",
             champ_nom: "Nom",
             champ_email: "E-mail",
             champ_telephone: "Téléphone",
             champ_aide_contact: "Renseignez au moins l'un des deux.",
-            champ_date: "Date souhaitée",
+            champ_date: "Date souhaitée (du lundi au samedi)",
             champ_convives: "Nombre de convives",
             champ_evenement: "Type d'événement",
             option_evenement_vide: "Sélectionnez (facultatif)",
@@ -120,6 +122,7 @@
             rgpd_texte: "Les informations de ce formulaire sont utilisées uniquement pour traiter votre demande de privatisation et vous recontacter.",
             rgpd_lien: "En savoir plus sur le traitement de vos données",
             formulaire_envoyer: "Envoyer la demande",
+            formulaire_envoi_en_cours: "Envoi en cours…",
             confirmation_titre: "Demande envoyée",
             confirmation_avant: "Nous avons bien reçu votre demande de privatisation pour le",
             confirmation_appel_avant: "Pour toute question, appelez-nous au",
@@ -134,8 +137,11 @@
             erreur_contact: "Renseignez au moins un e-mail ou un numéro de téléphone.",
             erreur_date_manquante: "Merci d'indiquer une date souhaitée.",
             erreur_date_passee: "Cette date est déjà passée.",
+            erreur_date_dimanche: "Le bar n'est pas privatisable le dimanche : merci de choisir un autre jour.",
             erreur_convives_manquant: "Merci d'indiquer le nombre de convives.",
-            erreur_convives_minimum: "Le nombre de convives doit être d'au moins 1."
+            erreur_convives_minimum: "Le nombre de convives doit être d'au moins 1.",
+            // {max} est remplacé par js/formulaire.js (constante CAPACITE_MAXIMALE).
+            erreur_convives_maximum: "Nous pouvons accueillir jusqu'à {max} personnes. Pour un groupe plus grand, appelez-nous directement."
         },
         en: {
             nav_accueil: "Home",
@@ -148,18 +154,18 @@
             selecteur_langue_aria: "Choose language",
 
             footer_horaires_titre: "Opening hours",
-            footer_horaires_habituels: "TODO — usual opening hours to confirm",
-            footer_horaires_happy_hour: "Happy hour: TODO — time slot to confirm",
+            footer_horaires_habituels: "Every day: 9am – 2am",
+            footer_horaires_happy_hour: "Happy hour: 4pm – 2am",
             footer_horaires_note_avant: "Today's hours and exceptional closures are on",
             footer_horaires_lien: "our Google listing",
             footer_lien_mentions: "Legal notice",
             footer_retour_haut: "Back to top",
 
-            meta_description_accueil: "Bar and restaurant with a year-round terrace at 320 rue des Pyrénées in Paris, open every day from 11am to 2am.",
+            meta_description_accueil: "Bar and restaurant with a year-round terrace at 320 rue des Pyrénées in Paris, open every day from 9am to 2am.",
             og_titre_accueil: "L'impondérable",
             hero_eyebrow: "Bar & restaurant, year-round terrace, open every day",
-            hero_horaires: "Every day: 11am – 2am",
-            hero_happy_hour: "Happy Hour 5pm – 2am",
+            hero_horaires: "Every day: 9am – 2am",
+            hero_happy_hour: "Happy Hour 4pm – 2am",
             hero_metro: "Jourdain metro station",
             hero_cta: "View the Menu",
             story_eyebrow: "The Impondérable spirit",
@@ -175,20 +181,22 @@
             ambiance_h2: "Great food, great atmosphere",
             ambiance_pizzas_titre: "Pizzas",
             ambiance_pizzas_tag: "Takeaway",
+            ambiance_pizzas_alt: "Tartufata pizza: truffle cream, ham, mushrooms and basil",
             ambiance_couscous_titre: "Couscous",
             ambiance_couscous_tag: "Chef's speciality",
             ambiance_terrasse_titre: "The terrace",
             ambiance_terrasse_frequence: "Open every day",
             ambiance_terrasse_tag: "Year-round",
             avis_h2: "What our customers say",
-            avis_intro: "The best way to get a feel for the place is to read what past visitors have said — and maybe add your own review.",
+            avis_intro: "The best way to get a feel for the place is to read what past visitors have said and maybe add your own review.",
             avis_note: "4.2/5 on Google",
             avis_nombre: "· 131 reviews",
             avis_cta: "See all reviews on Google",
             privatisation_h2: "Book L'Impondérable",
             privatisation_intro: "Birthdays, leaving parties, after-work drinks: the room and terrace are available to hire for your occasion.",
-            privatisation_capacite: "Capacity: TODO — to be confirmed with the manager",
-            privatisation_espaces: "Available spaces: TODO — room, terrace, or both",
+            privatisation_offre: "2 free pizzas with your booking, for groups of 20 or more",
+            privatisation_capacite: "Capacity: up to 80 guests",
+            privatisation_espaces: "Spaces: the whole bar can be booked, room and terrace, depending on group size",
             privatisation_cta_demande: "Make a request",
             privatisation_cta_appeler: "Call us",
 
@@ -210,14 +218,14 @@
             privatisation_h1: "Book the bar",
             privatisation_photo_salle_alt: "L'Impondérable's dining room, the bar and tables",
             privatisation_savoir_h2: "Good to know",
-            privatisation_jours: "Available days and time slots: TODO — to be confirmed with the manager",
-            privatisation_conditions: "Conditions: TODO — minimum spend, deposit, to be confirmed with the manager",
+            privatisation_jours: "Days: every day except Sunday",
+            privatisation_conditions: "Conditions: depending on group size, send us your request",
             formulaire_h2: "Your request",
             champ_nom: "Name",
             champ_email: "Email",
             champ_telephone: "Phone",
             champ_aide_contact: "Please provide at least one of the two.",
-            champ_date: "Preferred date",
+            champ_date: "Preferred date (Monday to Saturday)",
             champ_convives: "Number of guests",
             champ_evenement: "Event type",
             option_evenement_vide: "Select (optional)",
@@ -229,6 +237,7 @@
             rgpd_texte: "The information in this form is only used to handle your booking request and get back to you.",
             rgpd_lien: "Learn more about how your data is handled",
             formulaire_envoyer: "Send request",
+            formulaire_envoi_en_cours: "Sending…",
             confirmation_titre: "Request sent",
             confirmation_avant: "We've received your booking request for",
             confirmation_appel_avant: "For any questions, call us on",
@@ -242,8 +251,10 @@
             erreur_contact: "Please provide an email address or phone number.",
             erreur_date_manquante: "Please choose a preferred date.",
             erreur_date_passee: "This date has already passed.",
+            erreur_date_dimanche: "The bar can't be booked on Sundays: please choose another day.",
             erreur_convives_manquant: "Please enter the number of guests.",
-            erreur_convives_minimum: "The number of guests must be at least 1."
+            erreur_convives_minimum: "The number of guests must be at least 1.",
+            erreur_convives_maximum: "We can host up to {max} guests. For a larger group, please call us directly."
         }
     };
 
@@ -282,7 +293,7 @@
     // Transforme un nom d'attribut kebab-case en segment de clé dataset
     // camelCase : "aria-label" -> "i18nAriaLabel".
     function cleDataset(attribut) {
-        return "i18n" + attribut.replace(/(^|-)([a-z])/g, function (_, tiret, lettre) {
+        return "i18n" + attribut.replace(/(?:^|-)([a-z])/g, function (_, lettre) {
             return lettre.toUpperCase();
         });
     }

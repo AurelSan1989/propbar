@@ -504,6 +504,38 @@
                 ]
             },
             {
+                "id": "salades", 
+                "nom" : "Salades",
+                "nomEn" : "Salads",
+                "articles" : [
+                    {
+                        "nom" : "Crottin de Chavignol",
+                        "description" : "Salade, tomate, concombre, tomates séchées, chèvre sur toast, cerneaux de noix",
+                        "descriptionEn" : "Lettuce, tomato, cucumber, sun-dried tomatoes, goat cheese on toast, walnuts"
+                    },
+                    {
+                        "nom" : "Parisienne",
+                        "description" : "Salade, tomate, concombre, pommes de terre à l'huile, jambon de Paris, emmental, oeuf",
+                        "descriptionEn" : "Lettuce, tomato, cucumber, potatoes in vinaigrette, Paris ham, Emmental, egg"
+                    },
+                    {
+                        "nom" : "Auvergnate",
+                        "description" : "Salade, tomate, pommes de terre sautées, cantal, jambon de pays, bleu, noix",
+                        "descriptionEn" : "Lettuce, tomato, sautéed potatoes, Cantal cheese, cured ham, blue cheese, walnuts"
+                    },
+                    {
+                        "nom" : "Italienne",
+                        "description" : "Salade, tomate, mozzarella, artichaut, charcuterie italienne",
+                        "descriptionEn" : "Lettuce, tomato, mozzarella, artichoke, Italian cured meats"
+                    },
+                    {
+                        "nom" : "Océane",
+                        "description" : "Salade, tomate, saumon fumé, fruits de mer, tarama, crème de ciboulette, toast",
+                        "descriptionEn" : "Lettuce, tomato, smoked salmon, seafood, taramasalata, chive cream, toast"
+                    }
+                ]
+            },
+            {
                 "id" : "couscous",
                 "nom" : "Couscous",
                 "articles" : [
@@ -628,8 +660,8 @@
                     },
                     {
                         "nom" : "Buffala",
-                        "description" : "Burrata, tomate cerise, jambon cru ?, roquette",
-                        "descriptionEn" : "Burrata, cherry tomato, cured ham?, arugula",
+                        "description" : "Burrata, tomate cerise, jambon cru, roquette",
+                        "descriptionEn" : "Burrata, cherry tomato, cured ham, arugula",
                         "prix" : 15.90
                     },
                     {

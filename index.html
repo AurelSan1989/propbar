@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'impondérable</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 11h à 2h." data-i18n-content="meta_description_accueil">
+    <meta name="description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
     <meta property="og:title" content="L'impondérable" data-i18n-content="og_titre_accueil">
-    <meta property="og:description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 11h à 2h." data-i18n-content="meta_description_accueil">
+    <meta property="og:description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
     <meta property="og:type" content="website">
     <meta property="og:url" content="TODO">
     <meta property="og:image" content="TODO">
@@ -26,13 +26,18 @@
             "addressLocality": "Paris",
             "addressCountry": "FR"
         },
-        "telephone": "+33983233914"
+        "telephone": "+33983233914",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "02:00"
+        }
     }
     </script>
     <!-- Champs schema.org volontairement absents, à ajouter une fois connus :
          "url" (nom de domaine pas encore choisi), "image" (même sujet que
-         og:image), "openingHoursSpecification" (horaires pas encore
-         confirmés par le gérant, voir le TODO du pied de page). -->
+         og:image). -->
 </head>
 <body id="top">
     <header>
@@ -69,8 +74,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 </div>
                 <div class="info-text">
-                    <p data-i18n="hero_horaires">Tous les jours : 11h - 2h00</p>
-                    <span data-i18n="hero_happy_hour">Happy Hour 17h00 - 02h00</span>
+                    <p data-i18n="hero_horaires">Tous les jours : 9h - 2h00</p>
+                    <span data-i18n="hero_happy_hour">Happy Hour 16h00 - 02h00</span>
                 </div>
             </div>
             <div class="info">
@@ -129,7 +134,8 @@
             </div>
             <div class="card">
                 <div class="card-media">
-                    <!-- photo attendue : une pizza du menu, à insérer -->
+                    <!-- photo temporaire (envoyée par le gérant), à remplacer -->
+                    <img src="img/pizza.webp" alt="Pizza Tartufata : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt">
                     <span class="tag-picture" data-i18n="ambiance_pizzas_tag">À emporter</span>
                 </div>
                 <div class="card-body">
@@ -197,17 +203,23 @@
                 se privatisent pour vos occasions.
             </p>
             <ul class="privatisation-reperes">
+                <li class="repere-offre">
+                    <div class="center-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                    </div>
+                    <span data-i18n="privatisation_offre">2 pizzas offertes à la réservation, à partir de 20 personnes</span>
+                </li>
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-group"><path d="M17 21a5 5 0 00-10 0"/><path d="M22 10.5a3.5 3.5 0 00-5.507-2.868"/><path d="M7.507 7.632A3.5 3.5 0 002 10.5"/><circle cx="12" cy="13" r="3"/><circle cx="18.5" cy="4.5" r="2.5"/><circle cx="5.5" cy="4.5" r="2.5"/></svg>
                     </div>
-                    <span data-i18n="privatisation_capacite">Capacité : TODO — à confirmer avec le gérant</span>
+                    <span data-i18n="privatisation_capacite">Capacité : jusqu'à 80 personnes</span>
                 </li>
                 <li>
                     <div class="center-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                     </div>
-                    <span data-i18n="privatisation_espaces">Espaces disponibles : TODO — salle, terrasse, ou les deux</span>
+                    <span data-i18n="privatisation_espaces">Espaces : tout le bar est privatisable, salle et terrasse, selon le nombre de convives</span>
                 </li>
             </ul>
             <div class="actions">
@@ -229,8 +241,8 @@
 
         <div class="footer-horaires">
             <h2 data-i18n="footer_horaires_titre">Horaires</h2>
-            <p data-i18n="footer_horaires_habituels">TODO — horaires habituels à confirmer</p>
-            <p data-i18n="footer_horaires_happy_hour">Happy hour : TODO — créneau à confirmer</p>
+            <p data-i18n="footer_horaires_habituels">Tous les jours : 9h – 2h</p>
+            <p data-i18n="footer_horaires_happy_hour">Happy hour : 16h – 2h</p>
             <p>
                 <span data-i18n="footer_horaires_note_avant">Horaires du jour et fermetures exceptionnelles sur</span>
                 <a href="https://share.google/3GtbogjKdMXxzdB8y" target="_blank" rel="noopener" data-i18n="footer_horaires_lien">notre fiche Google</a>.

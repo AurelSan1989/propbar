@@ -303,6 +303,20 @@ a:hover {
    6. Boutons et focus
    ========================================================================== */
 
+/* Le navigateur ne pose la main que sur les liens : sans cette règle, un
+   <button> stylé exactement comme un lien .cta garde la flèche, et ne
+   paraît donc pas cliquable au pointeur. */
+button {
+    cursor: pointer;
+}
+
+/* Pendant l'envoi du formulaire : le curseur confirme que quelque chose est
+   en cours plutôt que de laisser croire à un bouton mort. */
+button:disabled {
+    cursor: progress;
+    opacity: 0.75;
+}
+
 /* Action dominante : un seul bouton plein par écran */
 .cta {
     display: flex;
@@ -844,9 +858,21 @@ body.menu-ouvert {
     padding-top: 2px;
 }
 
-/* Repères encore à confirmer : traités comme mention provisoire */
 .privatisation-reperes span {
-    color: var(--texte-doux);
+    color: var(--texte);
+}
+
+/* Offre commerciale : même tuile que les autres repères, relevée par
+   l'accent. Pleine largeur dans la grille desktop, pour ne jamais y
+   laisser de case vide quel que soit le nombre de repères. */
+.privatisation-reperes .repere-offre {
+    grid-column: 1 / -1;
+    background-color: color-mix(in srgb, var(--accent) 14%, var(--fond-carte));
+    border-color: var(--accent);
+}
+
+.privatisation-reperes .repere-offre span {
+    font-weight: 600;
 }
 
 .actions {

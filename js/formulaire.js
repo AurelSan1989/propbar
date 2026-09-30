@@ -1,24 +1,23 @@
 // Formulaire de privatisation : validation de confort côté client, puis
-// envoi par EmailJS (service tiers gratuit, sans dépendance à installer —
-// il s'utilise via un script chargé en CDN et une clé publique).
+// envoi à notre script Google Apps Script, qui transmet la demande par
+// email (son code de référence est dans apps-script/Code.gs).
 //
 // IMPORTANT — cette validation n'est qu'un confort pour le visiteur (lui
 // éviter un aller-retour serveur pour une date passée ou un champ oublié).
-// Elle ne protège de rien : un robot qui vise directement l'API EmailJS la
-// contourne entièrement. La seule protection réelle ici est le honeypot
-// (voir plus bas) et, côté tableau de bord EmailJS, la restriction de
-// domaine et la limite de débit d'envoi.
+// Elle ne protège de rien : un robot qui vise directement l'URL du script la
+// contourne entièrement. Les protections réelles sont le honeypot (voir plus
+// bas) et, côté script, le plafond d'envois quotidien.
 
-// Identifiants EmailJS — à renseigner avant mise en production.
-// La clé publique EmailJS est publique par conception : elle est faite pour
-// vivre dans le code côté client, au même titre qu'une clé d'API Google Maps.
-// Ce n'est donc pas un secret à cacher. La protection contre les abus se
-// règle depuis le tableau de bord EmailJS, via la restriction de domaine
-// (n'autoriser que le domaine du site) et la limite de débit d'envoi —
-// jamais en tentant de dissimuler cette clé dans le code.
-const EMAILJS_SERVICE_ID = "";
-const EMAILJS_TEMPLATE_ID = "";
-const EMAILJS_PUBLIC_KEY = "";
+// URL de l'application web Apps Script, obtenue à son déploiement. Elle se
+// termine par /exec — une URL en /dev ne répond qu'au compte qui l'a créée.
+// Cette URL n'est pas un secret : elle vit forcément dans le code envoyé au
+// navigateur du visiteur, au même titre qu'une clé d'API Google Maps.
+const URL_FORMULAIRE = "https://script.google.com/macros/s/AKfycbzY9pStdESVvmM23W33BCeeiYNr4w1CtZB2HYGqhys6PQJU-fSs9RamUiZzFhxDflbIJw/exec";
+
+// Capacité maximale du bar. Sert à la fois à la validation et à l'attribut
+// max du champ. À tenir cohérent avec la clé privatisation_capacite de
+// js/i18n.js, qui l'affiche parmi les repères de la page.
+const CAPACITE_MAXIMALE = 80;
 
 
 /* --------------------------------------------------------------------------
@@ -43,6 +42,8 @@ if (formulaire) {
     const blocConfirmation = document.getElementById("confirmation");
     const blocErreurEnvoi = document.getElementById("erreur-envoi");
 
+    let envoiEnCours = false;
+
 
     /* ----------------------------------------------------------------------
        Dates : aujourd'hui, en local, sans décalage de fuseau horaire
@@ -63,8 +64,16 @@ if (formulaire) {
         return valeurIso < dateDuJourEnIso();
     }
 
-    function formaterDateLisible(valeurIso) {
-        const langue = window.I18N ? window.I18N.langue() : "fr";
+    // Le dimanche est réservé depuis des années à un événement régulier
+    // (lecture/concert) : le gérant ne veut pas avoir à refuser ces demandes.
+    function dateEstUnDimanche(valeurIso) {
+        return new Date(valeurIso + "T00:00:00").getDay() === 0;
+    }
+
+    // langueForcee : le mail envoyé au gérant reste en français, quelle que
+    // soit la langue dans laquelle le visiteur consulte le site.
+    function formaterDateLisible(valeurIso, langueForcee) {
+        const langue = langueForcee || (window.I18N ? window.I18N.langue() : "fr");
         const date = new Date(valeurIso + "T00:00:00");
         return new Intl.DateTimeFormat(langue === "en" ? "en-GB" : "fr-FR", {
             weekday: "long",
@@ -106,12 +115,20 @@ if (formulaire) {
             erreurs.push({ champ: champDate, id: "erreur-date", message: traduire("erreur_date_manquante") });
         } else if (dateEstPassee(champDate.value)) {
             erreurs.push({ champ: champDate, id: "erreur-date", message: traduire("erreur_date_passee") });
+        } else if (dateEstUnDimanche(champDate.value)) {
+            erreurs.push({ champ: champDate, id: "erreur-date", message: traduire("erreur_date_dimanche") });
         }
 
         if (!champRempli(champConvives)) {
             erreurs.push({ champ: champConvives, id: "erreur-convives", message: traduire("erreur_convives_manquant") });
         } else if (Number(champConvives.value) < 1) {
             erreurs.push({ champ: champConvives, id: "erreur-convives", message: traduire("erreur_convives_minimum") });
+        } else if (Number(champConvives.value) > CAPACITE_MAXIMALE) {
+            erreurs.push({
+                champ: champConvives,
+                id: "erreur-convives",
+                message: traduire("erreur_convives_maximum").replace("{max}", CAPACITE_MAXIMALE)
+            });
         }
 
         return erreurs;
@@ -144,15 +161,25 @@ if (formulaire) {
        Confirmation et échec d'envoi
        ---------------------------------------------------------------------- */
 
+    // Masquer le formulaire fait remonter brutalement le reste de la page :
+    // sans ce recentrage, le visiteur resté au niveau du bouton se retrouve
+    // devant le pied de page et ne voit jamais la réponse à son envoi.
+    function revelerPanneau(panneau) {
+        const animationReduite = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        panneau.hidden = false;
+        panneau.focus({ preventScroll: true });
+        panneau.scrollIntoView({ behavior: animationReduite ? "auto" : "smooth", block: "center" });
+    }
+
     function afficherConfirmation() {
         document.getElementById("confirmation-date").textContent = formaterDateLisible(champDate.value);
         formulaire.hidden = true;
         blocErreurEnvoi.hidden = true;
-        blocConfirmation.hidden = false;
+        revelerPanneau(blocConfirmation);
     }
 
     function afficherErreurEnvoi() {
-        blocErreurEnvoi.hidden = false;
+        revelerPanneau(blocErreurEnvoi);
     }
 
     function masquerErreurEnvoi() {
@@ -177,32 +204,60 @@ if (formulaire) {
 
 
     /* ----------------------------------------------------------------------
-       Envoi par EmailJS
+       Envoi au script Apps Script
        ---------------------------------------------------------------------- */
 
+    // Ces noms de champs sont ceux que lit apps-script/Code.gs : les deux
+    // fichiers doivent être modifiés ensemble.
     function construireParametresEnvoi() {
+        const evenementChoisi = champEvenement.value
+            ? champEvenement.options[champEvenement.selectedIndex].dataset.libelleFr
+            : "Non précisé";
+        const dateFr = formaterDateLisible(champDate.value, "fr");
         return {
-            objet: "Privatisation — " + formaterDateLisible(champDate.value) + " — " + champConvives.value + " personnes",
+            objet: "Demande de privatisation : " + champConvives.value + " personnes le " + dateFr,
             nom: champNom.value.trim(),
-            email: champEmail.value.trim(),
-            telephone: champTelephone.value.trim(),
-            date: champDate.value,
+            email: champEmail.value.trim() || "Non renseigné",
+            // Adresse de réponse du mail : vide plutôt qu'un texte qui ne
+            // serait pas une adresse valide.
+            reply_to: champEmail.value.trim(),
+            telephone: champTelephone.value.trim() || "Non renseigné",
+            date_lisible: dateFr,
             convives: champConvives.value,
-            evenement: champEvenement.value,
-            message: champMessage.value.trim()
+            evenement: evenementChoisi,
+            message: champMessage.value.trim() || "(aucun message)",
+            langue: window.I18N && window.I18N.langue() === "en" ? "Anglais — répondre en anglais" : "Français"
         };
     }
 
-    // TODO : appel réel une fois la bibliothèque EmailJS chargée (balise
-    // <script> vers leur CDN dans le <head>) et les identifiants ci-dessus
-    // renseignés, par exemple :
-    //
-    //   return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, parametres, EMAILJS_PUBLIC_KEY);
-    //
     // En l'absence de configuration, l'envoi échoue volontairement : mieux
     // vaut un message d'erreur visible qu'une fausse confirmation.
     async function envoyerDemande(parametres) {
-        throw new Error("Envoi non configuré : identifiants EmailJS à renseigner en tête de js/formulaire.js.");
+        if (!URL_FORMULAIRE) {
+            throw new Error("Envoi non configuré : URL du script à renseigner en tête de js/formulaire.js.");
+        }
+
+        // Le type text/plain est délibéré : il fait entrer la requête dans la
+        // catégorie « simple » du navigateur, qui n'envoie alors pas de
+        // requête de contrôle OPTIONS — Apps Script ne sait pas y répondre et
+        // l'envoi serait bloqué. Le corps reste du JSON, que le script relit.
+        const reponse = await fetch(URL_FORMULAIRE, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(parametres)
+        });
+
+        if (!reponse.ok) {
+            throw new Error("Réponse HTTP " + reponse.status);
+        }
+
+        // Le script répond toujours en JSON, y compris quand il refuse la
+        // demande (champs manquants, plafond d'envois atteint).
+        const resultat = await reponse.json();
+        if (!resultat.ok) {
+            throw new Error("Demande refusée par le script : " + resultat.erreur);
+        }
+        return resultat;
     }
 
 
@@ -227,9 +282,21 @@ if (formulaire) {
             return;
         }
 
+        // La touche Entrée soumet le formulaire même quand le bouton est
+        // désactivé : ce drapeau est la seule garantie contre un second envoi
+        // pendant que le premier est en route.
+        if (envoiEnCours) {
+            return;
+        }
+
         viderErreurs();
         masquerErreurEnvoi();
+        envoiEnCours = true;
         boutonEnvoyer.disabled = true;
+        // L'aller-retour avec le script dure près de deux secondes : sans ce
+        // changement de libellé, rien ne bouge à l'écran et le visiteur croit
+        // que son clic n'a pas été pris en compte.
+        boutonEnvoyer.textContent = traduire("formulaire_envoi_en_cours");
 
         try {
             const parametres = construireParametresEnvoi();
@@ -239,7 +306,9 @@ if (formulaire) {
             console.error("Privatisation : envoi impossible.", erreur);
             afficherErreurEnvoi();
         } finally {
+            envoiEnCours = false;
             boutonEnvoyer.disabled = false;
+            boutonEnvoyer.textContent = traduire("formulaire_envoyer");
         }
     });
 
@@ -266,4 +335,5 @@ if (formulaire) {
        ---------------------------------------------------------------------- */
 
     champDate.min = dateDuJourEnIso();
+    champConvives.max = CAPACITE_MAXIMALE;
 }
