@@ -1,152 +1,200 @@
 /* ==========================================================================
    L'Impondérable — feuille de style unique
-   Mobile d'abord, un seul point de rupture à 768px.
-   Sommaire :
-     1.  Polices auto-hébergées
-     2.  Variables
-     3.  Base et réinitialisation
-     4.  Typographie
-     5.  Icônes SVG
-     6.  Boutons et focus
-     7.  En-tête
-     8.  Premier écran (hero)
-     9.  Présentation (story)
-     10. Ambiance (cartes)
-     11. Avis
-     12. Privatisation
-     13. Pied de page
-     14. Point de rupture 768px
-     15. Invitation au clic
-     16. Page des tarifs
-     17. Formulaire de privatisation
-     18. Page des mentions légales
-     19. Barre d'action flottante (mobile)
+   ==========================================================================
 
-   Classes du menu de navigation, communes aux trois pages et pilotées par
-   js/app.js, stylées en section 7 (et sa surcharge en section 14) :
-     .nav-principale.est-ouvert  panneau plein écran du menu mobile, affiché
-                                 tant que le bouton n'est pas refermé
-     body.menu-ouvert            bloque le défilement du fond derrière le
-                                 panneau ouvert
+   Concept : le site change de matière avec l'heure.
+     JOUR  — papier grainé, filets tracés, ombres douces. On a envie de
+             toucher. Les photos de plats y sont appétissantes.
+     NUIT  — encre profonde, plus aucune bordure : les blocs émergent du fond
+             par la lumière. Trois éléments seulement s'allument, écho des
+             néons de la vitrine.
 
-   Classes de privatisation.html dont le contenu change avec js/formulaire.js,
-   stylées en section 17 :
-     .champ-erreur          message d'erreur sous un champ (texte posé par le
-                            script, jamais vide dans le HTML de départ) ;
-                            un repère visuel (le point rouge) s'ajoute au
-                            texte dès qu'elle en contient, jamais à sa place
-     .formulaire-panel      confirmation d'envoi ou message d'échec, les deux
-                            masqués par défaut (attribut hidden) et révélés
-                            par le script
+   Ce qui NE CHANGE JAMAIS entre les deux modes : la grille, les tailles, les
+   positions, les espacements, la typographie. C'est la même page sous une
+   autre lumière — c'est ce qui rend le double mode tenable.
 
-   Classes produites par js/tarifs.js, toutes stylées en section 16 :
-     .page-carte              colonne latérale + contenu (desktop), simple
-                              empilement sur mobile — posée dans tarifs.html
-     .categories-nav-lien     puce de la bande de catégories (tarifs.html) ;
-                              devient un lien de colonne latérale au-delà
-                              de 768px. .est-actif quand sa catégorie est
-                              celle lue
-     .categories-nav-rubrique étiquette de rubrique (Happy Hour / Boissons /
-                              Restauration) au-dessus d'un groupe de puces ;
-                              visible seulement dans la colonne latérale
-     .tarifs-groupe           intertitre coiffant les catégories d'un même groupe
-     .tarifs-categorie        bloc d'une catégorie
-     .tarifs-categorie-titre  titre de catégorie, porte l'id servant d'ancre
-     .tarifs-note             note de catégorie
-     .tarifs-lien-ardoise     renvoi discret vers l'ardoise
-     .tarifs-liste            liste des articles
-     .tarifs-article          une ligne d'article
-     .tarifs-article-texte    nom, contenance et description regroupés
-     .tarifs-nom              nom de l'article
-     .tarifs-contenance       contenance, quand elle existe
-     .tarifs-description      description, quand elle existe
-     .tarifs-prix             prix affiché, un seul par ligne
-     .tarifs-erreur           message affiché si la carte ne se charge pas
-     .card-prix               prix minimum sur les cartes de l'accueil
-                              (apparence héritée de « .card-body span »)
-     .card-prix-libelle       mention « à partir de » précédant ce prix
-     .card-prix-valeur        le montant lui-même
+   Le mode est posé sur <html data-mode="jour|nuit"> par js/jour-nuit.js.
+
+   Sommaire
+     1.  Réglages et palettes
+     2.  Base et matière
+     3.  Typographie
+     4.  Liens, boutons, focus
+     5.  En-tête et navigation
+     6.  Sélecteurs (langue, mode)
+     7.  Premier écran
+     8.  Présentation
+     9.  Ambiance (zigzag)
+     10. Avis
+     11. Privatisation
+     12. Pied de page
+     13. Barre flottante
+     14. Apparitions et mouvement
+     15. Page de la carte
+     16. Formulaire de privatisation
+     17. Mentions légales et page introuvable
+     18. Invitation au clic
    ========================================================================== */
 
 
 /* ==========================================================================
-   1. Polices auto-hébergées — jeu latin, graisses réellement utilisées
-   ========================================================================== */
-
-@font-face {
-    font-family: "Barlow Condensed";
-    src: url("../fonts/barlow-condensed-600.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Barlow Condensed";
-    src: url("../fonts/barlow-condensed-700.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Plus Jakarta Sans";
-    src: url("../fonts/plus-jakarta-sans-400.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Plus Jakarta Sans";
-    src: url("../fonts/plus-jakarta-sans-600.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-
-/* ==========================================================================
-   2. Variables
+   1. Réglages et palettes
    ========================================================================== */
 
 :root {
-    --fond: #121A2B;
-    --fond-carte: #1A2438;
-    --ligne: #2A3549;
-    --texte: #F2EBDD;
-    --texte-doux: #C3CAD8;
-    --accent: #F2C9A0;
-    --cta-fond: #C8301E;
-    --cta-texte: #FFF4EE;
-
-    --titre: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
-    --police: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-    --rayon: 10px;
-    --rayon-sm: 6px;
-
+    /* --- Espacements, sur une seule échelle --- */
     --xs: 0.5rem;
-    --sm: 0.75rem;
-    --md: 1rem;
-    --lg: 1.5rem;
-    --xl: 2.5rem;
+    --sm: 0.875rem;
+    --md: 1.5rem;
+    --lg: 2.5rem;
+    --xl: 4rem;
+    --xxl: 6.5rem;
 
+    --conteneur: 1180px;
+    --lecture: 62ch;
+    --gouttiere: clamp(1.25rem, 5vw, 4rem);
     --cible: 44px;
-    --conteneur: 1100px;
+    --rayon: 4px;
+    /* Hauteur des deux barres collantes, calculée plutôt qu'écrite en dur :
+       cible tactile + espacements + filet. Sert aux ancres de la carte et au
+       menu plein écran, qui doivent se poser juste dessous. */
+    --hauteur-entete: calc(var(--cible) + var(--xs) * 2 + 1px);
+    --hauteur-nav-categories: calc(var(--cible) + var(--xs) * 2 + 1px);
+    --rayon-photo: 6px;
 
-    /* Hauteurs réelles des barres collantes de tarifs.html (mesurées, pas
-       estimées) : servent à caler la bande sous l'en-tête, et les ancres
-       sous les deux à la fois. Recalculer si l'une des deux barres change. */
-    --hauteur-entete: 61px;
-    --hauteur-nav-categories: 76px;
-    --hauteur-barre-flottante: 81px;
+    /* --- Typographie --- */
+    --titre: "Fraunces", Georgia, "Times New Roman", serif;
+    --police: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --t-h1: clamp(3.25rem, 11vw, 7.5rem);
+    --t-h2: clamp(2rem, 5.2vw, 3.75rem);
+    /* Titre de page intérieure : la même voix que le premier écran, une
+       octave plus bas. --t-h1 reste réservé au nom du bar. */
+    --t-h1-page: clamp(2.5rem, 7vw, 5rem);
+    --t-h3: clamp(1.375rem, 2.6vw, 1.875rem);
+    --t-lead: clamp(1.125rem, 2vw, 1.4375rem);
+    --t-corps: 1.0625rem;
+    --t-petit: 0.9375rem;
+    --t-label: 0.8125rem;
+
+    /* --- JOUR : la matière --- */
+    --fond: #E6DFD1;
+    --fond-alt: #DDD4C2;
+    --fond-carte: #F3EEE4;
+    --texte: #1E1913;
+    --texte-doux: #625849;
+    --ligne: #C4B9A4;
+    --ligne-forte: #8C8371;
+    --accent: #C8301E;
+    --accent-lien: #A8281A;
+    /* Ocre assombri : la version plus claire ne tenait pas le contraste
+       minimal pour les sur-titres, qui sont petits et en capitales. */
+    --accent-doux: #70481E;
+    --cta-fond: #C8301E;
+    --cta-texte: #FDF6F1;
+
+    --ombre-photo: 0 1px 2px rgba(30, 25, 19, 0.08), 0 10px 28px rgba(30, 25, 19, 0.12);
+    --ombre-bloc: 0 1px 2px rgba(30, 25, 19, 0.05), 0 4px 14px rgba(30, 25, 19, 0.06);
+    --lueur: none;
+    --grain-opacite: 0.05;
+    --voile-photo: linear-gradient(to top, rgba(18, 14, 10, 0.92) 0%, rgba(18, 14, 10, 0.55) 38%, rgba(18, 14, 10, 0.12) 70%);
+    --photo-filtre: none;
+
+    color-scheme: light;
+}
+
+/* --- NUIT : la lumière, dans la famille « bouteille » ---
+   Fond vert bouteille très sombre plutôt que bleu nuit, et l'or en accent
+   doux : c'est la palette du bar éclairé le soir, pas celle d'un écran. */
+:root[data-mode="nuit"] {
+    --fond: #0C1A14;
+    --fond-alt: #10201A;
+    --fond-carte: #16291F;
+    --texte: #F2EBDD;
+    --texte-doux: #A9BAAE;
+    --ligne: #22382C;
+    --ligne-forte: #3B5949;
+    --accent: #F04B33;
+    --accent-lien: #F2694F;
+    --accent-doux: #E0BE5A;
+    /* Le rouge du bouton reste celui du jour : un rouge plus clair la nuit
+       tombait sous le contraste minimal avec son texte. C'est le halo, pas
+       la teinte, qui donne l'impression d'allumage. */
+    --cta-fond: #C8301E;
+    --cta-texte: #FFF6F1;
+
+    /* La nuit, les blocs ne sont plus posés sur le fond : ils en émergent. */
+    --ombre-photo: 0 18px 50px rgba(0, 0, 0, 0.6);
+    --ombre-bloc: none;
+    --lueur: 0 0 34px rgba(240, 75, 51, 0.28);
+    --grain-opacite: 0.028;
+    --voile-photo: linear-gradient(to top, rgba(4, 12, 8, 0.94) 0%, rgba(4, 12, 8, 0.6) 40%, rgba(4, 12, 8, 0.15) 72%);
+    --photo-filtre: contrast(1.08) saturate(1.05) brightness(0.92);
+
+    color-scheme: dark;
+}
+
+/* Les transitions de couleur ne vivent que le temps de la bascule : en
+   permanence, elles alourdiraient chaque survol et chaque défilement. */
+:root.bascule-en-cours,
+:root.bascule-en-cours * {
+    transition: background-color 0.45s ease, color 0.45s ease,
+                border-color 0.45s ease, box-shadow 0.45s ease !important;
 }
 
 
 /* ==========================================================================
-   3. Base et réinitialisation
+   2. Base et matière
    ========================================================================== */
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("../fonts/fraunces-400.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("../fonts/fraunces-600.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("../fonts/fraunces-700.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Archivo";
+    src: url("../fonts/archivo-400.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Archivo";
+    src: url("../fonts/archivo-500.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Archivo";
+    src: url("../fonts/archivo-600.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Archivo";
+    src: url("../fonts/archivo-700.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
 
 *,
 *::before,
@@ -155,7 +203,7 @@
 }
 
 html {
-    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -163,110 +211,50 @@ body {
     background-color: var(--fond);
     color: var(--texte);
     font-family: var(--police);
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: var(--t-corps);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* La matière : un grain fin posé sur toute la page. Très présent le jour,
+   presque éteint la nuit — de la lumière, on n'attend pas du toucher. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--grain-opacite);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* La nuit, une lueur très diffuse en haut de page : la pièce est éclairée
+   par quelque chose hors champ, dans l'ambre d'une lampe. */
+:root[data-mode="nuit"] body::after {
+    content: "";
+    position: fixed;
+    top: -30vh;
+    left: 50%;
+    width: 120vw;
+    height: 70vh;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(224, 190, 90, 0.08) 0%, transparent 65%);
 }
 
 img {
     max-width: 100%;
-    height: auto;
     display: block;
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+/* Les règles de display posées plus bas prennent le pas sur la règle par
+   défaut du navigateur : sans ceci, l'icône de fermeture du menu, marquée
+   hidden dans le HTML, s'afficherait en même temps que celle d'ouverture. */
+[hidden] {
+    display: none !important;
 }
-
-p {
-    margin: 0;
-}
-
-address {
-    font-style: normal;
-}
-
-section {
-    padding: var(--xl) var(--md);
-}
-
-/* Défilement adouci vers les ancres (bande de catégories, retour en haut),
-   seulement si la personne n'a pas demandé de réduire les animations. */
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-}
-
-
-/* ==========================================================================
-   4. Typographie
-   ========================================================================== */
-
-h1,
-h2,
-h3,
-h4 {
-    margin: 0;
-    font-family: var(--titre);
-    color: var(--texte);
-    text-transform: uppercase;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-}
-
-h1 {
-    font-size: 2.25rem;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 1.625rem;
-    font-weight: 700;
-}
-
-h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-
-h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-}
-
-/* Surtitre de section : label court, jamais une information isolée */
-.eyebrow {
-    display: block;
-    font-family: var(--police);
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.6;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-strong {
-    font-weight: 600;
-    color: var(--accent);
-}
-
-a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==========================================================================
-   5. Icônes SVG — dimensionnées ici, couleur héritée via stroke="currentColor"
-   ========================================================================== */
 
 .lucide {
     width: 20px;
@@ -274,146 +262,108 @@ a:hover {
     flex-shrink: 0;
 }
 
-.center-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo {
-    width: 32px;
-    height: 32px;
-    transition: transform 0.2s ease;
-}
-
-/* La feuille est une <img> (fichier SVG externe) : elle ne peut pas hériter
-   d'un changement de couleur CSS comme le ferait un SVG intégré au HTML,
-   d'où ce léger agrandissement plutôt qu'un changement de teinte. */
-.brand:hover .logo {
-    transform: scale(1.08);
-}
-
-.iconlogo {
-    width: 22px;
-    height: 22px;
+main {
+    position: relative;
+    z-index: 2;
 }
 
 
 /* ==========================================================================
-   6. Boutons et focus
+   3. Typographie
    ========================================================================== */
 
-/* Lien d'évitement : premier élément atteint au clavier, invisible tant
-   qu'il n'a pas le focus. Sans lui, il faut traverser l'en-tête entier
-   (logo, 3 liens, langue, thèmes, téléphone) sur chaque page avant
-   d'atteindre le contenu. Décalé hors écran plutôt que masqué, pour rester
-   accessible aux lecteurs d'écran. */
-.lien-evitement {
-    position: absolute;
-    top: -100px;
-    left: var(--sm);
-    z-index: 30;
-    padding: var(--sm) var(--md);
-    background-color: var(--cta-fond);
-    color: var(--cta-texte);
-    border-radius: var(--rayon-sm);
+h1, h2, h3 {
     font-family: var(--titre);
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
 }
 
-.lien-evitement:focus {
-    top: var(--sm);
+h1 {
+    font-size: var(--t-h1);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+}
+
+h2 {
+    font-size: var(--t-h2);
+}
+
+h3 {
+    font-size: var(--t-h3);
+    letter-spacing: -0.015em;
+}
+
+p {
+    margin: 0 0 var(--md);
+    max-width: var(--lecture);
+}
+
+/* L'étiquette qui coiffe chaque section : petite, espacée, en capitales.
+   C'est le seul endroit où l'on utilise les capitales — les titres, eux,
+   restent en bas-de-casse pour laisser respirer le serif. */
+.eyebrow {
+    display: block;
+    font-family: var(--police);
+    font-size: var(--t-label);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-doux);
+    margin: 0 0 var(--sm);
+    max-width: none;
+}
+
+.lead {
+    font-size: var(--t-lead);
+    line-height: 1.55;
+}
+
+/* La colonne de contenu est obtenue par le padding, pas en centrant chaque
+   enfant : centrer les enfants leur ferait perdre leur alignement à gauche
+   dès qu'ils ont eux-mêmes une largeur maximale (un titre sur 16 caractères,
+   par exemple, se retrouverait au milieu). */
+main > section {
+    position: relative;
+    padding-block: var(--xxl);
+    padding-inline: max(var(--gouttiere), calc((100% - var(--conteneur)) / 2));
+}
+
+
+/* ==========================================================================
+   4. Liens, boutons, focus
+   ========================================================================== */
+
+a {
+    color: var(--accent-lien);
     text-decoration: none;
 }
 
-/* La cible du lien d'évitement reçoit le focus par programme : pas de
-   contour permanent, il ne s'agit pas d'un élément interactif. */
-#contenu:focus {
-    outline: none;
+/* Le filet se trace au survol, au lieu d'apparaître d'un coup. */
+main a:not(.cta):not(.cta-secondaire):not(.card-lien),
+footer a {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
 }
 
-/* Le navigateur ne pose la main que sur les liens : sans cette règle, un
-   <button> stylé exactement comme un lien .cta garde la flèche, et ne
-   paraît donc pas cliquable au pointeur. */
+main a:not(.cta):not(.cta-secondaire):hover,
+footer a:hover {
+    background-size: 100% 1px;
+}
+
 button {
     cursor: pointer;
+    font: inherit;
 }
 
-/* Pendant l'envoi du formulaire : le curseur confirme que quelque chose est
-   en cours plutôt que de laisser croire à un bouton mort. */
 button:disabled {
     cursor: progress;
     opacity: 0.75;
-}
-
-/* Action dominante : un seul bouton plein par écran */
-.cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--xs);
-    min-height: 48px;
-    padding: var(--sm) var(--lg);
-    background-color: var(--cta-fond);
-    color: var(--cta-texte);
-    font-family: var(--titre);
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border-radius: var(--rayon-sm);
-    text-align: center;
-}
-
-.cta:hover {
-    background-color: color-mix(in srgb, var(--cta-fond) 82%, var(--cta-texte));
-    text-decoration: none;
-}
-
-/* Action secondaire : contour seul, jamais de fond plein. Couleur du contour
-   thématique : --texte par défaut (bleu nuit), surchargée en --accent pour
-   les thèmes ardoise et bouteille — voir les blocs [data-theme] en fin de
-   fichier. */
-.cta-secondaire {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: var(--sm) var(--lg);
-    border: 2px solid var(--texte);
-    border-radius: var(--rayon-sm);
-    color: var(--texte);
-    font-family: var(--titre);
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    text-align: center;
-}
-
-/* Bouton contour (dont « Nous téléphoner ») : le contour se remplit */
-.cta-secondaire:hover {
-    background-color: var(--texte);
-    color: var(--fond);
-    text-decoration: none;
-}
-
-.btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--cible);
-    min-height: var(--cible);
-    background-color: var(--fond-carte);
-    border: 1px solid var(--ligne);
-    border-radius: var(--rayon-sm);
-    color: var(--accent);
-}
-
-.btn-icon:hover {
-    border-color: var(--accent);
 }
 
 :focus-visible {
@@ -421,35 +371,99 @@ button:disabled {
     outline-offset: 3px;
 }
 
+.cta,
+.cta-secondaire {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--xs);
+    min-height: 52px;
+    padding: var(--sm) var(--lg);
+    border-radius: var(--rayon);
+    font-family: var(--police);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.cta {
+    background-color: var(--cta-fond);
+    color: var(--cta-texte);
+    box-shadow: var(--lueur);
+}
+
+.cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--lueur), 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.cta-secondaire {
+    border: 1.5px solid var(--ligne-forte);
+    color: var(--texte);
+}
+
+.cta-secondaire:hover {
+    border-color: var(--accent);
+    color: var(--accent-lien);
+    transform: translateY(-2px);
+}
+
+.lien-evitement {
+    position: absolute;
+    top: -100px;
+    left: var(--sm);
+    z-index: 60;
+    padding: var(--sm) var(--md);
+    background-color: var(--cta-fond);
+    color: var(--cta-texte);
+    border-radius: var(--rayon);
+    font-weight: 600;
+}
+
+.lien-evitement:focus {
+    top: var(--sm);
+}
+
+#contenu:focus {
+    outline: none;
+}
+
+.center-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 
 /* ==========================================================================
-   7. En-tête
+   5. En-tête et navigation
    ========================================================================== */
 
 header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 40;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--sm);
-    padding: var(--xs) var(--md);
-    border-bottom: 1px solid var(--ligne);
+    gap: var(--md);
+    padding: var(--xs) var(--gouttiere);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
 }
 
-/* Le flou vit sur ce calque séparé plutôt que sur <header> lui-même : un
-   filtre CSS sur un ancêtre devient le repère de positionnement de ses
-   descendants en position fixed — ça écraserait le panneau du menu mobile
-   (posé plus bas dans ce même <header>) à une hauteur de 0. */
 header::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-color: color-mix(in srgb, var(--fond) 88%, transparent);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background-color: color-mix(in srgb, var(--fond) 82%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    backdrop-filter: blur(14px) saturate(1.4);
 }
 
 .brand {
@@ -461,13 +475,22 @@ header::before {
     font-family: var(--titre);
     font-size: 1.375rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.02em;
 }
 
-.brand:hover {
-    text-decoration: none;
-    color: var(--accent);
+.brand:hover .logo {
+    transform: rotate(-8deg) scale(1.08);
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.iconlogo {
+    width: 20px;
+    height: 20px;
 }
 
 .header-actions {
@@ -476,7 +499,25 @@ header::before {
     gap: var(--xs);
 }
 
-/* Panneau plein écran sous l'en-tête, masqué tant que le menu n'est pas ouvert */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--cible);
+    min-height: var(--cible);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon);
+    background-color: transparent;
+    color: var(--accent-lien);
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-icon:hover {
+    border-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Panneau plein écran du menu, masqué tant qu'il n'est pas ouvert */
 .nav-principale {
     display: none;
     position: fixed;
@@ -484,7 +525,7 @@ header::before {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 15;
+    z-index: 45;
     overflow-y: auto;
     background-color: var(--fond);
 }
@@ -498,7 +539,7 @@ header::before {
     flex-direction: column;
     gap: var(--xs);
     margin: 0;
-    padding: var(--lg) var(--md);
+    padding: var(--lg) var(--gouttiere);
     list-style: none;
 }
 
@@ -506,100 +547,182 @@ header::before {
     display: flex;
     align-items: center;
     min-height: var(--cible);
-    padding: 0 var(--sm);
-    border-radius: var(--rayon-sm);
     color: var(--texte);
     font-family: var(--titre);
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
-.nav-principale a:hover {
-    color: var(--accent);
-    text-decoration: none;
-}
-
+.nav-principale a:hover,
 .nav-principale a[aria-current="page"] {
-    color: var(--accent);
+    color: var(--accent-lien);
 }
 
-/* Empêche le fond de défiler derrière le panneau ouvert */
 body.menu-ouvert {
     overflow: hidden;
 }
 
 
 /* ==========================================================================
-   8. Premier écran — compact pour garder « Voir la carte » visible sur 390x670
+   6. Sélecteurs (langue, mode jour/nuit)
    ========================================================================== */
 
-.hero {
-    padding: 0;
+.selecteur-langue-item,
+.selecteur-mode-item {
+    border-top: 1px solid var(--ligne);
+    margin-top: var(--sm);
+    padding-top: var(--sm);
 }
 
-.hero-media {
-    height: 180px;
-    overflow: hidden;
-    background-color: var(--fond-carte);
+.selecteur-langue {
+    display: flex;
+    gap: var(--xs);
 }
 
-/* Recadrage volontaire de la photo d'accroche, d'où l'exception à height:auto */
-.hero-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-content {
-    padding: var(--md) var(--md) var(--lg);
-}
-
-.hero-content .eyebrow {
-    margin-bottom: 0.25rem;
-}
-
-.hero-content h1 {
-    margin-bottom: var(--sm);
-}
-
-.info {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--sm);
-    align-items: start;
-    padding: var(--sm);
-    margin-bottom: var(--xs);
-    background-color: var(--fond-carte);
+.selecteur-langue-bouton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--cible);
+    min-height: var(--cible);
+    padding: 0 var(--sm);
+    background-color: transparent;
     border: 1px solid var(--ligne);
-    border-radius: var(--rayon);
-}
-
-.info .center-icon {
-    color: var(--accent);
-    padding-top: 2px;
-}
-
-.info-text p {
+    border-radius: 999px;
+    color: var(--texte-doux);
+    font-family: var(--police);
+    font-size: var(--t-label);
     font-weight: 600;
+    letter-spacing: 0.06em;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.info-text span {
-    display: block;
+.selecteur-langue-bouton:hover {
+    border-color: var(--accent);
     color: var(--texte);
 }
 
-.hero-content .cta {
-    margin-top: var(--sm);
+.selecteur-langue-bouton[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--cta-texte);
+}
+
+.selecteur-mode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--cible);
+    min-height: var(--cible);
+    background-color: transparent;
+    border: 1px solid var(--ligne);
+    border-radius: 999px;
+    color: var(--accent-doux);
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.35s ease;
+}
+
+.selecteur-mode:hover {
+    border-color: var(--accent);
+    transform: rotate(18deg);
 }
 
 
 /* ==========================================================================
-   9. Présentation
+   7. Premier écran
+   ========================================================================== */
+
+.hero {
+    display: grid;
+    min-height: clamp(540px, 84vh, 880px);
+    padding: 0 !important;
+    isolation: isolate;
+}
+
+
+.hero-media {
+    grid-area: 1 / 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: var(--photo-filtre);
+}
+
+/* Le voile fait tenir le texte par-dessus la photo, dans les deux modes. */
+.hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--voile-photo);
+}
+
+.hero-content {
+    grid-area: 1 / 1;
+    align-self: end;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--conteneur);
+    margin-inline: auto;
+    padding: var(--xl) var(--gouttiere) var(--lg);
+}
+
+/* Le premier écran garde sa couleur claire même en mode jour : le texte est
+   posé sur une photo sombre, pas sur le papier. */
+.hero-content .eyebrow {
+    color: #F2C9A0;
+}
+
+.hero-content h1 {
+    color: #FBF6EE;
+    margin-bottom: var(--lg);
+}
+
+.hero .info {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sm);
+    color: #EFE7DA;
+}
+
+.hero .info .center-icon {
+    color: #F2C9A0;
+    padding-top: 3px;
+}
+
+.hero .info-text p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.hero .info-text span {
+    display: block;
+    font-size: var(--t-petit);
+    color: #C5BCAE;
+}
+
+.hero .info-text .lien-itineraire {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: var(--t-petit);
+    color: #F2C9A0;
+}
+
+.hero .cta {
+    margin-top: var(--md);
+}
+
+
+/* ==========================================================================
+   8. Présentation
    ========================================================================== */
 
 .story {
-    background-color: var(--fond-carte);
+    background-color: var(--fond-alt);
 }
 
 .eyebrow-row {
@@ -609,134 +732,127 @@ body.menu-ouvert {
     margin-bottom: var(--xs);
 }
 
-.story h2 {
-    margin-bottom: var(--md);
+.eyebrow-row .eyebrow {
+    margin-bottom: 0;
 }
 
-.story p {
-    margin-bottom: var(--md);
+.story h2 {
+    max-width: 16ch;
+    margin-bottom: var(--lg);
 }
 
 .story .lead {
-    font-size: 1.0625rem;
+    max-width: var(--lecture);
 }
 
-/* Phrase mise en avant : filet d'accent, pas de changement de couleur du texte */
+.story .lead strong {
+    font-family: var(--titre);
+    font-weight: 600;
+    color: var(--accent-lien);
+}
+
+/* Mise en exergue par un filet à gauche, pas par une boîte de plus. */
 .text-important {
-    padding: var(--sm) var(--md);
-    background-color: var(--fond);
+    padding-left: var(--md);
     border-left: 3px solid var(--accent);
-    border-radius: 0 var(--rayon-sm) var(--rayon-sm) 0;
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    color: var(--texte);
 }
 
 .tags {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--xs);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sm);
     margin-top: var(--lg);
 }
 
 .tag {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
     gap: var(--xs);
-    padding: var(--sm) var(--xs);
-    background-color: var(--fond);
+    padding: var(--xs) var(--md);
     border: 1px solid var(--ligne);
-    border-radius: var(--rayon);
-    text-align: center;
+    border-radius: 999px;
+    color: var(--texte);
 }
 
-.tag svg {
-    width: 24px;
-    height: 24px;
-    color: var(--accent);
+.tag .center-icon,
+.tag > svg {
+    color: var(--accent-doux);
 }
 
 .tag p {
-    font-family: var(--titre);
-    font-size: 1.125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    margin: 0;
+    font-size: var(--t-petit);
+    font-weight: 500;
+    max-width: none;
 }
 
 
 /* ==========================================================================
-   10. Ambiance — cartes photo
+   9. Ambiance — c'est ici que la page sort du rang
    ========================================================================== */
+
+.ambiance {
+    display: grid;
+    gap: var(--xl);
+}
 
 .ambiance-header {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     gap: var(--md);
-    margin-bottom: var(--lg);
+    padding-bottom: var(--md);
+    border-bottom: 1px solid var(--ligne);
 }
 
 .ambiance-header .center-icon {
-    color: var(--accent);
+    color: var(--accent-doux);
 }
 
-.ambiance-header .lucide-camera {
-    width: 26px;
-    height: 26px;
-}
-
-.ambiance-title .eyebrow {
-    margin-bottom: 0.25rem;
+.ambiance-title h2 {
+    max-width: 12ch;
 }
 
 .card {
-    margin-bottom: var(--md);
-    background-color: var(--fond-carte);
-    border: 1px solid var(--ligne);
-    border-radius: var(--rayon);
-    overflow: hidden;
-}
-
-.card:last-child {
-    margin-bottom: 0;
+    display: grid;
+    gap: var(--md);
 }
 
 .card-media {
     position: relative;
     aspect-ratio: 4 / 3;
-    background-color: var(--fond);
     overflow: hidden;
+    border-radius: var(--rayon-photo);
+    background-color: var(--fond-carte);
+    box-shadow: var(--ombre-photo);
 }
 
-/* Recadrage volontaire des photos de carte, d'où l'exception à height:auto */
 .card-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    filter: var(--photo-filtre);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Réservé aux appareils à survol réel : un doigt ne « survole » pas une carte. */
-@media (hover: hover) {
-    .card:hover .card-media img {
-        transform: scale(1.05);
-    }
+.card:hover .card-media img {
+    transform: scale(1.04);
 }
 
-/* Emplacement encore sans photo : trame discrète plutôt qu'un bloc vide */
+/* Emplacement encore sans photo : une trame discrète plutôt qu'un trou. */
 .card-media:not(:has(img)) {
     background-image: repeating-linear-gradient(
         135deg,
-        var(--fond),
-        var(--fond) 12px,
-        var(--fond-carte) 12px,
-        var(--fond-carte) 24px
+        var(--fond-carte),
+        var(--fond-carte) 10px,
+        var(--fond-alt) 10px,
+        var(--fond-alt) 20px
     );
 }
 
-/* Précise que l'espace attend une photo plutôt que de laisser croire à une
-   image cassée. Généré en CSS, pas posé dans le HTML : disparaît de lui-même
-   dès qu'une <img> est ajoutée, sans légende oubliée à retirer à la main. */
 .card-media:not(:has(img))::after {
     content: "Photo à venir";
     position: absolute;
@@ -744,68 +860,68 @@ body.menu-ouvert {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--sm);
     color: var(--texte-doux);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-align: center;
+    font-size: var(--t-petit);
 }
 
-/* --cta-texte sur --cta-fond : la même paire garantie lisible que le bouton
-   d'action (section 6), réemployée ici pour son contraste déjà validé —
-   taille et graisse choisies pour rester au-dessus du seuil AA applicable
-   aux grands caractères */
 .tag-picture {
     position: absolute;
-    top: var(--xs);
-    left: var(--xs);
-    padding: 2px 10px;
+    top: var(--sm);
+    left: var(--sm);
+    z-index: 2;
+    padding: 0.3rem 0.75rem;
     background-color: var(--cta-fond);
     color: var(--cta-texte);
-    font-family: var(--titre);
-    font-size: 1.25rem;
-    font-weight: 700;
+    border-radius: 999px;
+    font-size: var(--t-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-radius: var(--rayon-sm);
+    box-shadow: var(--lueur);
 }
 
 .card-body {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--xs);
-    padding: var(--sm) var(--md);
+    align-self: center;
 }
 
-/* Enfant direct seulement : les éléments imbriqués (le prix minimum et son
-   libellé) héritent de ce style sans spécificité, et peuvent donc l'ajuster. */
+/* Le nom du plat porte la section : il doit peser autant que la photo, sinon
+   la colonne de texte flotte dans le vide à côté d'une grande image. */
+.card-body h3 {
+    font-size: clamp(1.875rem, 3.6vw, 3rem);
+    margin-bottom: var(--sm);
+}
+
+/* Le prix est une donnée : chiffres alignés, jamais de chasse variable.
+   Le filet au-dessus lui donne une assise, comme une ligne de tableau. */
+.card-prix,
 .card-body > span {
-    font-family: var(--titre);
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
+    display: block;
+    padding-top: var(--sm);
+    border-top: 1px solid var(--ligne);
+    font-size: var(--t-lead);
+    color: var(--texte-doux);
+    font-variant-numeric: tabular-nums;
+}
+
+.card-prix-libelle {
+    font-size: var(--t-petit);
+    color: var(--texte-doux);
+}
+
+.card-prix-valeur {
+    margin-left: 0.35em;
+    color: var(--accent-lien);
+    font-weight: 700;
 }
 
 
 /* ==========================================================================
-   11. Avis
+   10. Avis
    ========================================================================== */
 
-.avis {
-    background-color: var(--fond-carte);
-}
-
 .avis h2 {
-    margin-bottom: var(--sm);
-}
-
-.avis p {
-    margin-bottom: var(--lg);
+    max-width: 14ch;
+    margin-bottom: var(--md);
 }
 
 .avis-note {
@@ -815,20 +931,18 @@ body.menu-ouvert {
     margin-bottom: var(--lg);
 }
 
-/* Décoratif : la note exacte est donnée en texte juste à côté, jamais par la couleur ou l'icône seule */
 .avis-etoiles {
     color: var(--accent);
     font-size: 1.25rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
 }
 
 .avis-note p {
-    margin-bottom: 0;
+    margin: 0;
     font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }
 
-/* :last-child cible seulement le compte d'avis (le second span, une fois le
-   premier ajouté pour porter data-i18n="avis_note" côté HTML). */
 .avis-note p span:last-child {
     color: var(--texte-doux);
     font-weight: 400;
@@ -840,36 +954,61 @@ body.menu-ouvert {
     margin-bottom: var(--lg);
 }
 
+/* Les avis ne sont pas des cartes : un filet et un guillemet suffisent. */
 .avis-carte {
+    position: relative;
     margin: 0;
-    padding: var(--md);
-    background-color: var(--fond);
-    border: 1px solid var(--ligne);
-    border-radius: var(--rayon);
-    text-align: left;
+    padding: var(--md) 0 0 var(--md);
+    border-top: 1px solid var(--ligne);
+}
+
+.avis-carte::before {
+    content: "\201C";
+    position: absolute;
+    top: 0.35em;
+    left: -0.06em;
+    font-family: var(--titre);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.55;
 }
 
 .avis-carte p {
-    margin-bottom: var(--xs);
+    margin-bottom: var(--sm);
+    font-size: var(--t-petit);
+    line-height: 1.65;
 }
 
 .avis-carte cite {
-    color: var(--texte-doux);
     font-style: normal;
-    font-size: 1rem;
+    font-size: var(--t-label);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texte-doux);
 }
 
 
 /* ==========================================================================
-   12. Privatisation
+   11. Privatisation
    ========================================================================== */
 
-.privatisation h2 {
-    margin-bottom: var(--sm);
+.privatisation {
+    background-color: var(--fond-alt);
 }
 
-.privatisation > p {
-    margin-bottom: var(--lg);
+.privatisation h2 {
+    max-width: 14ch;
+    margin-bottom: var(--md);
+}
+
+.privatisation-reperes {
+    display: grid;
+    gap: var(--sm);
+    margin: var(--lg) 0 0;
+    padding: 0;
+    list-style: none;
 }
 
 .privatisation-reperes li {
@@ -877,117 +1016,108 @@ body.menu-ouvert {
     grid-template-columns: auto 1fr;
     gap: var(--sm);
     align-items: start;
-    padding: var(--sm);
-    margin-bottom: var(--xs);
+    padding: var(--md);
     background-color: var(--fond-carte);
     border: 1px solid var(--ligne);
     border-radius: var(--rayon);
+    box-shadow: var(--ombre-bloc);
 }
 
 .privatisation-reperes .center-icon {
-    color: var(--accent);
+    color: var(--accent-doux);
     padding-top: 2px;
 }
 
-.privatisation-reperes span {
-    color: var(--texte);
+/* L'offre commerciale : la seule tuile qui s'allume la nuit. */
+.repere-offre {
+    border-color: var(--accent) !important;
+    background-color: color-mix(in srgb, var(--accent) 10%, var(--fond-carte)) !important;
+    box-shadow: var(--lueur) !important;
 }
 
-/* Offre commerciale : même tuile que les autres repères, relevée par
-   l'accent. Pleine largeur dans la grille desktop, pour ne jamais y
-   laisser de case vide quel que soit le nombre de repères. */
-.privatisation-reperes .repere-offre {
-    grid-column: 1 / -1;
-    background-color: color-mix(in srgb, var(--accent) 14%, var(--fond-carte));
-    border-color: var(--accent);
+.repere-offre .center-icon {
+    color: var(--accent) !important;
 }
 
-.privatisation-reperes .repere-offre span {
+.repere-offre span {
     font-weight: 600;
 }
 
 .actions {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: var(--sm);
     margin-top: var(--lg);
 }
 
 
 /* ==========================================================================
-   13. Pied de page
+   12. Pied de page
    ========================================================================== */
 
 footer {
-    padding: var(--xl) var(--md);
-    background-color: var(--fond-carte);
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: var(--lg);
+    padding-block: var(--xl) var(--xxl);
+    padding-inline: max(var(--gouttiere), calc((100% - var(--conteneur)) / 2));
     border-top: 1px solid var(--ligne);
+    color: var(--texte-doux);
+    font-size: var(--t-petit);
 }
 
 .footer-marque {
     display: flex;
     align-items: center;
     gap: var(--xs);
-    margin-bottom: var(--md);
-}
-
-.footer-marque span {
+    color: var(--texte);
     font-family: var(--titre);
     font-size: 1.375rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.02em;
 }
 
 footer address {
-    margin-bottom: var(--lg);
-}
-
-.footer-horaires {
-    margin-bottom: var(--lg);
+    font-style: normal;
+    line-height: 1.8;
 }
 
 .footer-horaires h2 {
-    font-size: 1.25rem;
+    font-size: var(--t-label);
+    font-family: var(--police);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-doux);
     margin-bottom: var(--xs);
 }
 
-/* Horaires encore à confirmer : mentions provisoires */
-.footer-horaires p:nth-child(2),
-.footer-horaires p:nth-child(3) {
-    color: var(--texte-doux);
-}
-
-/* Lien au fil du texte : cible tactile portée à 44px sans casser le paragraphe */
-.footer-horaires p a {
-    position: relative;
-}
-
-.footer-horaires p a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: var(--cible);
-    transform: translateY(-50%);
+.footer-horaires p {
+    margin-bottom: 0.25rem;
 }
 
 .footer-liens {
-    margin-bottom: var(--lg);
-    border-top: 1px solid var(--ligne);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.footer-liens a {
-    display: flex;
-    align-items: center;
-    min-height: var(--cible);
-    border-bottom: 1px solid var(--ligne);
+footer a {
+    color: var(--texte-doux);
+}
+
+footer a:hover {
+    color: var(--accent-lien);
 }
 
 .message-sanitaire {
-    color: var(--texte-doux);
-    margin-bottom: var(--md);
+    padding-top: var(--md);
+    border-top: 1px solid var(--ligne);
+    font-size: var(--t-label);
 }
 
 .retour-haut a {
@@ -995,46 +1125,97 @@ footer address {
     align-items: center;
     gap: var(--xs);
     min-height: var(--cible);
-    color: var(--texte-doux);
 }
 
 
 /* ==========================================================================
-   14. Point de rupture 768px
+   13. Barre flottante (mobile)
+   ========================================================================== */
+
+.barre-flottante {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 35;
+    padding: var(--sm) var(--gouttiere);
+    padding-bottom: calc(var(--sm) + env(safe-area-inset-bottom, 0px));
+    background-color: color-mix(in srgb, var(--fond) 88%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--ligne);
+}
+
+.barre-flottante .cta {
+    width: 100%;
+}
+
+body.menu-ouvert .barre-flottante {
+    display: none;
+}
+
+footer:has(~ .barre-flottante) {
+    padding-bottom: calc(var(--xxl) + 76px);
+}
+
+
+/* ==========================================================================
+   14. Apparitions et mouvement
+   ========================================================================== */
+
+/* Posé par js/app.js : l'état masqué vit en CSS, mais n'est appliqué que si
+   le script tourne — sans lui, tout reste visible. */
+.section-en-attente {
+    opacity: 0;
+    transform: translateY(32px);
+}
+
+.section-visible {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Profondeur au défilement : la valeur est posée par js/animations.js,
+   qui la laisse à 0 si le visiteur demande des animations réduites. */
+.parallaxe {
+    will-change: transform;
+    transform: translate3d(0, var(--decalage, 0), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .section-en-attente {
+        opacity: 1;
+        transform: none;
+    }
+
+    .parallaxe {
+        transform: none !important;
+    }
+}
+
+
+/* ==========================================================================
+   Point de rupture : 768px
    ========================================================================== */
 
 @media (min-width: 768px) {
-
-    /* Typographie */
-    h1 {
-        font-size: 3.25rem;
-    }
-
-    h2 {
-        font-size: 2.125rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    /* Gabarit */
     header {
-        padding: var(--xs) var(--lg);
+        padding-inline: var(--gouttiere);
     }
 
-    section {
-        padding: var(--xl) var(--lg);
-    }
-
-    header {
-        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        justify-content: flex-start;
-        gap: var(--lg);
-    }
-
-    /* Nav classique en ligne, plus de panneau ni de bouton menu */
     .btn-menu {
         display: none;
     }
@@ -1057,344 +1238,126 @@ footer address {
     .nav-principale a {
         min-height: auto;
         padding: var(--xs) 0;
-        font-size: 1rem;
+        font-family: var(--police);
+        font-size: var(--t-petit);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .selecteur-langue-item,
+    .selecteur-mode-item {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+        margin-left: var(--xs);
+        padding-left: var(--sm);
+        border-left: 1px solid var(--ligne);
     }
 
     .header-actions {
         margin-left: auto;
     }
 
-    .story,
-    .avis,
-    .privatisation,
-    .ambiance,
-    .hero,
-    .mentions-legales {
-        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-    }
-
-    /* Premier écran sur deux colonnes */
-    .hero {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--xl);
-        align-items: center;
-        padding-top: var(--xl);
+    .hero-content {
         padding-bottom: var(--xl);
     }
 
-    .hero-media {
-        height: auto;
-        aspect-ratio: 4 / 3;
-        border-radius: var(--rayon);
-        border: 1px solid var(--ligne);
-    }
-
-    .hero-content {
-        padding: 0;
-    }
-
-    .info {
-        padding: var(--md);
-        margin-bottom: var(--sm);
-    }
-
-    .hero-content .cta {
-        margin-top: var(--md);
+    /* Les deux repères du premier écran passent côte à côte. */
+    .hero .info {
         display: inline-flex;
+        margin-right: var(--xl);
     }
 
-    /* Longueur de ligne confortable sur grand écran */
-    .story p,
-    .mentions-legales p {
-        max-width: 68ch;
-    }
-
-    /* Ambiance sur trois colonnes */
-    .ambiance {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--md);
-        align-items: start;
-    }
-
-    .ambiance-header {
-        grid-column: 1 / -1;
-        margin-bottom: 0;
-    }
-
+    /* Le zigzag : photo à gauche, texte à droite, puis l'inverse. */
     .card {
-        margin-bottom: 0;
+        grid-template-columns: 1.25fr 1fr;
+        gap: var(--xl);
+        align-items: center;
     }
 
-    /* Le prix (ou « 7j/7 ») passe systématiquement sous le titre plutôt que de
-       partager sa ligne : les trois cartes gardent ainsi la même hauteur,
-       quelle que soit la longueur du titre ou du prix de chacune. */
-    .card-body {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+    .card:nth-child(odd) .card-media {
+        order: 2;
     }
 
-    /* Avis et privatisation centrés */
-    .avis,
-    .privatisation {
-        text-align: center;
-    }
-
-    .avis .cta,
-    .privatisation .actions {
-        max-width: 26rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .avis-note {
-        justify-content: center;
+    .card:nth-child(odd) .card-body {
+        order: 1;
+        text-align: right;
     }
 
     .avis-liste {
         grid-template-columns: repeat(3, 1fr);
+        gap: var(--lg);
     }
 
     .privatisation-reperes {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: var(--md);
-        text-align: left;
     }
 
-    .privatisation-reperes li {
-        margin-bottom: 0;
-    }
-
-    .actions {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .actions .cta,
-    .actions .cta-secondaire {
-        flex: 1 1 0;
-    }
-
-    /* Pied de page sur trois colonnes */
-    footer {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: var(--xl);
-        row-gap: var(--md);
-        align-items: start;
-        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-    }
-
-    .footer-marque {
-        grid-column: 1;
-        grid-row: 1;
-        margin-bottom: 0;
-    }
-
-    footer address {
-        grid-column: 1;
-        grid-row: 2;
-        margin-bottom: 0;
-    }
-
-    .footer-horaires {
-        grid-column: 2;
-        grid-row: 1 / span 2;
-        margin-bottom: 0;
-    }
-
-    .footer-liens {
-        grid-column: 3;
-        grid-row: 1 / span 2;
-        margin-bottom: 0;
-        border-top: 0;
-    }
-
-    .footer-liens a {
-        border-bottom: 0;
-    }
-
-    .message-sanitaire {
+    .repere-offre {
         grid-column: 1 / -1;
-        padding-top: var(--md);
-        border-top: 1px solid var(--ligne);
-        margin-bottom: 0;
     }
 
+    .barre-flottante {
+        display: none;
+    }
+
+    footer:has(~ .barre-flottante) {
+        padding-bottom: var(--xxl);
+    }
+
+    footer {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: start;
+    }
+
+    .footer-marque,
+    .message-sanitaire,
     .retour-haut {
         grid-column: 1 / -1;
     }
 }
 
 
-/* ==========================================================================
-   15. Invitation au clic
-   Au pointeur : survol. Au toucher : rejoué une fois à l'entrée à l'écran,
-   la classe .en-vue étant posée par js/app.js.
-   ========================================================================== */
-
-.cta,
-.cta-secondaire,
-.btn-icon {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.cta svg,
-.btn-icon svg {
-    transition: transform 0.2s ease;
-}
-
-/* L'icône avance dans le sens de la lecture */
-.cta:hover svg {
-    transform: translateX(3px);
-}
-
-.btn-icon:hover {
-    border-color: var(--accent);
-}
-
-/* Le combiné sonne : oscillation amortie */
-@keyframes sonnerie {
-    0%, 100% { transform: rotate(0); }
-    20% { transform: rotate(-9deg); }
-    40% { transform: rotate(7deg); }
-    60% { transform: rotate(-5deg); }
-    80% { transform: rotate(3deg); }
-}
-
-/* Rappel périodique : deux oscillations, puis repos jusqu'au cycle suivant.
-   Le mouvement tient dans les 12 premiers pour cent, soit 0,7 s sur 6 s. */
-@keyframes rappel-telephone {
-    0%, 12%, 100% { transform: rotate(0); }
-    2% { transform: rotate(-9deg); }
-    4% { transform: rotate(8deg); }
-    6% { transform: rotate(-7deg); }
-    8% { transform: rotate(5deg); }
-    10% { transform: rotate(-3deg); }
-}
-
-.btn-appel svg {
-    animation: rappel-telephone 6s ease-in-out infinite;
-}
-
-.btn-appel:hover svg {
-    animation: sonnerie 0.5s ease;
-}
-
-.footer-liens a:hover {
-    color: var(--texte);
-}
-
-/* Fondu d'apparition des sections au défilement, posé par js/app.js. */
-.section-en-attente {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.section-en-attente.section-visible {
-    opacity: 1;
-    transform: none;
-}
-
-/* Équivalent tactile : seuls les appareils sans survol rejouent l'effet */
-@media (hover: none) {
-
-    @keyframes invite-fond {
-        35%, 65% { background-color: color-mix(in srgb, var(--cta-fond) 82%, var(--cta-texte)); }
+@media (min-width: 1100px) {
+    /* La photo du premier écran déborde légèrement de la colonne de texte :
+       c'est ce décalage qui casse l'impression de gabarit. */
+    .story h2 {
+        font-size: clamp(2.5rem, 4.5vw, 4rem);
     }
 
-    /* Un @keyframes n'est pas surchargeable par [data-theme] : il reprend donc
-       la couleur de contour du thème par défaut (--texte). Sur les thèmes
-       ardoise et bouteille, où .cta-secondaire:hover passe en --accent, ce
-       reflet tactile ponctuel (0,9 s) garde --texte — écart mineur, sans
-       incidence pour la version qui sera mise en ligne (thème bleu nuit). */
-    @keyframes invite-contour {
-        35%, 65% {
-            background-color: var(--texte);
-            color: var(--fond);
-        }
-    }
-
-    @keyframes invite-icone {
-        35%, 65% { transform: translateX(3px); }
-    }
-
-    .cta.en-vue {
-        animation: invite-fond 0.9s ease;
-    }
-
-    .cta.en-vue svg {
-        animation: invite-icone 0.9s ease;
-    }
-
-    .cta-secondaire.en-vue {
-        animation: invite-contour 0.9s ease;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    .cta,
-    .cta-secondaire,
-    .btn-icon,
-    .cta svg,
-    .btn-icon svg,
-    .btn-icon:hover svg,
-    .cta.en-vue,
-    .cta.en-vue svg,
-    .cta-secondaire.en-vue,
-    .categories-nav-lien,
-    .formulaire-panel-fermer,
-    .logo,
-    .card-media img {
-        transition: none;
-        animation: none;
-    }
-
-    .section-en-attente {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-
-    .cta:hover svg {
-        transform: none;
+    .ambiance {
+        gap: var(--xxl);
     }
 }
 
 
 /* ==========================================================================
-   16. Page des tarifs — contenu construit par js/tarifs.js
+   15. Page de la carte — contenu construit par js/tarifs.js
    ========================================================================== */
 
-/* La section ardoise se retire quand aucun prix réduit n'existe. */
-[hidden] {
-    display: none !important;
-}
-
-/* Bande de catégories : collante juste sous l'en-tête, défile horizontalement. */
+/* Sur téléphone, les catégories forment une bande collante sous l'en-tête ;
+   au-delà de 768px elles deviennent une colonne latérale (voir plus bas). */
 .categories-nav {
     position: sticky;
     top: var(--hauteur-entete);
     z-index: 9;
-    background-color: var(--fond);
+    background-color: color-mix(in srgb, var(--fond) 88%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--ligne);
 }
 
-/* Dégradé de sortie : signale qu'il reste des puces hors champ, sans gêner le clic. */
+/* Dégradé de sortie : signale qu'il reste des puces hors champ, sans gêner
+   le toucher. */
 .categories-nav::after {
     content: "";
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 28px;
+    width: 32px;
     background: linear-gradient(to right, transparent, var(--fond));
     pointer-events: none;
 }
@@ -1402,10 +1365,9 @@ footer address {
 .categories-nav-liste {
     display: flex;
     gap: var(--xs);
-    padding: var(--xs) var(--md);
+    padding: var(--xs) var(--gouttiere);
     overflow-x: auto;
     scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
 }
 
 .categories-nav-lien {
@@ -1419,61 +1381,84 @@ footer address {
     border: 1px solid var(--ligne);
     border-radius: 999px;
     color: var(--texte-doux);
-    /* Même douceur que les boutons du reste du site (section 15) : le
-       changement de puce active au défilement ne doit pas être plus sec
-       qu'un simple survol de bouton. */
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    font-size: 1rem;
+    font-size: var(--t-petit);
     font-weight: 600;
+    letter-spacing: 0.04em;
     white-space: nowrap;
     scroll-snap-align: start;
-}
-
-/* Repère de rubrique : seule la colonne latérale du bureau a la place de le
-   montrer sans nuire à la bande de puces défilante du mobile (voir plus bas). */
-.categories-nav-rubrique {
-    display: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .categories-nav-lien:hover {
     border-color: var(--accent);
-    text-decoration: none;
+    color: var(--texte);
 }
 
-/* Catégorie actuellement lue, posée par le scrollspy dans js/tarifs.js. */
+/* Catégorie en cours de lecture, posée par le scrollspy de js/tarifs.js.
+   La paire --cta-fond / --cta-texte est la seule dont le contraste est
+   garanti dans les deux modes : une puce pleine en --accent portant le fond
+   de page en texte passerait sous le seuil. */
 .categories-nav-lien.est-actif {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--fond);
+    background-color: var(--cta-fond);
+    border-color: var(--cta-fond);
+    color: var(--cta-texte);
 }
 
-/* Les cibles des puces ne doivent pas atterrir sous l'en-tête ni la bande. */
+/* Repère de rubrique : seule la colonne latérale du bureau a la place de
+   l'afficher sans nuire à la bande défilante du téléphone. */
+.categories-nav-rubrique {
+    display: none;
+}
+
+/* Les cibles des puces ne doivent atterrir ni sous l'en-tête ni sous la bande. */
 #ardoise-titre,
 .tarifs-categorie-titre,
 .tarifs-groupe {
     scroll-margin-top: calc(var(--hauteur-entete) + var(--hauteur-nav-categories) + var(--sm));
 }
 
-.carte-happy,
-.carte-section {
-    padding-top: var(--lg);
-}
-
+/* Le titre de la page coiffe directement la première rubrique : l'espace
+   complet d'une section l'en éloignerait. */
 .carte-intro {
     padding-bottom: 0;
 }
 
-.carte-happy {
-    background-color: var(--fond-carte);
+.carte-intro h1 {
+    font-size: var(--t-h1-page);
 }
 
-/* Intertitre coiffant plusieurs catégories (les vins, par exemple) :
-   plus grand que les titres qu'il rassemble, pour que le rang se lise.
-   scroll-margin-top est posé plus haut, avec celui des autres ancres. */
+/* Les rubriques s'enchaînent : l'espace complet d'une section les séparerait
+   plus qu'il ne les lierait. */
+.carte-happy,
+.carte-section {
+    padding-block: var(--lg) var(--xl);
+}
+
+/* L'ardoise est la seule chose qui change d'une semaine à l'autre : elle se
+   détache sur sa propre matière. */
+.carte-happy {
+    background-color: var(--fond-alt);
+}
+
+/* Les rubriques sont des repères de chapitre, pas des titres de page : elles
+   restent nettement sous le « Notre carte » qui les coiffe toutes. */
+.carte-happy > h2,
+.carte-section > h2 {
+    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    margin-bottom: var(--lg);
+}
+
+/* Intertitre coiffant plusieurs catégories (les vins, par exemple) : il doit
+   peser plus que les titres qu'il rassemble pour que le rang se lise. Le
+   filet au-dessus fait office de changement de chapitre. */
 .tarifs-groupe {
-    font-size: 1.5rem;
-    margin-bottom: var(--md);
-    color: var(--accent);
+    margin: var(--xl) 0 var(--md);
+    padding-top: var(--sm);
+    border-top: 2px solid var(--accent);
+}
+
+.tarifs-groupe:first-child {
+    margin-top: 0;
 }
 
 .tarifs-categorie {
@@ -1481,10 +1466,10 @@ footer address {
 }
 
 .tarifs-categorie-titre {
+    font-size: 1.375rem;
     padding-bottom: var(--xs);
     margin-bottom: var(--sm);
     border-bottom: 1px solid var(--ligne);
-    /* scroll-margin-top est posé plus haut, avec celui des autres ancres. */
 }
 
 /* --- Catégories repliables (téléphone) -------------------------------
@@ -1508,8 +1493,8 @@ summary.tarifs-categorie-resume::-webkit-details-marker {
     display: none;
 }
 
-/* Le titre porte déjà le filet de séparation : il doit occuper toute la
-   largeur du résumé pour que le trait aille d'un bord à l'autre. */
+/* Le titre porte le filet de séparation : il doit occuper toute la largeur
+   du résumé pour que le trait aille d'un bord à l'autre. */
 summary.tarifs-categorie-resume .tarifs-categorie-titre {
     flex: 1;
     margin-bottom: 0;
@@ -1536,33 +1521,10 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     margin-top: var(--sm);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    summary.tarifs-categorie-resume::after {
-        transition: none;
-    }
-}
-
-@media (min-width: 768px) {
-    /* Tout est ouvert : le résumé redevient un simple titre, sans chevron
-       ni possibilité de replier. */
-    summary.tarifs-categorie-resume {
-        min-height: 0;
-        cursor: default;
-        pointer-events: none;
-    }
-
-    summary.tarifs-categorie-resume::after {
-        display: none;
-    }
-
-    summary.tarifs-categorie-resume .tarifs-categorie-titre {
-        margin-bottom: var(--sm);
-    }
-}
-
 .tarifs-note {
     margin-bottom: var(--sm);
     color: var(--texte-doux);
+    font-size: var(--t-petit);
 }
 
 .tarifs-lien-ardoise {
@@ -1574,6 +1536,9 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 .tarifs-liste {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .tarifs-article {
@@ -1589,6 +1554,14 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     border-bottom: 0;
 }
 
+.tarifs-article-texte {
+    min-width: 0;
+}
+
+.tarifs-nom {
+    font-weight: 500;
+}
+
 .tarifs-contenance {
     color: var(--texte-doux);
 }
@@ -1598,15 +1571,19 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 }
 
 .tarifs-description {
+    margin: 0;
     color: var(--texte-doux);
+    font-size: var(--t-petit);
 }
 
+/* Le prix est une donnée : même traitement que sur la page d'accueil —
+   serif, chiffres à chasse fixe, jamais de retour à la ligne. */
 .tarifs-prix {
     font-family: var(--titre);
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.04em;
+    color: var(--accent-lien);
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
@@ -1616,58 +1593,49 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     border: 1px solid var(--ligne);
     border-left: 3px solid var(--accent);
     border-radius: var(--rayon);
-}
-
-/* .card-prix et .card-prix-valeur reçoivent leur apparence de « .card-body span »
-   (section 10), pour rester identiques au « 7j/7 » de la carte voisine. Vide,
-   .card-prix n'occupe aucune place tant que le prix n'est pas chargé. */
-.card-prix {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.35rem;
-}
-
-/* Le libellé accompagne le prix sans lui disputer la vedette. */
-.card-prix-libelle {
-    font-family: var(--police);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--texte-doux);
-    text-transform: none;
-    letter-spacing: normal;
+    box-shadow: var(--ombre-bloc);
 }
 
 @media (min-width: 768px) {
-
-    .tarifs-categorie {
-        margin-bottom: var(--xl);
-    }
-
-    /* Sur grand écran, la bande devient une colonne latérale fixe plutôt qu'un
-       défilement horizontal : plus naturelle à la souris, et tout y tient
-       sans avoir à faire glisser quoi que ce soit. */
+    /* La bande devient une colonne latérale : plus naturelle à la souris, et
+       tout y tient sans avoir à faire glisser quoi que ce soit. */
     .page-carte {
         display: grid;
         grid-template-columns: minmax(200px, 240px) 1fr;
         align-items: start;
         gap: var(--xl);
-        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
+        padding-inline: max(var(--gouttiere), calc((100% - var(--conteneur)) / 2));
     }
 
     .page-carte > main {
         min-width: 0;
     }
 
-    .page-carte main section {
-        padding-left: 0;
-        padding-right: 0;
+    /* La colonne de contenu est déjà posée par la grille ci-dessus : les
+       sections ne doivent pas la reproduire une seconde fois. */
+    .page-carte main > section {
+        padding-inline: 0;
+    }
+
+    /* Rendue à sa largeur de colonne, l'ardoise devient un vrai panneau :
+       sans ce retrait, sa teinte viendrait mordre sur le texte. Le sélecteur
+       reprend .page-carte, sans quoi la règle ci-dessus l'emporterait. */
+    .page-carte .carte-happy {
+        margin-top: var(--md);
+        padding-inline: var(--md);
+        border-radius: var(--rayon);
     }
 
     .categories-nav {
         max-height: calc(100vh - var(--hauteur-entete));
         overflow-y: auto;
+        /* Seize catégories ne tiennent pas dans un écran : la colonne défile,
+           mais sa barre reste un filet plutôt qu'une gouttière. */
+        scrollbar-width: thin;
+        scrollbar-color: var(--ligne-forte) transparent;
         background-color: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
         border-bottom: 0;
         border-right: 1px solid var(--ligne);
     }
@@ -1687,7 +1655,7 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     .categories-nav-lien {
         justify-content: flex-start;
         width: 100%;
-        border-radius: var(--rayon-sm);
+        border-radius: var(--rayon);
         scroll-snap-align: none;
     }
 
@@ -1695,21 +1663,39 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
         display: block;
         margin: var(--md) 0 var(--xs);
         padding: 0 var(--sm);
-        color: var(--texte-doux);
-        font-size: 0.8125rem;
-        font-weight: 700;
+        color: var(--accent-doux);
+        font-size: var(--t-label);
+        font-weight: 600;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
     }
 
-    /* La première rubrique n'a pas besoin de l'écart qui sépare les suivantes. */
     .categories-nav-rubrique:first-child {
         margin-top: 0;
     }
 
-    /* La colonne latérale ne consomme plus de hauteur en haut de l'écran
-       (contrairement à la bande horizontale sur mobile) : le décalage des
-       ancres n'a donc plus besoin d'y faire de place. */
+    .tarifs-categorie {
+        margin-bottom: var(--xl);
+    }
+
+    /* Tout est ouvert : le résumé redevient un simple titre, sans chevron
+       ni possibilité de replier. */
+    summary.tarifs-categorie-resume {
+        min-height: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    summary.tarifs-categorie-resume::after {
+        display: none;
+    }
+
+    summary.tarifs-categorie-resume .tarifs-categorie-titre {
+        margin-bottom: var(--sm);
+    }
+
+    /* La colonne latérale ne consomme plus de hauteur en haut de l'écran :
+       le décalage des ancres n'a plus à lui faire de place. */
     #ardoise-titre,
     .tarifs-categorie-titre,
     .tarifs-groupe {
@@ -1719,11 +1705,21 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 
 
 /* ==========================================================================
-   17. Formulaire de privatisation
+   16. Formulaire de privatisation
    ========================================================================== */
 
 .privatisation-intro {
     padding-bottom: 0;
+}
+
+.privatisation-intro h1 {
+    font-size: var(--t-h1-page);
+    margin-bottom: var(--md);
+}
+
+.privatisation-intro p {
+    font-size: var(--t-lead);
+    line-height: 1.55;
 }
 
 .privatisation-photos {
@@ -1731,22 +1727,14 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     gap: var(--md);
 }
 
-.privatisation-photos .card-media {
-    border-radius: var(--rayon);
-    overflow: hidden;
-}
-
 .privatisation-savoir,
 .privatisation-contact-direct {
-    background-color: var(--fond-carte);
+    background-color: var(--fond-alt);
 }
 
-.privatisation-savoir h2 {
-    margin-bottom: var(--md);
-}
-
+.privatisation-savoir h2,
 .privatisation-contact-direct h2 {
-    margin-bottom: var(--sm);
+    margin-bottom: var(--md);
 }
 
 .privatisation-contact-direct p {
@@ -1778,11 +1766,18 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     min-height: var(--cible);
     padding: var(--sm);
     background-color: var(--fond-carte);
-    border: 1px solid var(--ligne);
-    border-radius: var(--rayon-sm);
+    border: 1px solid var(--ligne-forte);
+    border-radius: var(--rayon);
     color: var(--texte);
     font-family: var(--police);
     font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.champ input:hover,
+.champ select:hover,
+.champ textarea:hover {
+    border-color: var(--accent);
 }
 
 .champ textarea {
@@ -1790,14 +1785,24 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     resize: vertical;
 }
 
-/* Le sélecteur suit la même hauteur tactile que les champs texte. */
+/* Le sélecteur garde la même hauteur tactile que les champs texte. */
 .champ select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C3CAD8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right var(--sm) center;
     background-size: 20px;
     padding-right: calc(var(--sm) + 24px);
+}
+
+/* Le chevron est une image : sa couleur ne peut pas venir d'une variable
+   CSS, d'où cette reprise littérale de --texte-doux par mode. Deux lignes
+   à tenir à jour si la palette bouge. */
+.champ select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23625849' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-mode="nuit"] .champ select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A9BAAE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
 /* Mention utile (pas secondaire) : reste en --texte, jamais en --texte-doux. */
@@ -1809,12 +1814,12 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 }
 
 /* Message d'erreur : le texte porte l'information à lui seul (lu par tout
-   lecteur d'écran), le point n'est qu'un renfort visuel — jamais l'inverse.
-   --cta-fond y reste un aplat (ce point), jamais la couleur du texte. */
+   lecteur d'écran), le point n'est qu'un renfort visuel — jamais l'inverse. */
 .champ-erreur {
     display: flex;
     align-items: flex-start;
     gap: 0.45rem;
+    margin: 0;
     color: var(--texte);
     font-size: 1rem;
 }
@@ -1865,6 +1870,7 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     border: 1px solid var(--ligne);
     border-left: 3px solid var(--accent);
     border-radius: var(--rayon);
+    box-shadow: var(--ombre-bloc);
 }
 
 /* Cible tactile pleine (44px) mais icône discrète : le panneau reste lisible
@@ -1880,13 +1886,13 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     height: var(--cible);
     background: none;
     border: none;
-    border-radius: var(--rayon-sm);
+    border-radius: var(--rayon);
     color: var(--texte-doux);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .formulaire-panel-fermer:hover {
-    background-color: var(--fond);
+    background-color: var(--fond-alt);
     color: var(--accent);
 }
 
@@ -1908,9 +1914,8 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 }
 
 /* Lien au fil du texte (le numéro de téléphone) : cible tactile portée à
-   44px sans casser le paragraphe — même technique qu'en pied de page.
-   Ciblé sur .formulaire-panel lui-même (pas « p a ») car le panneau
-   d'échec d'envoi est un <p> à même de porter la classe, sans <p> imbriqué. */
+   44px sans casser le paragraphe. Ciblé sur .formulaire-panel lui-même et
+   non sur « p a », le panneau d'échec étant un <p> sans <p> imbriqué. */
 .formulaire-panel a {
     position: relative;
 }
@@ -1926,31 +1931,20 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 }
 
 @media (min-width: 768px) {
-
     .privatisation-photos {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .privatisation-savoir,
-    .privatisation-contact-direct,
-    .formulaire-section {
-        padding-left: max(var(--lg), calc((100% - var(--conteneur)) / 2));
-        padding-right: max(var(--lg), calc((100% - var(--conteneur)) / 2));
     }
 
     .privatisation-contact-direct {
         text-align: center;
     }
 
-    .privatisation-contact-direct .cta-secondaire {
-        max-width: 26rem;
-        margin-left: auto;
-        margin-right: auto;
+    .privatisation-contact-direct p {
+        margin-inline: auto;
     }
 
-    /* Toujours une seule colonne : juste plus confortable à lire, pas de
-       champs côte à côte. Aligné à gauche comme le titre au-dessus, pas
-       centré isolément dans la largeur de la section. */
+    /* Toujours une seule colonne : plus confortable à lire que des champs
+       côte à côte, et aligné à gauche comme le titre au-dessus. */
     .formulaire-section form,
     .formulaire-panel {
         max-width: 640px;
@@ -1959,18 +1953,20 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 
 
 /* ==========================================================================
-   18. Page des mentions légales
+   17. Mentions légales et page introuvable
    ========================================================================== */
 
 .mentions-legales h1 {
+    font-size: var(--t-h1-page);
     margin-bottom: var(--lg);
 }
 
 .mentions-legales h2 {
     margin-top: var(--xl);
     margin-bottom: var(--sm);
-    /* Un lien externe peut cibler cette section (ex. depuis privatisation.html) :
-       évite qu'elle ne se retrouve masquée sous l'en-tête collant à l'arrivée */
+    font-size: var(--t-h3);
+    /* Un lien externe peut viser cette section (depuis privatisation.html) :
+       évite qu'elle n'arrive masquée sous l'en-tête collant. */
     scroll-margin-top: calc(var(--hauteur-entete) + var(--sm));
 }
 
@@ -1982,85 +1978,18 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
     margin-bottom: var(--sm);
 }
 
-
-/* ==========================================================================
-   19. Barre d'action flottante (mobile uniquement)
-   ========================================================================== */
-
-.barre-flottante {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 15;
-    padding: var(--sm) var(--md);
-    padding-bottom: calc(var(--sm) + env(safe-area-inset-bottom, 0px));
-    background-color: color-mix(in srgb, var(--fond) 92%, transparent);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--ligne);
-}
-
-.barre-flottante .cta {
-    width: 100%;
-}
-
-/* Le panneau du menu mobile occupe déjà tout l'écran sous l'en-tête : la
-   barre ne doit pas rester visible par-dessus pendant qu'il est ouvert. */
-body.menu-ouvert .barre-flottante {
-    display: none;
-}
-
-/* Laisse la place à la barre en bas de page, seulement sur les pages qui en
-   ont une (:has cible le pied de page d'après le frère qui le suit dans le
-   HTML). C'est le pied de page qui reçoit cet espace, pas <main> : il vient
-   après dans le document, c'est donc son propre bas qui finirait sinon
-   masqué derrière la barre fixe. */
-footer:has(~ .barre-flottante) {
-    padding-bottom: calc(var(--xl) + var(--hauteur-barre-flottante));
-}
-
-@media (min-width: 768px) {
-    /* La nav du bureau, toujours visible dans l'en-tête, remplit déjà ce
-       rôle en permanence : la barre flottante n'a plus lieu d'être. */
-    .barre-flottante {
-        display: none;
-    }
-
-    footer {
-        padding-bottom: var(--xl);
-    }
-}
-
-
-/* ==========================================================================
-   20. Lien d'itinéraire et page introuvable
-   ========================================================================== */
-
-.lien-itineraire {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--cible);
-    color: var(--accent);
-}
-
-/* Dans le premier écran, il suit le nom du métro dans un bloc en colonne :
-   la hauteur de cible tactile y est déjà assurée par l'espacement du bloc. */
-.info-text .lien-itineraire {
-    min-height: 0;
-    margin-top: 2px;
-}
-
+/* La page introuvable n'a rien à raconter : tout tient au milieu de l'écran. */
 .page-introuvable {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    min-height: 60vh;
     justify-content: center;
+    min-height: 60vh;
+    text-align: center;
 }
 
 .page-introuvable h1 {
+    font-size: var(--t-h1-page);
     margin-bottom: var(--sm);
 }
 
@@ -2071,189 +2000,77 @@ footer:has(~ .barre-flottante) {
 
 
 /* ==========================================================================
-   21. Sélecteur de langue FR/EN
+   18. Invitation au clic
+   Au pointeur : survol. Au toucher : rejoué une fois à l'entrée à l'écran,
+   la classe .en-vue étant posée par js/app.js. Le bloc « animations
+   réduites » de la section 14 neutralise l'ensemble.
    ========================================================================== */
 
-/* Posé par js/i18n.js comme <li> de #nav-principale > ul, sur le même
-   principe que le sélecteur de thème temporaire ci-dessous : panneau plein
-   écran du menu burger sur mobile, rangée en ligne dans l'en-tête sur
-   desktop. Contrairement au thème, ce sélecteur est permanent. */
-
-.selecteur-langue-item {
-    border-top: 1px solid var(--ligne);
-    margin-top: var(--sm);
-    padding-top: var(--sm);
+.cta svg,
+.btn-icon svg {
+    transition: transform 0.2s ease;
 }
 
-@media (min-width: 768px) {
-    .selecteur-langue-item {
-        border-top: 0;
-        margin-top: 0;
-        padding-top: 0;
-        border-left: 1px solid var(--ligne);
-        margin-left: var(--sm);
-        padding-left: var(--md);
+/* L'icône avance dans le sens de la lecture. */
+.cta:hover svg {
+    transform: translateX(3px);
+}
+
+/* Le combiné sonne : oscillation amortie. */
+@keyframes sonnerie {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-9deg); }
+    40% { transform: rotate(7deg); }
+    60% { transform: rotate(-5deg); }
+    80% { transform: rotate(3deg); }
+}
+
+/* Rappel périodique : deux oscillations, puis repos jusqu'au cycle suivant.
+   Le mouvement tient dans les 12 premiers pour cent, soit 0,7 s sur 6 s. */
+@keyframes rappel-telephone {
+    0%, 12%, 100% { transform: rotate(0); }
+    2% { transform: rotate(-9deg); }
+    4% { transform: rotate(8deg); }
+    6% { transform: rotate(-7deg); }
+    8% { transform: rotate(5deg); }
+    10% { transform: rotate(-3deg); }
+}
+
+.btn-appel svg {
+    animation: rappel-telephone 6s ease-in-out infinite;
+}
+
+.btn-appel:hover svg {
+    animation: sonnerie 0.5s ease;
+}
+
+/* Équivalent tactile : seuls les appareils sans survol rejouent l'effet. */
+@media (hover: none) {
+
+    @keyframes invite-fond {
+        35%, 65% { background-color: color-mix(in srgb, var(--cta-fond) 82%, var(--cta-texte)); }
+    }
+
+    @keyframes invite-contour {
+        35%, 65% {
+            border-color: var(--accent);
+            color: var(--accent-lien);
+        }
+    }
+
+    @keyframes invite-icone {
+        35%, 65% { transform: translateX(3px); }
+    }
+
+    .cta.en-vue {
+        animation: invite-fond 0.9s ease;
+    }
+
+    .cta.en-vue svg {
+        animation: invite-icone 0.9s ease;
+    }
+
+    .cta-secondaire.en-vue {
+        animation: invite-contour 0.9s ease;
     }
 }
-
-.selecteur-langue {
-    display: flex;
-    gap: var(--xs);
-}
-
-.selecteur-langue-bouton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--cible);
-    min-height: var(--cible);
-    padding: 0 var(--sm);
-    background-color: transparent;
-    border: 1px solid var(--ligne);
-    border-radius: 999px;
-    color: var(--texte-doux);
-    font-family: var(--police);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.selecteur-langue-bouton:hover {
-    border-color: var(--accent);
-    color: var(--texte);
-}
-
-.selecteur-langue-bouton[aria-pressed="true"] {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--fond);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .selecteur-langue-bouton {
-        transition: none;
-    }
-}
-
-
-/* === THÈMES TEMPORAIRES — À SUPPRIMER AVANT MISE EN PRODUCTION === */
-
-/* --- Palettes -------------------------------------------------------- */
-
-[data-theme="ardoise"] {
-    --fond: #1B1917;
-    --fond-carte: #2A2724;
-    --ligne: #3A3632;
-    --texte: #F2EBDD;
-    --texte-doux: #C9C1B4;
-    --accent: #E0906A;
-    --cta-fond: #F2EBDD;
-    --cta-texte: #1B1917;
-}
-
-[data-theme="bouteille"] {
-    --fond: #14261F;
-    --fond-carte: #1D3329;
-    --ligne: #2C4639;
-    --texte: #F2EBDD;
-    --texte-doux: #BFCBC2;
-    --accent: #D9B64A;
-    --cta-fond: #C9A227;
-    --cta-texte: #231B02;
-}
-
-/* .cta-secondaire (section 6) est en --texte par défaut (bleu nuit) ;
-   ardoise et bouteille le surchargent en --accent, bordure et texte. */
-[data-theme="ardoise"] .cta-secondaire,
-[data-theme="bouteille"] .cta-secondaire {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-[data-theme="ardoise"] .cta-secondaire:hover,
-[data-theme="bouteille"] .cta-secondaire:hover {
-    background-color: var(--accent);
-}
-
-/* La flèche du <select> (section 17) est encodée en data URI : un CSS
-   var() ne peut pas y être interpolé, d'où cette reprise littérale de
-   --texte-doux par thème plutôt qu'une seule règle pilotée par variable. */
-[data-theme="ardoise"] .champ select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9C1B4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-[data-theme="bouteille"] .champ select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BFCBC2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-
-/* --- Sélecteur, posé par js/theme-switcher.js comme dernier <li> de
-   #nav-principale > ul -------------------------------------------------
-   Choix délibéré : en s'appuyant sur la liste de nav existante plutôt que
-   sur une barre fixe posée par-dessus la page, il suit exactement le même
-   comportement responsive que les vrais liens (Accueil / Notre carte /
-   Privatiser) sans aucune règle de positionnement à ajouter — panneau
-   plein écran du menu burger sur mobile (invisible tant qu'il n'est pas
-   ouvert), rangée en ligne dans l'en-tête sur desktop. Ne recouvre donc
-   jamais le contenu de la page. */
-
-.selecteur-theme-item {
-    border-top: 1px solid var(--ligne);
-    margin-top: var(--sm);
-    padding-top: var(--sm);
-}
-
-@media (min-width: 768px) {
-    .selecteur-theme-item {
-        border-top: 0;
-        margin-top: 0;
-        padding-top: 0;
-        border-left: 1px solid var(--ligne);
-        margin-left: var(--sm);
-        padding-left: var(--md);
-    }
-}
-
-.selecteur-theme {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--xs);
-}
-
-.selecteur-theme-bouton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--cible);
-    min-height: var(--cible);
-    padding: 0 var(--sm);
-    background-color: transparent;
-    border: 1px solid var(--ligne);
-    border-radius: 999px;
-    color: var(--texte-doux);
-    font-family: var(--police);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.selecteur-theme-bouton:hover {
-    border-color: var(--accent);
-    color: var(--texte);
-}
-
-.selecteur-theme-bouton[aria-pressed="true"] {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--fond);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .selecteur-theme-bouton {
-        transition: none;
-    }
-}
-
-/* === FIN DES THÈMES TEMPORAIRES === */

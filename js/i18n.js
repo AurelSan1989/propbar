@@ -33,6 +33,10 @@
             menu_fermer_aria: "Fermer le menu",
             barre_flottante_appeler: "Appeler",
             selecteur_langue_aria: "Choisir la langue",
+            mode_jour_aria: "Passer en mode jour",
+            mode_nuit_aria: "Passer en mode nuit",
+            mode_auto_titre: "Mode automatique, réglé sur le coucher du soleil",
+            mode_manuel_titre: "Mode choisi manuellement",
             aller_au_contenu: "Aller au contenu",
             itineraire: "Itinéraire",
 
@@ -154,6 +158,10 @@
             menu_fermer_aria: "Close menu",
             barre_flottante_appeler: "Call",
             selecteur_langue_aria: "Choose language",
+            mode_jour_aria: "Switch to day mode",
+            mode_nuit_aria: "Switch to night mode",
+            mode_auto_titre: "Automatic mode, follows the sunset",
+            mode_manuel_titre: "Mode chosen manually",
             aller_au_contenu: "Skip to content",
             itineraire: "Get directions",
 
@@ -338,7 +346,7 @@
 
     // Posé comme dernier élément de la liste de #nav-principale plutôt que
     // dans une barre flottante par-dessus la page : voir le commentaire du
-    // même choix dans js/theme-switcher.js.
+    // même choix que le bouton jour/nuit de js/jour-nuit.js.
     function construireSelecteur() {
         var liste = document.querySelector("#nav-principale ul");
         if (!liste) {
