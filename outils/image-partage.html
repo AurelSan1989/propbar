@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Gabarit de l'image de partage</title>
+<!--
+    Gabarit servant à produire img/partage.jpg (l'aperçu affiché quand le lien
+    du site est envoyé sur WhatsApp, Facebook, Messenger...). Ne fait pas
+    partie du site publié : il est rendu une fois, capturé en 1200x630, et le
+    résultat seul est mis en ligne.
+
+    Pour refaire l'image après un changement de photo ou de texte, ouvrir ce
+    fichier à exactement 1200x630 et capturer la page.
+-->
+<style>
+    @font-face {
+        font-family: "Barlow Condensed";
+        src: url("../fonts/barlow-condensed-700.woff2") format("woff2");
+        font-weight: 700;
+    }
+    @font-face {
+        font-family: "Plus Jakarta Sans";
+        src: url("../fonts/plus-jakarta-sans-400.woff2") format("woff2");
+        font-weight: 400;
+    }
+    @font-face {
+        font-family: "Plus Jakarta Sans";
+        src: url("../fonts/plus-jakarta-sans-600.woff2") format("woff2");
+        font-weight: 600;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+        background-color: #121A2B;
+    }
+
+    .photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Voile dégradé : la photo reste lisible en haut, le texte détaché en bas. */
+    .voile {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+            rgba(18, 26, 43, 0.25) 0%,
+            rgba(18, 26, 43, 0.75) 55%,
+            rgba(18, 26, 43, 0.96) 100%);
+    }
+
+    .contenu {
+        position: absolute;
+        left: 64px;
+        right: 64px;
+        bottom: 56px;
+    }
+
+    .eyebrow {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #F2C9A0;
+        margin-bottom: 14px;
+    }
+
+    h1 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        font-size: 104px;
+        line-height: 0.95;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #F2EBDD;
+        margin-bottom: 18px;
+    }
+
+    .infos {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 27px;
+        line-height: 1.5;
+        color: #C3CAD8;
+    }
+
+    /* Filet d'accent, repris de l'identité du site. */
+    .filet {
+        width: 96px;
+        height: 5px;
+        background-color: #C8301E;
+        margin-bottom: 22px;
+    }
+</style>
+</head>
+<body>
+    <img class="photo" src="../img/terrasse-hiver.webp" alt="">
+    <div class="voile"></div>
+    <div class="contenu">
+        <div class="filet"></div>
+        <p class="eyebrow">Bar restaurant · Paris 20<sup>e</sup></p>
+        <h1>L'Impondérable</h1>
+        <p class="infos">
+            Terrasse toute l'année · Happy hour 16h - 2h<br>
+            320 rue des Pyrénées · Métro Jourdain
+        </p>
+    </div>
+</body>
+</html>

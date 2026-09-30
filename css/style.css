@@ -303,6 +303,37 @@ a:hover {
    6. Boutons et focus
    ========================================================================== */
 
+/* Lien d'évitement : premier élément atteint au clavier, invisible tant
+   qu'il n'a pas le focus. Sans lui, il faut traverser l'en-tête entier
+   (logo, 3 liens, langue, thèmes, téléphone) sur chaque page avant
+   d'atteindre le contenu. Décalé hors écran plutôt que masqué, pour rester
+   accessible aux lecteurs d'écran. */
+.lien-evitement {
+    position: absolute;
+    top: -100px;
+    left: var(--sm);
+    z-index: 30;
+    padding: var(--sm) var(--md);
+    background-color: var(--cta-fond);
+    color: var(--cta-texte);
+    border-radius: var(--rayon-sm);
+    font-family: var(--titre);
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.lien-evitement:focus {
+    top: var(--sm);
+    text-decoration: none;
+}
+
+/* La cible du lien d'évitement reçoit le focus par programme : pas de
+   contour permanent, il ne s'agit pas d'un élément interactif. */
+#contenu:focus {
+    outline: none;
+}
+
 /* Le navigateur ne pose la main que sur les liens : sans cette règle, un
    <button> stylé exactement comme un lien .cta garde la flèche, et ne
    paraît donc pas cliquable au pointeur. */
@@ -1456,6 +1487,79 @@ footer address {
     /* scroll-margin-top est posé plus haut, avec celui des autres ancres. */
 }
 
+/* --- Catégories repliables (téléphone) -------------------------------
+   La carte complète dépasse vingt écrans sur mobile : chaque catégorie se
+   déplie au toucher, la première de chaque rubrique restant ouverte.
+   L'ouverture est pilotée par js/tarifs.js, qui rouvre tout au-delà de
+   768px ; ici on ne s'occupe que de l'apparence. */
+
+summary.tarifs-categorie-resume {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sm);
+    min-height: var(--cible);
+    cursor: pointer;
+    /* Retire la flèche native, remplacée par le chevron ci-dessous. */
+    list-style: none;
+}
+
+summary.tarifs-categorie-resume::-webkit-details-marker {
+    display: none;
+}
+
+/* Le titre porte déjà le filet de séparation : il doit occuper toute la
+   largeur du résumé pour que le trait aille d'un bord à l'autre. */
+summary.tarifs-categorie-resume .tarifs-categorie-titre {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+summary.tarifs-categorie-resume::after {
+    content: "";
+    flex-shrink: 0;
+    width: 11px;
+    height: 11px;
+    margin-bottom: var(--xs);
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: rotate(45deg);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+
+details.tarifs-categorie[open] > summary.tarifs-categorie-resume::after {
+    transform: rotate(-135deg);
+}
+
+details.tarifs-categorie > summary.tarifs-categorie-resume + * {
+    margin-top: var(--sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    summary.tarifs-categorie-resume::after {
+        transition: none;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Tout est ouvert : le résumé redevient un simple titre, sans chevron
+       ni possibilité de replier. */
+    summary.tarifs-categorie-resume {
+        min-height: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    summary.tarifs-categorie-resume::after {
+        display: none;
+    }
+
+    summary.tarifs-categorie-resume .tarifs-categorie-titre {
+        margin-bottom: var(--sm);
+    }
+}
+
 .tarifs-note {
     margin-bottom: var(--sm);
     color: var(--texte-doux);
@@ -1930,7 +2034,44 @@ footer:has(~ .barre-flottante) {
 
 
 /* ==========================================================================
-   20. Sélecteur de langue FR/EN
+   20. Lien d'itinéraire et page introuvable
+   ========================================================================== */
+
+.lien-itineraire {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--cible);
+    color: var(--accent);
+}
+
+/* Dans le premier écran, il suit le nom du métro dans un bloc en colonne :
+   la hauteur de cible tactile y est déjà assurée par l'espacement du bloc. */
+.info-text .lien-itineraire {
+    min-height: 0;
+    margin-top: 2px;
+}
+
+.page-introuvable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+    justify-content: center;
+}
+
+.page-introuvable h1 {
+    margin-bottom: var(--sm);
+}
+
+.page-introuvable p {
+    max-width: 46ch;
+    margin-bottom: var(--lg);
+}
+
+
+/* ==========================================================================
+   21. Sélecteur de langue FR/EN
    ========================================================================== */
 
 /* Posé par js/i18n.js comme <li> de #nav-principale > ul, sur le même

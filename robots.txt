@@ -1,2 +1,13 @@
+# TANT QUE LE SITE N'EST PAS EN LIGNE : tout est bloqué.
+# À LA MISE EN LIGNE, remplacer ce fichier par le contenu commenté ci-dessous
+# (et retirer les balises <meta name="robots" content="noindex, nofollow">
+# des quatre pages, sans quoi le blocage subsiste malgré ce fichier).
 User-agent: *
 Disallow: /
+
+# Version à activer à la mise en ligne :
+#
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://TODO-DOMAINE/sitemap.xml

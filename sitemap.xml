@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Liste des pages à proposer aux moteurs de recherche.
+     TODO-DOMAINE est à remplacer partout par le nom de domaine réel au
+     moment de la mise en ligne (voir aussi les balises canonical et og:url
+     de chaque page, ainsi que robots.txt). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://TODO-DOMAINE/index.html</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://TODO-DOMAINE/tarifs.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://TODO-DOMAINE/privatisation.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://TODO-DOMAINE/mentions-legales.html</loc>
+        <priority>0.1</priority>
+    </url>
+</urlset>

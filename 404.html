@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121A2B">
+    <title>L'impondérable Page introuvable</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- Affichée quand une adresse n'existe pas (lien périmé, faute de frappe).
+     Sa prise en compte dépend de l'hébergeur : Netlify sert automatiquement
+     un 404.html placé à la racine, d'autres demandent un réglage. À vérifier
+     une fois l'hébergement choisi. -->
+<body id="top">
+    <header>
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32">L'impondérable</a>
+        <div class="header-actions">
+            <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon btn-appel">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            </a>
+        </div>
+    </header>
+    <main id="contenu">
+        <section class="page-introuvable">
+            <p class="eyebrow">Erreur 404</p>
+            <h1>Cette page n'existe pas</h1>
+            <p>
+                Le lien est peut-être périmé, ou l'adresse comporte une faute de frappe.
+                Le bar, lui, est toujours au 320 rue des Pyrénées.
+            </p>
+            <div class="actions">
+                <a href="index.html" class="cta">Retour à l'accueil</a>
+                <a href="tarifs.html" class="cta-secondaire">Voir la carte</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-marque">
+            <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">
+            <span>L'Impondérable</span>
+        </div>
+
+        <address>
+            320 rue des Pyrénées, 75020 Paris<br>
+            <span>Métro Jourdain</span>
+        </address>
+
+        <ul class="footer-liens">
+            <li><a href="tel:+33983233914">09 83 23 39 14</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+
+        <p class="message-sanitaire">
+            L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
+        </p>
+    </footer>
+    <script src="js/app.js" defer></script>
+</body>
+</html>

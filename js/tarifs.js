@@ -148,11 +148,15 @@ function creerLienArdoise() {
 // options.avecAncre : pose l'id de la catégorie sur son titre
 // options.avecLienArdoise : ajoute le renvoi vers l'ardoise si un prix réduit existe
 // options.niveauTitre : "h3" par défaut, "h4" sous un intertitre de groupe
+// options.repliable : rend la catégorie dépliable (<details>) — la carte
+//   complète dépasse vingt écrans sur téléphone. Sur grand écran, tout est
+//   rouvert et le repli désactivé (voir ajusterRepliables et le CSS).
 function creerBlocCategorie(categorie, options) {
     const reglages = options || {};
     const champPrix = reglages.champPrix || "prix";
     const articles = categorie.articles || [];
-    const bloc = creerElement("div", "tarifs-categorie");
+    const repliable = reglages.repliable === true;
+    const bloc = creerElement(repliable ? "details" : "div", "tarifs-categorie");
 
     if (reglages.avecLienArdoise && articles.some(aUnPrixReduit)) {
         bloc.appendChild(creerLienArdoise());
@@ -162,7 +166,16 @@ function creerBlocCategorie(categorie, options) {
     if (reglages.avecAncre && categorie.id) {
         titre.id = categorie.id;
     }
-    bloc.appendChild(titre);
+
+    // Le titre passe dans le <summary> : il reste la cible de l'ancre et de
+    // la puce de navigation, tout en servant de bouton d'ouverture.
+    if (repliable) {
+        const resume = creerElement("summary", "tarifs-categorie-resume");
+        resume.appendChild(titre);
+        bloc.appendChild(resume);
+    } else {
+        bloc.appendChild(titre);
+    }
 
     const note = texteSelonLangue(categorie, "note");
     if (note) {
@@ -274,11 +287,45 @@ function construireSection(conteneur, section) {
         conteneur.appendChild(creerBlocCategorie(categorie, {
             avecAncre: true,
             avecLienArdoise: true,
-            niveauTitre: groupe ? "h4" : "h3"
+            niveauTitre: groupe ? "h4" : "h3",
+            repliable: true
         }));
     });
 
     return entreesNav;
+}
+
+
+/* --------------------------------------------------------------------------
+   Repli des catégories sur téléphone
+   -------------------------------------------------------------------------- */
+
+const ECRAN_LARGE = window.matchMedia("(min-width: 768px)");
+
+// Sur grand écran, toutes les catégories sont ouvertes et le repli n'a plus
+// lieu d'être (le CSS neutralise alors le clic sur les résumés). Sur
+// téléphone, seule la première de chaque rubrique s'ouvre : la page reste
+// courte tout en montrant d'emblée qu'il y a du contenu.
+function ajusterRepliables() {
+    const large = ECRAN_LARGE.matches;
+    document.querySelectorAll("#boissons, #restauration").forEach(function (conteneur) {
+        conteneur.querySelectorAll("details.tarifs-categorie").forEach(function (bloc, index) {
+            bloc.open = large || index === 0;
+        });
+    });
+}
+
+// Une puce de navigation menant à une catégorie repliée doit l'ouvrir, sinon
+// le visiteur atterrit sur un titre sans rien dessous.
+function ouvrirCategorieVisee(id) {
+    const cible = document.getElementById(id);
+    if (!cible) {
+        return;
+    }
+    const bloc = cible.closest("details.tarifs-categorie");
+    if (bloc) {
+        bloc.open = true;
+    }
 }
 
 
@@ -313,6 +360,9 @@ function construireNavCategories(conteneur, entrees) {
         }
         const lien = creerElement("a", "categories-nav-lien", entree.nom);
         lien.href = "#" + entree.id;
+        lien.addEventListener("click", function () {
+            ouvrirCategorieVisee(entree.id);
+        });
         conteneur.appendChild(lien);
     });
 }
@@ -556,6 +606,7 @@ let donneesTarifsChargees = null;
 function rendreTarifs(donnees) {
     construirePageTarifs(donnees);
     remplirPrixMinimums(donnees);
+    ajusterRepliables();
 }
 
 async function demarrer() {
@@ -583,5 +634,9 @@ window.addEventListener("langue-changee", function () {
         rendreTarifs(donneesTarifsChargees);
     }
 });
+
+// Passage téléphone / grand écran sans rechargement (rotation, fenêtre
+// redimensionnée) : les catégories doivent suivre.
+ECRAN_LARGE.addEventListener("change", ajusterRepliables);
 
 demarrer();

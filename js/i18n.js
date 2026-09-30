@@ -33,6 +33,8 @@
             menu_fermer_aria: "Fermer le menu",
             barre_flottante_appeler: "Appeler",
             selecteur_langue_aria: "Choisir la langue",
+            aller_au_contenu: "Aller au contenu",
+            itineraire: "Itinéraire",
 
             // Pied de page, commun aux trois pages
             footer_horaires_titre: "Horaires",
@@ -152,6 +154,8 @@
             menu_fermer_aria: "Close menu",
             barre_flottante_appeler: "Call",
             selecteur_langue_aria: "Choose language",
+            aller_au_contenu: "Skip to content",
+            itineraire: "Get directions",
 
             footer_horaires_titre: "Opening hours",
             footer_horaires_habituels: "Every day: 9am – 2am",

@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121A2B">
     <title data-i18n="titre_page_carte">L'impondérable Notre carte</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_carte">
     <meta property="og:title" content="L'impondérable Notre carte" data-i18n-content="og_titre_carte">
     <meta property="og:description" content="Boissons, restauration et Happy Hour de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_carte">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="TODO">
-    <meta property="og:image" content="TODO">
+    <meta property="og:url" content="https://TODO-DOMAINE/tarifs.html">
+    <meta property="og:image" content="https://TODO-DOMAINE/img/partage.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="L'Impondérable">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://TODO-DOMAINE/tarifs.html">
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body id="top">
+    <a class="lien-evitement" href="#contenu" data-i18n="aller_au_contenu">Aller au contenu</a>
     <header>
-        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">L'impondérable</a>
         <nav id="nav-principale" class="nav-principale">
             <ul>
                 <li><a href="index.html" data-i18n="nav_accueil">Accueil</a></li>
@@ -40,7 +49,7 @@
         <nav class="categories-nav" aria-label="Catégories de la carte">
             <div class="categories-nav-liste" id="categories-nav"></div>
         </nav>
-        <main>
+        <main id="contenu" tabindex="-1">
             <section class="carte-intro">
                 <h1 data-i18n="carte_h1">Notre carte</h1>
             </section>
@@ -63,13 +72,14 @@
     </div>
     <footer>
         <div class="footer-marque">
-            <img src="img/logo.svg" alt="" class="logo">
+            <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">
             <span>L'Impondérable</span>
         </div>
 
         <address>
             320 rue des Pyrénées, 75020 Paris<br>
-            <span data-i18n="hero_metro">Métro Jourdain</span>
+            <span data-i18n="hero_metro">Métro Jourdain</span><br>
+            <a href="https://www.google.com/maps/dir/?api=1&amp;destination=320+rue+des+Pyr%C3%A9n%C3%A9es+75020+Paris" target="_blank" rel="noopener" class="lien-itineraire" data-i18n="itineraire">Itinéraire</a>
         </address>
 
         <div class="footer-horaires">

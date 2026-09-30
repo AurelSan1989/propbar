@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121A2B">
     <title>L'impondérable</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
     <meta property="og:title" content="L'impondérable" data-i18n-content="og_titre_accueil">
     <meta property="og:description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="TODO">
-    <meta property="og:image" content="TODO">
+    <meta property="og:url" content="https://TODO-DOMAINE/index.html">
+    <meta property="og:image" content="https://TODO-DOMAINE/img/partage.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="L'Impondérable">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://TODO-DOMAINE/index.html">
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
     <script type="application/ld+json">
@@ -27,6 +35,23 @@
             "addressCountry": "FR"
         },
         "telephone": "+33983233914",
+        "url": "https://TODO-DOMAINE/",
+        "image": "https://TODO-DOMAINE/img/partage.jpg",
+        "hasMenu": "https://TODO-DOMAINE/tarifs.html",
+        "servesCuisine": ["Française", "Pizza", "Couscous"],
+        "priceRange": "€",
+        "currenciesAccepted": "EUR",
+        "publicAccess": true,
+        "smokingAllowed": false,
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 48.8736,
+            "longitude": 2.3897
+        },
+        "sameAs": [
+            "https://www.facebook.com/barlimponderable/",
+            "https://www.instagram.com/limponderable2021/"
+        ],
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -35,13 +60,15 @@
         }
     }
     </script>
-    <!-- Champs schema.org volontairement absents, à ajouter une fois connus :
-         "url" (nom de domaine pas encore choisi), "image" (même sujet que
-         og:image). -->
+    <!-- « sameAs » rattache le site aux comptes Facebook et Instagram du bar
+         aux yeux des moteurs : c'est ce qui permet de reconnaître qu'il s'agit
+         du même établissement. Les coordonnées géographiques sont celles du
+         320 rue des Pyrénées, à vérifier si l'adresse change. -->
 </head>
 <body id="top">
+    <a class="lien-evitement" href="#contenu" data-i18n="aller_au_contenu">Aller au contenu</a>
     <header>
-        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo">L'impondérable</a>
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">L'impondérable</a>
         <nav id="nav-principale" class="nav-principale">
             <ul>
                 <li><a href="index.html" aria-current="page" data-i18n="nav_accueil">Accueil</a></li>
@@ -60,11 +87,11 @@
             </button>
         </div>
     </header>
-    <main>
+    <main id="contenu" tabindex="-1">
         <section class="hero">
         <div class="hero-media">
             <!-- photo temporaire, à remplacer -->
-            <img src="img/terrasse-hiver.webp" alt="Terrasse couverte de L'Impondérable en hiver">
+            <img src="img/terrasse-hiver.webp" alt="Terrasse couverte de L'Impondérable en hiver" width="680" height="454">
         </div>
         <div class="hero-content">
             <p class="eyebrow" data-i18n="hero_eyebrow">Bar restaurant, terrasse toute l'année, ouvert 7j/7</p>
@@ -85,6 +112,7 @@
                 <div class="info-text">
                     <p>320 rue des Pyrénées, 75020 Paris</p>
                     <span data-i18n="hero_metro">Métro Jourdain</span>
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=320+rue+des+Pyr%C3%A9n%C3%A9es+75020+Paris" target="_blank" rel="noopener" class="lien-itineraire" data-i18n="itineraire">Itinéraire</a>
                 </div>
             </div>
                 <a href="tarifs.html" class="cta" data-i18n="hero_cta">Voir la Carte</a>
@@ -92,7 +120,7 @@
         </section>
         <section class="story">
             <div class="eyebrow-row">
-                <img src="img/logo.svg" alt="" class="iconlogo">
+                <img src="img/logo.svg" alt="" class="iconlogo" width="22" height="22" loading="lazy" decoding="async">
                 <span class="eyebrow" data-i18n="story_eyebrow">L'esprit Impondérable</span>
             </div>
             <h2 data-i18n="story_h2">Le repaire populaire de la rue des Pyrénées</h2>
@@ -135,7 +163,7 @@
             <div class="card">
                 <div class="card-media">
                     <!-- photo temporaire (envoyée par le gérant), à remplacer -->
-                    <img src="img/pizza.webp" alt="Pizza Tartufata : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt">
+                    <img src="img/pizza.webp" alt="Pizza Tartufata : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt" width="1200" height="900" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_pizzas_tag">À emporter</span>
                 </div>
                 <div class="card-body">
@@ -156,7 +184,7 @@
             <div class="card">
                 <div class="card-media">
                     <!-- photo temporaire, à remplacer -->
-                    <img src="img/terrasse-ete.webp" alt="Terrasse de L'Impondérable en été">
+                    <img src="img/terrasse-ete.webp" alt="Terrasse de L'Impondérable en été" width="680" height="510" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_terrasse_tag">Toute l'année</span>
                 </div>
                 <div class="card-body">
@@ -230,13 +258,14 @@
     </main>
     <footer>
         <div class="footer-marque">
-            <img src="img/logo.svg" alt="" class="logo">
+            <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">
             <span>L'Impondérable</span>
         </div>
 
         <address>
             320 rue des Pyrénées, 75020 Paris<br>
-            <span data-i18n="hero_metro">Métro Jourdain</span>
+            <span data-i18n="hero_metro">Métro Jourdain</span><br>
+            <a href="https://www.google.com/maps/dir/?api=1&amp;destination=320+rue+des+Pyr%C3%A9n%C3%A9es+75020+Paris" target="_blank" rel="noopener" class="lien-itineraire" data-i18n="itineraire">Itinéraire</a>
         </address>
 
         <div class="footer-horaires">
