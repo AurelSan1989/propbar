@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#E6DFD1">
-    <title>L'impondérable Mentions légales</title>
+    <title>Mentions légales — L'Impondérable</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Mentions légales de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
-    <meta property="og:title" content="L'impondérable Mentions légales">
+    <meta property="og:title" content="Mentions légales — L'Impondérable">
     <meta property="og:description" content="Mentions légales de L'Impondérable, bar restaurant au 320 rue des Pyrénées à Paris.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://TODO-DOMAINE/mentions-legales.html">
@@ -21,6 +21,13 @@
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <!-- Les deux polices du premier écran sont demandées avant la feuille de
+         style, qui ne les réclamerait qu'une fois analysée. Sur mobile, cela
+         retire un aller-retour au moment où Google mesure le chargement.
+         crossorigin est obligatoire même en local : une police est toujours
+         récupérée en mode anonyme, sans quoi le navigateur la retéléchargerait. -->
+    <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
 </head>

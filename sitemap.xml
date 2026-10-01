@@ -1,23 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Liste des pages à proposer aux moteurs de recherche.
+
      TODO-DOMAINE est à remplacer partout par le nom de domaine réel au
      moment de la mise en ligne (voir aussi les balises canonical et og:url
-     de chaque page, ainsi que robots.txt). -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     de chaque page, les données structurées, et robots.txt).
+
+     <lastmod> n'est utile que s'il est sincère : Google cesse d'en tenir
+     compte quand il ne correspond pas aux modifications réelles. À mettre à
+     jour lors d'un vrai changement de contenu (nouvelle carte, nouveaux
+     tarifs), pas à chaque retouche de style.
+
+     <priority> et <changefreq> sont ignorés par Google depuis des années.
+     Ils sont conservés pour les autres moteurs, sans rien en attendre.
+
+     La page introuvable (404.html) n'y figure pas : elle ne doit jamais
+     être indexée. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://TODO-DOMAINE/index.html</loc>
+        <lastmod>2026-10-01</lastmod>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/terrasse-hiver.webp</image:loc>
+            <image:title>Terrasse couverte de L'Impondérable, Paris 20e</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/terrasse-ete.webp</image:loc>
+            <image:title>Terrasse de L'Impondérable en été, rue des Pyrénées</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/pizza.webp</image:loc>
+            <image:title>Pizza Tartufata de L'Impondérable</image:title>
+        </image:image>
     </url>
     <url>
         <loc>https://TODO-DOMAINE/tarifs.html</loc>
+        <lastmod>2026-10-01</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://TODO-DOMAINE/privatisation.html</loc>
-        <priority>0.8</priority>
+        <lastmod>2026-10-01</lastmod>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/bar.webp</image:loc>
+            <image:title>Salle privatisable de L'Impondérable, Paris 20e</image:title>
+        </image:image>
     </url>
     <url>
         <loc>https://TODO-DOMAINE/mentions-legales.html</loc>
+        <lastmod>2026-10-01</lastmod>
         <priority>0.1</priority>
     </url>
 </urlset>

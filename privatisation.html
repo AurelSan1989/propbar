@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#E6DFD1">
-    <title data-i18n="titre_page_privatisation">L'impondérable Privatisation</title>
+    <title data-i18n="titre_page_privatisation">Privatiser un bar à Paris 20e — L'Impondérable</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_privatisation">
-    <meta property="og:title" content="L'impondérable Privatisation" data-i18n-content="og_titre_privatisation">
-    <meta property="og:description" content="Privatisez L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse au 320 rue des Pyrénées à Paris." data-i18n-content="meta_description_privatisation">
+    <meta name="description" content="Anniversaire, pot de départ, after-work : privatisez tout ou partie du bar, jusqu'à 80 personnes, tous les jours sauf dimanche. Paris 20e, métro Jourdain." data-i18n-content="meta_description_privatisation">
+    <meta property="og:title" content="Privatiser un bar à Paris 20e — L'Impondérable" data-i18n-content="og_titre_privatisation">
+    <meta property="og:description" content="Anniversaire, pot de départ, after-work : privatisez tout ou partie du bar, jusqu'à 80 personnes, tous les jours sauf dimanche. Paris 20e, métro Jourdain." data-i18n-content="meta_description_privatisation">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://TODO-DOMAINE/privatisation.html">
     <meta property="og:image" content="https://TODO-DOMAINE/img/partage.jpg">
@@ -21,6 +21,72 @@
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <!-- C'est la page qui doit ressortir sur « privatiser un bar Paris 20 » :
+         elle déclare le service lui-même, son périmètre et sa capacité, et le
+         rattache à l'établissement par son @id. -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://TODO-DOMAINE/" },
+                    { "@type": "ListItem", "position": 2, "name": "Privatiser", "item": "https://TODO-DOMAINE/privatisation.html" }
+                ]
+            },
+            {
+                "@type": "Service",
+                "@id": "https://TODO-DOMAINE/privatisation.html#privatisation",
+                "name": "Privatisation de bar à Paris 20e",
+                "serviceType": "Privatisation de bar et de terrasse",
+                "description": "Privatisation de tout ou partie de L'Impondérable pour un anniversaire, un pot de départ ou un after-work : salle et terrasse, jusqu'à 80 personnes, tous les jours sauf le dimanche. Deux pizzas offertes à partir de 20 personnes.",
+                "url": "https://TODO-DOMAINE/privatisation.html",
+                "provider": { "@id": "https://TODO-DOMAINE/#etablissement" },
+                "areaServed": {
+                    "@type": "AdministrativeArea",
+                    "name": "Paris 20e arrondissement"
+                },
+                "audience": {
+                    "@type": "Audience",
+                    "audienceType": "Groupes, entreprises et particuliers"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "priceCurrency": "EUR",
+                    "url": "https://TODO-DOMAINE/privatisation.html",
+                    "eligibleQuantity": {
+                        "@type": "QuantitativeValue",
+                        "unitText": "personnes",
+                        "minValue": 1,
+                        "maxValue": 80
+                    }
+                },
+                "potentialAction": {
+                    "@type": "ReserveAction",
+                    "name": "Faire une demande de privatisation",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://TODO-DOMAINE/privatisation.html#contenu",
+                        "inLanguage": "fr-FR",
+                        "actionPlatform": [
+                            "https://schema.org/DesktopWebPlatform",
+                            "https://schema.org/MobileWebPlatform"
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+    </script>
+    <!-- Les deux polices du premier écran sont demandées avant la feuille de
+         style, qui ne les réclamerait qu'une fois analysée. Sur mobile, cela
+         retire un aller-retour au moment où Google mesure le chargement.
+         crossorigin est obligatoire même en local : une police est toujours
+         récupérée en mode anonyme, sans quoi le navigateur la retéléchargerait. -->
+    <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
 </head>
@@ -57,7 +123,7 @@
 
         <section class="privatisation-photos">
             <div class="card-media">
-                <img src="img/bar.webp" alt="Salle de L'Impondérable, le bar et les tables" data-i18n-alt="privatisation_photo_salle_alt" width="680" height="454" loading="lazy" decoding="async">
+                <img src="img/bar.webp" alt="Salle privatisable de L'Impondérable, le comptoir et les tables, rue des Pyrénées à Paris 20e" data-i18n-alt="privatisation_photo_salle_alt" width="680" height="454" loading="lazy" decoding="async">
             </div>
             <div class="card-media">
                 <!-- photo attendue : la terrasse privatisée en soirée, à insérer -->

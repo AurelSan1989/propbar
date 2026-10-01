@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#E6DFD1">
-    <title>L'impondérable</title>
+    <title data-i18n="titre_page_accueil">L'Impondérable — Bar restaurant à Paris 20e, terrasse 7j/7</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
-    <meta property="og:title" content="L'impondérable" data-i18n-content="og_titre_accueil">
-    <meta property="og:description" content="Bar restaurant avec terrasse toute l'année au 320 rue des Pyrénées à Paris, ouvert 7j/7 de 9h à 2h." data-i18n-content="meta_description_accueil">
+    <meta name="description" content="Bar restaurant au 320 rue des Pyrénées, Paris 20e. Terrasse couverte toute l'année, Happy Hour de 16h à 2h, ouvert 7j/7. Métro Jourdain." data-i18n-content="meta_description_accueil">
+    <meta property="og:title" content="L'Impondérable — Bar restaurant à Paris 20e" data-i18n-content="og_titre_accueil">
+    <meta property="og:description" content="Bar restaurant au 320 rue des Pyrénées, Paris 20e. Terrasse couverte toute l'année, Happy Hour de 16h à 2h, ouvert 7j/7. Métro Jourdain." data-i18n-content="meta_description_accueil">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://TODO-DOMAINE/index.html">
     <meta property="og:image" content="https://TODO-DOMAINE/img/partage.jpg">
@@ -21,44 +21,140 @@
     <link rel="icon" href="img/logo.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <!-- Les deux polices du premier écran sont demandées avant la feuille de
+         style, qui ne les réclamerait qu'une fois analysée. Sur mobile, cela
+         retire un aller-retour au moment où Google mesure le chargement.
+         crossorigin est obligatoire même en local : une police est toujours
+         récupérée en mode anonyme, sans quoi le navigateur la retéléchargerait. -->
+    <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Plus grand élément du premier écran : c'est lui que mesure le LCP. -->
+    <link rel="preload" href="img/terrasse-hiver.webp" as="image" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
+    <!-- Données structurées (schema.org). Elles ne changent rien à l'affichage :
+         elles disent à Google ce qu'est cet établissement, où il se trouve, ce
+         qu'il propose et quand il ouvre. C'est ce qui alimente la fiche latérale
+         et le bandeau de résultats locaux.
+         Le @graph déclare deux entités liées par leur @id : l'établissement,
+         référencé ensuite depuis les autres pages, et le site lui-même.
+         Volontairement absents : note moyenne et avis clients. Google interdit
+         à un établissement de publier ses propres avis en données structurées ;
+         ils doivent venir de la fiche Google, pas d'ici. -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "L'Impondérable",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "320 rue des Pyrénées",
-            "postalCode": "75020",
-            "addressLocality": "Paris",
-            "addressCountry": "FR"
-        },
-        "telephone": "+33983233914",
-        "url": "https://TODO-DOMAINE/",
-        "image": "https://TODO-DOMAINE/img/partage.jpg",
-        "hasMenu": "https://TODO-DOMAINE/tarifs.html",
-        "servesCuisine": ["Française", "Pizza", "Couscous"],
-        "priceRange": "€",
-        "currenciesAccepted": "EUR",
-        "publicAccess": true,
-        "smokingAllowed": false,
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 48.8736,
-            "longitude": 2.3897
-        },
-        "sameAs": [
-            "https://www.facebook.com/barlimponderable/",
-            "https://www.instagram.com/limponderable2021/"
-        ],
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "opens": "09:00",
-            "closes": "02:00"
-        }
+        "@graph": [
+            {
+                "@type": ["Restaurant", "BarOrPub"],
+                "@id": "https://TODO-DOMAINE/#etablissement",
+                "name": "L'Impondérable",
+                "description": "Bar restaurant du 20e arrondissement de Paris, rue des Pyrénées, à deux pas du métro Jourdain. Terrasse couverte toute l'année, Happy Hour de 16h à 2h, salle privatisable jusqu'à 80 personnes.",
+                "url": "https://TODO-DOMAINE/",
+                "logo": "https://TODO-DOMAINE/img/logo.svg",
+                "image": [
+                    "https://TODO-DOMAINE/img/partage.jpg",
+                    "https://TODO-DOMAINE/img/terrasse-ete.webp",
+                    "https://TODO-DOMAINE/img/bar.webp",
+                    "https://TODO-DOMAINE/img/pizza.webp"
+                ],
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "320 rue des Pyrénées",
+                    "addressLocality": "Paris",
+                    "postalCode": "75020",
+                    "addressRegion": "Île-de-France",
+                    "addressCountry": "FR"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 48.8736,
+                    "longitude": 2.3897
+                },
+                "hasMap": "https://www.google.com/maps/dir/?api=1&destination=320+rue+des+Pyr%C3%A9n%C3%A9es+75020+Paris",
+                "telephone": "+33983233914",
+                "email": "bessasoso@gmail.com",
+                "servesCuisine": ["Française", "Pizza", "Couscous", "Tapas"],
+                "priceRange": "€",
+                "currenciesAccepted": "EUR",
+                "publicAccess": true,
+                "smokingAllowed": false,
+                "maximumAttendeeCapacity": 80,
+                "acceptsReservations": "https://TODO-DOMAINE/privatisation.html",
+                "hasMenu": "https://TODO-DOMAINE/tarifs.html",
+                "areaServed": {
+                    "@type": "AdministrativeArea",
+                    "name": "Paris 20e arrondissement"
+                },
+                "amenityFeature": [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "Terrasse couverte toute l'année",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "Privatisation",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "Happy Hour",
+                        "value": true
+                    }
+                ],
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                        "opens": "09:00",
+                        "closes": "02:00"
+                    }
+                ],
+                "makesOffer": {
+                    "@type": "Offer",
+                    "name": "Privatisation du bar",
+                    "description": "Privatisation de tout ou partie du bar, jusqu'à 80 personnes, tous les jours sauf le dimanche. Deux pizzas offertes à partir de 20 personnes.",
+                    "url": "https://TODO-DOMAINE/privatisation.html",
+                    "availability": "https://schema.org/InStock",
+                    "priceCurrency": "EUR",
+                    "areaServed": {
+                        "@type": "AdministrativeArea",
+                        "name": "Paris 20e arrondissement"
+                    }
+                },
+                "potentialAction": {
+                    "@type": "ReserveAction",
+                    "name": "Demander une privatisation",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://TODO-DOMAINE/privatisation.html",
+                        "inLanguage": "fr-FR",
+                        "actionPlatform": [
+                            "https://schema.org/DesktopWebPlatform",
+                            "https://schema.org/MobileWebPlatform"
+                        ]
+                    },
+                    "result": {
+                        "@type": "Reservation",
+                        "name": "Demande de privatisation"
+                    }
+                },
+                "sameAs": [
+                    "https://www.facebook.com/barlimponderable/",
+                    "https://www.instagram.com/limponderable2021/",
+                    "https://share.google/3GtbogjKdMXxzdB8y"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://TODO-DOMAINE/#site",
+                "url": "https://TODO-DOMAINE/",
+                "name": "L'Impondérable",
+                "inLanguage": "fr-FR",
+                "publisher": { "@id": "https://TODO-DOMAINE/#etablissement" }
+            }
+        ]
     }
     </script>
     <!-- « sameAs » rattache le site aux comptes Facebook et Instagram du bar
@@ -92,7 +188,7 @@
         <section class="hero">
         <div class="hero-media">
             <!-- photo temporaire, à remplacer -->
-            <img src="img/terrasse-hiver.webp" alt="Terrasse couverte de L'Impondérable en hiver" width="680" height="454">
+            <img src="img/terrasse-hiver.webp" alt="Terrasse couverte de L'Impondérable en hiver, rue des Pyrénées à Paris 20e" width="680" height="454" fetchpriority="high">
         </div>
         <div class="hero-content">
             <p class="eyebrow" data-i18n="hero_eyebrow">Bar restaurant, terrasse toute l'année, ouvert 7j/7</p>
@@ -164,7 +260,7 @@
             <div class="card">
                 <div class="card-media">
                     <!-- photo temporaire (envoyée par le gérant), à remplacer -->
-                    <img src="img/pizza.webp" alt="Pizza Tartufata : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt" width="1200" height="900" loading="lazy" decoding="async">
+                    <img src="img/pizza.webp" alt="Pizza Tartufata servie à L'Impondérable : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt" width="1200" height="900" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_pizzas_tag">À emporter</span>
                 </div>
                 <div class="card-body">
@@ -185,7 +281,7 @@
             <div class="card">
                 <div class="card-media">
                     <!-- photo temporaire, à remplacer -->
-                    <img src="img/terrasse-ete.webp" alt="Terrasse de L'Impondérable en été" width="680" height="510" loading="lazy" decoding="async">
+                    <img src="img/terrasse-ete.webp" alt="Terrasse de L'Impondérable en été, rue des Pyrénées à Paris 20e" width="680" height="510" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_terrasse_tag">Toute l'année</span>
                 </div>
                 <div class="card-body">
