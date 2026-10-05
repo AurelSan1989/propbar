@@ -111,7 +111,7 @@
             "articles" : [
                 {
                     "nom" : "Café / Café décaféiné",
-                    "prix" : 2.20
+                    "prix" : 2.00
                 }, 
                 {
                     "nom" : "Café noisette",
@@ -131,7 +131,7 @@
                 },
                 {
                     "nom": "Thé / Infusion",
-                    "prix" : 2.80
+                    "prix" : 3.50
                 },
                 {
                     "nom": "Café frappé",
@@ -189,59 +189,73 @@
             "articles" : [
                 {
                     "nom" : "Cognac",
-                    "prix" : 5.00 
+                    "contenance" : "4 cl",
+                    "prix" : 8.00 
                 },
                 {
                     "nom" : "Armagnac",
-                    "prix" : 5.00
+                    "contenance" : "4 cl",
+                    "prix" : 8.00
                 },
                 {
                     "nom" : "Calvados",
-                    "prix" : 4.50
+                    "contenance" : "4 cl",
+                    "prix" : 8.00
                 },
                 {
                     "nom" : "Poire Williams",
-                    "prix" : 5.90
-                },
-                {
-                    "nom" : "Prune / Mirabelle",
-                    "prix" : 5.00
-                },
-                {
-                    "nom" : "Baileys",
-                    "prix" : 5.00
-                },
-                {
-                    "nom" : "Cointreau",
-                    "prix" : 5.50
-                },
-                {
-                    "nom" : "Vodka",
-                    "prix" : 6.00
-                },
-                {
-                    "nom" : "Vodka Absolut",
-                    "prix" : 6.90
-                },
-                {
-                    "nom" : "Rhum blanc",
-                    "prix" : 5.00
-                },
-                {
-                    "nom" : "Rhum ambré",
+                    "contenance" : "4 cl",
                     "prix" : 7.00
                 },
                 {
+                    "nom" : "Prune / Mirabelle",
+                    "contenance" : "4 cl",
+                    "prix" : 7.00
+                },
+                {
+                    "nom" : "Baileys",
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Cointreau",
+                    "contenance" : "4 cl",
+                    "prix" : 7.00
+                },
+                {
+                    "nom" : "Vodka",
+                    "contenance" : "4 cl",
+                    "prix" : 7.00
+                },
+                {
+                    "nom" : "Vodka Absolut",
+                    "contenance" : "4 cl",
+                    "prix" : 8.00
+                },
+                {
+                    "nom" : "Rhum blanc",
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
+                },
+                {
+                    "nom" : "Rhum ambré",
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
+                },
+                {
                     "nom" : "Gin To",
-                    "prix" : 6.50
+                    "contenance" : "4 cl",
+                    "prix" : 7.00
                 },
                 {
                     "nom" : "Amaretto",
-                    "prix" : 5.00
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
                 },
                 {
                     "nom" : "Get 27 ou 31",
-                    "prix" : 5.00
+                    "contenance" : "4 cl",
+                    "prix" : 6.00
                 }
             ]
         }, {
@@ -252,12 +266,12 @@
                 {
                     "nom" : "JB, Clan Campbell, Jameson",
                     "contenance" : "4 cl",
-                    "prix" : 6.00
+                    "prix" : 7.00
                 },
                 {
                     "nom" : "Chivas",
                     "contenance" : "4 cl",
-                    "prix" : 8.00
+                    "prix" : 9.00
                 },
                 {
                     "nom" : "Ballantine's",
@@ -270,7 +284,7 @@
                 },
                 {
                     "nom" : "Irish Coffee",
-                    "prix" : 6.00
+                    "prix" : 7.00
                 },
                 {
                     "nom" : "Whisky japonais",
@@ -288,7 +302,7 @@
             "articles" : [
                 {
                     "nom" : "Petit-Chablis",
-                    "prix" : 26.00,
+                    "prix" : 28.00,
                     "contenance" : "75 cl"
                 },
                 {
@@ -302,13 +316,8 @@
                     "contenance" : "75 cl"
                 },
                 {
-                    "nom" : "Quincy",
-                    "prix" : 32.00,
-                    "contenance" : "75 cl"
-                },
-                {
-                    "nom" : "Chablis 1er cru",
-                    "prix" : 35.00,
+                    "nom" : "Pouilly",
+                    "prix" : 28.00,
                     "contenance" : "75 cl"
                 }
             ]
@@ -326,18 +335,13 @@
                     "contenance" : "75 cl"
                 },
                 {
-                    "nom" : "Pinot",
+                    "nom" : "Chinon",
                     "prix" : 25.00,
                     "contenance" : "75 cl"
                 },
                 {
-                    "nom" : "Brouilly",
-                    "prix" : 28.00,
-                    "contenance" : "75 cl"
-                },
-                {
                     "nom" : "Côtes du rhône Bio",
-                    "prix" : 28.00,
+                    "prix" : 25.00,
                     "contenance" : "75 cl"
                 }
             ]
@@ -442,7 +446,7 @@
                 },
                 {
                     "nom" : "Double Ricard",
-                    "prix" : 4.50
+                    "prix" : 5.00
                 }
             ]
         }
@@ -460,19 +464,19 @@
                 "articles" : [
                     {
                         "nom" : "Oeuf cocotte",
-                        "prix" : 6.00
+                        "prix" : 5.00
                     },
                     {
                         "nom" : "Salade de gésiers",
-                        "prix" : 6.00
+                        "prix" : 5.00
                     },
                     {
                         "nom" : "Oeuf poché",
-                        "prix" : 6.00
+                        "prix" : 5.00
                     },
                     {
                         "nom" : "Velouté de légumes",
-                        "prix" : 6.00
+                        "prix" : 5.00
                     }
                 ]
             },
@@ -494,12 +498,12 @@
                         "prix" : 17.90
                     },
                     {
-                        "nom" : "Cuisse de poulet rôtie",
+                        "nom" : "Cuisse de poulet fermier",
                         "prix" : 14.50
                     },
                     {
                         "nom" : "Saucisse de Toulouse",
-                        "prix" : 15.00
+                        "prix" : 14.00
                     }
                 ]
             },
@@ -531,11 +535,6 @@
                         "description" : "Salade, tomate, mozzarella, artichaut, charcuterie italienne",
                         "descriptionEn" : "Lettuce, tomato, mozzarella, artichoke, Italian cured meats",
                         "prix" : 14.90
-                    },
-                    {
-                        "nom" : "Océane",
-                        "description" : "Salade, tomate, saumon fumé, fruits de mer, tarama, crème de ciboulette, toast",
-                        "descriptionEn" : "Lettuce, tomato, smoked salmon, seafood, taramasalata, chive cream, toast"
                     }
                 ]
             },
@@ -564,6 +563,12 @@
                         "description": "Boeuf, poulet, merguez",
                         "descriptionEn" : "Beef, chicken, merguez sausage",
                         "prix" : 18.90
+                    },
+                    {
+                        "nom" : "Couscous méchoui",
+                        "description" : "Méchoui agneau",
+                        "descriptionEn" : "Lamb méchoui (slow-roasted lamb)",
+                        "prix" : 22.00
                     }
                 ]
             },
@@ -574,7 +579,7 @@
                 "articles" : [
                     {
                         "nom": "Grillades du jour",
-                        "prix" : 13.90
+                        "prix" : 15.90
                     },
                     {
                         "nom": "Poissons du jour",
@@ -582,11 +587,11 @@
                     },
                     {
                         "nom": "Burger du jour",
-                        "prix" : 14.50
+                        "prix" : 14.00
                     },
                     {
                         "nom": "Dessert du jour",
-                        "prix" : 4.50
+                        "prix" : 5.00
                     }
                 ]
             },
@@ -614,11 +619,11 @@
                 "articles" : [
                     {
                         "nom" : "Croque-monsieur",
-                        "prix" : 12.00
+                        "prix" : 10.00
                     },
                     {
                         "nom" : "Croque-madame",
-                        "prix" : 12.90
+                        "prix" : 11.00
                     }
                 ]
             },
@@ -711,32 +716,12 @@
                     {
                         "nom" : "Pinte IPA artisanale",
                         "contenance" : "50 cl",
-                        "prixReduit" : 7.50
-                    },
-                    {
-                        "nom" : "Pinte de blonde artisanale",
-                        "contenance" : "50 cl",
                         "prixReduit" : 7.00
                     },
                     {
                         "nom" : "Pinte de blanche",
                         "contenance" : "50 cl",
                         "prixReduit" : 6.00
-                    },
-                    {
-                        "nom" : "Pinte Abbaye",
-                        "contenance" : "50 cl",
-                        "prixReduit" : 7.00
-                    },
-                    {
-                        "nom" : "Pinte de Leffe",
-                        "contenance" : "50 cl",
-                        "prixReduit" : 7.00
-                    },
-                    {
-                        "nom" : "Pinte de Tongerio",
-                        "contenance" : "50 cl",
-                        "prixReduit" : 7.50
                     },
                     {
                         "nom" : "Pinte de Picon",
