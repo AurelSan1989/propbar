@@ -511,22 +511,26 @@
                     {
                         "nom" : "Crottin de Chavignol",
                         "description" : "Salade, tomate, concombre, tomates séchées, chèvre sur toast, cerneaux de noix",
-                        "descriptionEn" : "Lettuce, tomato, cucumber, sun-dried tomatoes, goat cheese on toast, walnuts"
+                        "descriptionEn" : "Lettuce, tomato, cucumber, sun-dried tomatoes, goat cheese on toast, walnuts",
+                        "prix" : 11.90
                     },
                     {
                         "nom" : "Parisienne",
                         "description" : "Salade, tomate, concombre, pommes de terre à l'huile, jambon de Paris, emmental, oeuf",
-                        "descriptionEn" : "Lettuce, tomato, cucumber, potatoes in vinaigrette, Paris ham, Emmental, egg"
+                        "descriptionEn" : "Lettuce, tomato, cucumber, potatoes in vinaigrette, Paris ham, Emmental, egg",
+                        "prix" : 11.90
                     },
                     {
                         "nom" : "Auvergnate",
                         "description" : "Salade, tomate, pommes de terre sautées, cantal, jambon de pays, bleu, noix",
-                        "descriptionEn" : "Lettuce, tomato, sautéed potatoes, Cantal cheese, cured ham, blue cheese, walnuts"
+                        "descriptionEn" : "Lettuce, tomato, sautéed potatoes, Cantal cheese, cured ham, blue cheese, walnuts",
+                        "prix" : 13.90
                     },
                     {
                         "nom" : "Italienne",
                         "description" : "Salade, tomate, mozzarella, artichaut, charcuterie italienne",
-                        "descriptionEn" : "Lettuce, tomato, mozzarella, artichoke, Italian cured meats"
+                        "descriptionEn" : "Lettuce, tomato, mozzarella, artichoke, Italian cured meats",
+                        "prix" : 14.90
                     },
                     {
                         "nom" : "Océane",
@@ -669,6 +673,12 @@
                         "description" : "Crème de truffe, champignons, jambon, basilic",
                         "descriptionEn" : "Truffle cream, mushrooms, ham, basil",
                         "prix" : 15.90
+                    },
+                    {
+                        "nom" : "Diavola",
+                        "description" : "Sauce tomate, mozzarella, chorizo, basilic",
+                        "descriptionEn" : "Tomato sauce, mozzarella, chorizo, basil",
+                        "prix" : 14.90
                     }
                 ]
             }
