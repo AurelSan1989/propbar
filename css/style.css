@@ -808,10 +808,6 @@ body.menu-ouvert {
     border-bottom: 1px solid var(--ligne);
 }
 
-.ambiance-header .center-icon {
-    color: var(--accent-doux);
-}
-
 .ambiance-title h2 {
     max-width: 12ch;
 }
