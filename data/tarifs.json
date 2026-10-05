@@ -316,7 +316,7 @@
                     "contenance" : "75 cl"
                 },
                 {
-                    "nom" : "Pouilly",
+                    "nom" : "Pouilly-Fumé",
                     "prix" : 28.00,
                     "contenance" : "75 cl"
                 }
@@ -477,6 +477,48 @@
                     {
                         "nom" : "Velouté de légumes",
                         "prix" : 5.00
+                    }
+                ]
+            },
+            {
+                "id" : "tapas",
+                "nom" : "Tapas",
+                "articles" : [
+                    {
+                        "nom" : "Assiette de Calamars (9 pièces)",
+                        "prix" : 8.00
+                    },
+                    {
+                        "nom" : "Onion Rings (9 pièces)",
+                        "prix" : 8.00
+                    },
+                    {
+                        "nom" : "Sticks de mozzarella (7 pièces)",
+                        "prix": 9.00
+                    },
+                    {
+                        "nom" : "Mini camembert",
+                        "prix" : 9.00
+                    },
+                    {
+                        "nom" : "Accras de poisson",
+                        "prix" : 8.00
+                    },
+                    {
+                        "nom" : "Aiguillettes de poulet pané",
+                        "prix" : 9.00
+                    },
+                    {
+                        "nom" : "Planche de charcuterie",
+                        "prix" : 13.50
+                    },
+                    {
+                        "nom" : "Planche de fromage",
+                        "prix" : 13.50
+                    },
+                    {
+                        "nom" : "Planche mixte",
+                        "prix" : 16.50
                     }
                 ]
             },
