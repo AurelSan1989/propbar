@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Plus grand élément du premier écran : c'est lui que mesure le LCP. -->
-    <link rel="preload" href="img/terrasse-hiver.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="img/terrasse-jour.webp" as="image" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
     <!-- Données structurées (schema.org). Elles ne changent rien à l'affichage :
@@ -54,7 +54,7 @@
                 "logo": "https://TODO-DOMAINE/img/logo.svg",
                 "image": [
                     "https://TODO-DOMAINE/img/partage.jpg",
-                    "https://TODO-DOMAINE/img/terrasse-ete.webp",
+                    "https://TODO-DOMAINE/img/terrasse-jour.webp",
                     "https://TODO-DOMAINE/img/bar.webp",
                     "https://TODO-DOMAINE/img/pizza.webp"
                 ],
@@ -187,8 +187,7 @@
     <main id="contenu" tabindex="-1">
         <section class="hero">
         <div class="hero-media">
-            <!-- photo temporaire, à remplacer -->
-            <img src="img/terrasse-hiver.webp" alt="Terrasse couverte de L'impondérable en hiver, rue des Pyrénées à Paris 20e" width="680" height="454" fetchpriority="high">
+            <img src="img/terrasse-jour.webp" alt="Devanture et terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="hero_photo_alt" width="1158" height="896" fetchpriority="high">
         </div>
         <div class="hero-content">
             <p class="eyebrow" data-i18n="hero_eyebrow">Bar restaurant, terrasse toute l'année, ouvert 7j/7</p>
@@ -256,8 +255,7 @@
             </div>
             <div class="card">
                 <div class="card-media">
-                    <!-- photo temporaire (envoyée par le gérant), à remplacer -->
-                    <img src="img/pizza.webp" alt="Pizza Tartufata servie à L'impondérable : crème de truffe, jambon, champignons et basilic" data-i18n-alt="ambiance_pizzas_alt" width="1200" height="900" loading="lazy" decoding="async">
+                    <img src="img/pizza.webp" alt="Pizza cuite au four, garnie de mozzarella, salami, poivrons et oignons rouges" data-i18n-alt="ambiance_pizzas_alt" width="900" height="675" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_pizzas_tag">À emporter</span>
                 </div>
                 <div class="card-body">
@@ -267,7 +265,7 @@
             </div>
             <div class="card">
                 <div class="card-media">
-                    <!-- photo attendue : un couscous du chef, à insérer -->
+                    <img src="img/couscous.webp" alt="Couscous du chef à L'impondérable : semoule, viande, légumes, pois chiches et raisins secs" data-i18n-alt="ambiance_couscous_alt" width="1000" height="750" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_couscous_tag">Spécialité du chef</span>
                 </div>
                 <div class="card-body">
@@ -277,13 +275,12 @@
             </div>
             <div class="card">
                 <div class="card-media">
-                    <!-- photo temporaire, à remplacer -->
-                    <img src="img/terrasse-ete.webp" alt="Terrasse de L'impondérable en été, rue des Pyrénées à Paris 20e" width="680" height="510" loading="lazy" decoding="async">
+                    <img src="img/terrasse-cocktail.webp" alt="Cocktail aux fruits rouges et citron vert sur la terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="ambiance_terrasse_alt" width="1000" height="750" loading="lazy" decoding="async">
                     <span class="tag-picture" data-i18n="ambiance_terrasse_tag">Toute l'année</span>
                 </div>
                 <div class="card-body">
                     <h3 data-i18n="ambiance_terrasse_titre">La terrasse</h3>
-                    <span data-i18n="ambiance_terrasse_frequence">7j/7</span>
+                    <span data-i18n="ambiance_terrasse_happy_hour">Happy Hour 16h – 2h</span>
                 </div>
             </div>
         </section>

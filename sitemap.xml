@@ -22,16 +22,20 @@
         <lastmod>2026-10-01</lastmod>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/terrasse-hiver.webp</image:loc>
-            <image:title>Terrasse couverte de L'impondérable, Paris 20e</image:title>
+            <image:loc>https://TODO-DOMAINE/img/terrasse-jour.webp</image:loc>
+            <image:title>Devanture et terrasse de L'impondérable, Paris 20e</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/terrasse-ete.webp</image:loc>
-            <image:title>Terrasse de L'impondérable en été, rue des Pyrénées</image:title>
+            <image:loc>https://TODO-DOMAINE/img/couscous.webp</image:loc>
+            <image:title>Couscous du chef de L'impondérable</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/terrasse-cocktail.webp</image:loc>
+            <image:title>Cocktail sur la terrasse de L'impondérable, rue des Pyrénées</image:title>
         </image:image>
         <image:image>
             <image:loc>https://TODO-DOMAINE/img/pizza.webp</image:loc>
-            <image:title>Pizza Tartufata de L'impondérable</image:title>
+            <image:title>Pizza de L'impondérable</image:title>
         </image:image>
     </url>
     <url>
@@ -46,6 +50,10 @@
         <image:image>
             <image:loc>https://TODO-DOMAINE/img/bar.webp</image:loc>
             <image:title>Salle privatisable de L'impondérable, Paris 20e</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/plateau-cocktails.webp</image:loc>
+            <image:title>Cocktails servis en soirée à L'impondérable</image:title>
         </image:image>
     </url>
     <url>
