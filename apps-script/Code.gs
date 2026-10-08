@@ -1,4 +1,4 @@
-// L'Impondérable — réception des demandes de privatisation.
+// L'impondérable — réception des demandes de privatisation.
 //
 // Ce fichier ne fait PAS partie du site : c'est la copie de référence du
 // script publié sur script.google.com, gardée ici pour ne pas la perdre et
@@ -51,7 +51,7 @@ function doPost(requete) {
             // n'affichent pas le HTML se rabattent sur le texte brut.
             body: corpsTexte(demande),
             htmlBody: corpsHtml(demande),
-            name: "Site L'Impondérable"
+            name: "Site L'impondérable"
         };
 
         // Permet de répondre directement au visiteur depuis la boîte mail.
@@ -98,7 +98,7 @@ function corpsTexte(demande) {
         "Pour répondre, écrivez à " + texte(demande.email)
             + " ou appelez le " + texte(demande.telephone) + ".",
         "",
-        "Message automatique du site de L'Impondérable."
+        "Message automatique du site de L'impondérable."
     ].join("\n");
 }
 
@@ -145,7 +145,7 @@ function blocReponseHtml(demande) {
     let libelle;
     if (renseigne(email)) {
         lien = "mailto:" + email
-            + "?subject=" + encodeURIComponent("Votre demande de privatisation à L'Impondérable");
+            + "?subject=" + encodeURIComponent("Votre demande de privatisation à L'impondérable");
         libelle = "Répondre à " + texte(demande.nom);
     } else if (renseigne(telephone)) {
         lien = "tel:" + telephone.replace(/[^0-9+]/g, "");

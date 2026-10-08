@@ -1,7 +1,7 @@
 # Référencement — état des lieux et marche à suivre
 
 Objectif : qu'une personne qui cherche un bar à réserver ou à privatiser dans
-le 20e arrondissement de Paris trouve L'Impondérable rapidement.
+le 20e arrondissement de Paris trouve L'impondérable rapidement.
 
 Ce document sépare trois choses : ce qui est déjà fait dans le code, ce qu'il
 faut faire le jour de la mise en ligne, et ce qui décide réellement du
@@ -220,7 +220,7 @@ est déclarée.
 
 | Recherche | Objectif réaliste |
 |---|---|
-| « L'Impondérable », « L'Impondérable Paris » | **1re position**, rapidement |
+| « L'impondérable », « L'impondérable Paris » | **1re position**, rapidement |
 | « bar rue des Pyrénées », « bar métro Jourdain » | **1re page**, voire bandeau local |
 | « privatiser bar Paris 20 », « bar privatisable Jourdain » | **bandeau local atteignable** avec une fiche Google soignée ; les premières places classiques resteront aux plateformes |
 | « privatiser un bar à Paris » | hors d'atteinte pour un site de quatre pages — c'est le terrain des plateformes |

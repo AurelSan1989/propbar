@@ -105,7 +105,9 @@ if (boutonMenu && navPrincipale) {
 
     // Le passage en desktop pendant que le panneau est ouvert ne doit pas
     // laisser le défilement bloqué ou le bouton dans un état incohérent.
-    window.matchMedia("(min-width: 768px)").addEventListener("change", function (evenement) {
+    // Même seuil que l'en-tête dans css/style.css (1024 px, pas 768 px) :
+    // en dessous, la navigation ne tient pas sur une ligne.
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", function (evenement) {
         if (evenement.matches) {
             fermerMenu();
         }

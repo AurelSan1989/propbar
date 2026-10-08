@@ -1,5 +1,5 @@
 /* ==========================================================================
-   L'Impondérable — feuille de style unique
+   L'impondérable — feuille de style unique
    ==========================================================================
 
    Concept : le site change de matière avec l'heure.
@@ -66,7 +66,10 @@
     --titre: "Fraunces", Georgia, "Times New Roman", serif;
     --police: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --t-h1: clamp(3.25rem, 11vw, 7.5rem);
+    /* Le nom du bar est un seul mot, qui ne peut pas passer à la ligne : sa
+       taille doit le faire tenir dans l'écran le plus étroit (320 px, gouttières
+       comprises). Le mot mesure environ 7 fois la taille de la police. */
+    --t-h1: clamp(2.25rem, 12.5vw, 7.5rem);
     --t-h2: clamp(2rem, 5.2vw, 3.75rem);
     /* Titre de page intérieure : la même voix que le premier écran, une
        octave plus bas. --t-h1 reste réservé au nom du bar. */
@@ -634,6 +637,10 @@ body.menu-ouvert {
 
 .hero {
     display: grid;
+    /* minmax(0, 1fr) et non 1fr : une colonne 1fr s'élargit jusqu'au contenu
+       le plus large qu'elle ne peut pas couper. Ici, la photo et le titre
+       poussaient le bloc au-delà de l'écran sur les téléphones étroits. */
+    grid-template-columns: minmax(0, 1fr);
     min-height: clamp(540px, 84vh, 880px);
     padding: 0 !important;
     isolation: isolate;
@@ -1212,49 +1219,6 @@ footer:has(~ .barre-flottante) {
         padding-inline: var(--gouttiere);
     }
 
-    .btn-menu {
-        display: none;
-    }
-
-    .nav-principale {
-        display: block;
-        position: static;
-        overflow: visible;
-        background-color: transparent;
-        z-index: auto;
-    }
-
-    .nav-principale ul {
-        flex-direction: row;
-        align-items: center;
-        gap: var(--md);
-        padding: 0;
-    }
-
-    .nav-principale a {
-        min-height: auto;
-        padding: var(--xs) 0;
-        font-family: var(--police);
-        font-size: var(--t-petit);
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-    }
-
-    .selecteur-langue-item,
-    .selecteur-mode-item {
-        border-top: 0;
-        margin-top: 0;
-        padding-top: 0;
-        margin-left: var(--xs);
-        padding-left: var(--sm);
-        border-left: 1px solid var(--ligne);
-    }
-
-    .header-actions {
-        margin-left: auto;
-    }
-
     .hero-content {
         padding-bottom: var(--xl);
     }
@@ -1312,6 +1276,58 @@ footer:has(~ .barre-flottante) {
     .message-sanitaire,
     .retour-haut {
         grid-column: 1 / -1;
+    }
+}
+
+
+/* L'en-tête a son propre point de rupture, plus large que celui de la page :
+   logo, trois liens, sélecteur de langue, bouton jour/nuit et téléphone ne
+   tiennent sur une ligne qu'à partir de 1024 px (mesuré, en français comme en
+   anglais). En dessous — tablettes en portrait, petits portables — le menu
+   reste replié derrière le bouton, comme sur téléphone. Le seuil est repris
+   dans js/app.js, qui referme le menu quand on franchit cette largeur. */
+@media (min-width: 1024px) {
+    .btn-menu {
+        display: none;
+    }
+
+    .nav-principale {
+        display: block;
+        position: static;
+        overflow: visible;
+        background-color: transparent;
+        z-index: auto;
+    }
+
+    .nav-principale ul {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--md);
+        padding: 0;
+    }
+
+    .nav-principale a {
+        min-height: auto;
+        padding: var(--xs) 0;
+        font-family: var(--police);
+        font-size: var(--t-petit);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .selecteur-langue-item,
+    .selecteur-mode-item {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+        margin-left: var(--xs);
+        padding-left: var(--sm);
+        border-left: 1px solid var(--ligne);
+    }
+
+    .header-actions {
+        margin-left: auto;
     }
 }
 
