@@ -46,8 +46,16 @@ Dans cet ordre.
 
 ### 2.1 Remplacer le domaine
 
-Le marqueur `TODO-DOMAINE` apparaît **48 fois** (balises canoniques, Open
-Graph, données structurées, sitemap, robots.txt). Une seule commande :
+Le marqueur `TODO-DOMAINE` apparaît dans les balises canoniques, les
+données structurées, le sitemap et robots.txt.
+
+**Pendant la phase de test**, les balises `og:url` et `og:image` pointent
+déjà vers l'adresse provisoire `aurelsan1989.github.io/propbar`, pour que
+l'aperçu WhatsApp/Facebook fonctionne. Elles sont donc à remplacer aussi,
+tout comme la balise `<base href="/propbar/">` de `404.html`, qui devient
+`<base href="/">`.
+
+Une seule commande pour le marqueur :
 
 ```powershell
 # PowerShell, à la racine du projet
@@ -61,7 +69,7 @@ Get-ChildItem -Include *.html,*.xml,*.txt -Recurse |
 Vérifier ensuite qu'il n'en reste aucun :
 
 ```powershell
-Select-String -Path *.html,*.xml,*.txt -Pattern 'TODO-DOMAINE'
+Select-String -Path *.html,*.xml,*.txt -Pattern 'TODO-DOMAINE','github.io','/propbar/'
 ```
 
 ### 2.2 Ouvrir le site aux moteurs

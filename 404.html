@@ -6,23 +6,25 @@
     <meta name="theme-color" content="#E6DFD1">
     <title>L'impondérable Page introuvable</title>
     <meta name="robots" content="noindex, nofollow">
-    <!-- Chemins absolus (/css/…) sur cette page seulement : l'hébergeur la sert
-         pour n'importe quelle adresse inconnue, y compris /un/sous/dossier/,
-         où des chemins relatifs pointeraient dans le vide. Contrepartie :
-         ouverte en double-cliquant le fichier, elle s'affiche sans styles. -->
+    <!-- L'hébergeur sert cette page pour n'importe quelle adresse inconnue, y
+         compris /un/sous/dossier/ : sans <base>, ses chemins relatifs
+         pointeraient dans le vide. <base> les ancre au dossier du site.
+         Valeur provisoire pour GitHub Pages (site servi sous /propbar/).
+         À LA MISE EN LIGNE sur le vrai domaine : remplacer par <base href="/">. -->
+    <base href="/propbar/">
 
-    <link rel="icon" href="/img/logo.svg" type="image/svg+xml">
-    <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <!-- Les deux polices du premier écran sont demandées avant la feuille de
          style, qui ne les réclamerait qu'une fois analysée. Sur mobile, cela
          retire un aller-retour au moment où Google mesure le chargement.
          crossorigin est obligatoire même en local : une police est toujours
          récupérée en mode anonyme, sans quoi le navigateur la retéléchargerait. -->
-    <link rel="preload" href="/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/jour-nuit.js"></script>
+    <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jour-nuit.js"></script>
 </head>
 <!-- Affichée quand une adresse n'existe pas (lien périmé, faute de frappe).
      Sa prise en compte dépend de l'hébergeur : Netlify sert automatiquement
@@ -30,7 +32,7 @@
      une fois l'hébergement choisi. -->
 <body id="top">
     <header>
-        <a href="/index.html" class="brand"> <img src="/img/logo.svg" alt="" class="logo" width="32" height="32">L'impondérable</a>
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32">L'impondérable</a>
         <div class="header-actions">
             <a href="tel:+33983233914" aria-label="Appeler le bar" class="btn-icon btn-appel">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
@@ -46,14 +48,14 @@
                 Le bar, lui, est toujours au 320 rue des Pyrénées.
             </p>
             <div class="actions">
-                <a href="/index.html" class="cta">Retour à l'accueil</a>
-                <a href="/tarifs.html" class="cta-secondaire">Voir la carte</a>
+                <a href="index.html" class="cta">Retour à l'accueil</a>
+                <a href="tarifs.html" class="cta-secondaire">Voir la carte</a>
             </div>
         </section>
     </main>
     <footer>
         <div class="footer-marque">
-            <img src="/img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">
+            <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">
             <span>L'impondérable</span>
         </div>
 
@@ -64,13 +66,13 @@
 
         <ul class="footer-liens">
             <li><a href="tel:+33983233914">09 83 23 39 14</a></li>
-            <li><a href="/mentions-legales.html">Mentions légales</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
         </ul>
 
         <p class="message-sanitaire">
             L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
         </p>
     </footer>
-    <script src="/js/app.js" defer></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>
