@@ -59,18 +59,22 @@
             rgba(18, 14, 10, 0.94) 100%);
     }
 
+    /* Composition centrée : WhatsApp recadre souvent l'aperçu en carré
+       (630 × 630 au centre de l'image). Tout le texte doit tenir dans ce
+       carré, sans quoi le début du nom est coupé. */
     .contenu {
         position: absolute;
-        left: 64px;
-        right: 64px;
-        bottom: 56px;
+        left: 300px;
+        right: 300px;
+        bottom: 52px;
+        text-align: center;
     }
 
     .eyebrow {
         font-family: "Archivo", sans-serif;
         font-weight: 600;
-        font-size: 24px;
-        letter-spacing: 0.16em;
+        font-size: 20px;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: #F2C9A0;
         margin-bottom: 14px;
@@ -79,7 +83,7 @@
     h1 {
         font-family: "Fraunces", Georgia, serif;
         font-weight: 700;
-        font-size: 108px;
+        font-size: 76px;
         line-height: 1;
         letter-spacing: -0.01em;
         color: #FBF6EE;
@@ -88,7 +92,7 @@
 
     .infos {
         font-family: "Archivo", sans-serif;
-        font-size: 27px;
+        font-size: 22px;
         line-height: 1.5;
         color: #EFE7DA;
     }
@@ -98,7 +102,7 @@
         width: 96px;
         height: 5px;
         background-color: #C8301E;
-        margin-bottom: 22px;
+        margin: 0 auto 20px;
     }
 </style>
 </head>

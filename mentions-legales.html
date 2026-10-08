@@ -34,8 +34,8 @@
 <body id="top">
     <a class="lien-evitement" href="#contenu" data-i18n="aller_au_contenu">Aller au contenu</a>
     <header>
-        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">L'impondérable</a>
-        <nav id="nav-principale" class="nav-principale">
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32">L'impondérable</a>
+        <nav id="nav-principale" class="nav-principale" aria-label="Navigation principale">
             <ul>
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="tarifs.html">Notre carte</a></li>
@@ -143,18 +143,18 @@
             <li><a href="mentions-legales.html">Mentions légales</a></li>
         </ul>
 
-        <p class="message-sanitaire">
+        <p class="message-sanitaire" lang="fr">
             L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
         </p>
 
         <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg>Retour en haut</a></p>
     </footer>
-    <div class="barre-flottante">
+    <aside class="barre-flottante" aria-label="Appel rapide">
         <a href="tel:+33983233914" class="cta">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
             Appeler
         </a>
-    </div>
+    </aside>
     <script src="js/app.js" defer></script>
 </body>
 </html>

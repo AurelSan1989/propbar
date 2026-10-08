@@ -165,8 +165,8 @@
 <body id="top">
     <a class="lien-evitement" href="#contenu" data-i18n="aller_au_contenu">Aller au contenu</a>
     <header>
-        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32" loading="lazy" decoding="async">L'impondérable</a>
-        <nav id="nav-principale" class="nav-principale">
+        <a href="index.html" class="brand"> <img src="img/logo.svg" alt="" class="logo" width="32" height="32">L'impondérable</a>
+        <nav id="nav-principale" class="nav-principale" aria-label="Navigation principale" data-i18n-aria-label="nav_principale_aria">
             <ul>
                 <li><a href="index.html" aria-current="page" data-i18n="nav_accueil">Accueil</a></li>
                 <li><a href="tarifs.html" data-i18n="nav_carte">Notre carte</a></li>
@@ -306,7 +306,7 @@
                 <span class="avis-etoiles" aria-hidden="true">★★★★☆</span>
                 <p><span data-i18n="avis_note">4,2/5 sur Google</span> <span data-i18n="avis_nombre">· 131 avis</span></p>
             </div>
-            <div class="avis-liste">
+            <div class="avis-liste" lang="fr">
                 <blockquote class="avis-carte">
                     <p>« Super soirée dans ce bar à l'ambiance conviviale ! L'accueil est chaleureux, on se sent vite à l'aise. Mention spéciale au couscous, généreux et plein de saveurs. »</p>
                     <cite>Margaux C.</cite>
@@ -388,18 +388,18 @@
             <li><a href="mentions-legales.html" data-i18n="footer_lien_mentions">Mentions légales</a></li>
         </ul>
 
-        <p class="message-sanitaire">
+        <p class="message-sanitaire" lang="fr">
             L'abus d'alcool est dangereux pour la santé, à consommer avec modération.
         </p>
 
         <p class="retour-haut"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg><span data-i18n="footer_retour_haut">Retour en haut</span></a></p>
     </footer>
-    <div class="barre-flottante">
+    <aside class="barre-flottante" aria-label="Appel rapide" data-i18n-aria-label="barre_flottante_aria">
         <a href="tel:+33983233914" class="cta">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
             <span data-i18n="barre_flottante_appeler">Appeler</span>
         </a>
-    </div>
+    </aside>
     <script src="js/i18n.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/tarifs.js" defer></script>
