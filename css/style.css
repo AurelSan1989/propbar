@@ -100,7 +100,7 @@
     --ombre-bloc: 0 1px 2px rgba(30, 25, 19, 0.05), 0 4px 14px rgba(30, 25, 19, 0.06);
     --lueur: none;
     --grain-opacite: 0.05;
-    --voile-photo: linear-gradient(to top, rgba(18, 14, 10, 0.92) 0%, rgba(18, 14, 10, 0.55) 38%, rgba(18, 14, 10, 0.12) 70%);
+    --voile-photo: linear-gradient(to top, rgba(18, 14, 10, 0.92) 0%, rgba(18, 14, 10, 0.68) 45%, rgba(18, 14, 10, 0.12) 75%);
     --photo-filtre: none;
 
     color-scheme: light;
@@ -690,6 +690,14 @@ body.menu-ouvert {
     color: #F2C9A0;
 }
 
+/* Le texte du premier écran peut croiser les lettrages clairs de la
+   vitrine : une ombre douce garantit sa lisibilité là où le voile seul
+   ne suffit pas. */
+.hero-content .eyebrow,
+.hero .info {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 14px rgba(0, 0, 0, 0.45);
+}
+
 .hero-content h1 {
     color: #FBF6EE;
     margin-bottom: var(--lg);
@@ -887,6 +895,21 @@ body.menu-ouvert {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     box-shadow: var(--lueur);
+}
+
+/* Signale une image qui n'est pas une photo du lieu (générée par IA) :
+   lisible si on la cherche, sans concurrencer l'étiquette principale. */
+.mention-illustration {
+    position: absolute;
+    right: var(--xs);
+    bottom: var(--xs);
+    z-index: 2;
+    padding: 0.1rem 0.4rem;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
 }
 
 .card-body {
@@ -1775,6 +1798,18 @@ details.tarifs-categorie > summary.tarifs-categorie-resume + * {
 .champ label {
     font-weight: 600;
     color: var(--texte);
+}
+
+/* Astérisque visuel ; l'attribut required du champ l'annonce déjà aux
+   lecteurs d'écran, d'où aria-hidden sur le symbole. */
+.obligatoire {
+    color: var(--accent-lien);
+}
+
+.formulaire-legende {
+    margin-bottom: var(--md);
+    color: var(--texte-doux);
+    font-size: var(--t-petit);
 }
 
 .champ input,

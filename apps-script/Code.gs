@@ -16,8 +16,8 @@
 
 
 // Adresse qui reçoit les demandes.
-// Pendant les tests : celle de l'agence. À la mise en ligne : celle du gérant.
-const DESTINATAIRE = "aurelien.girodet+imponderable@gmail.com";
+// Celle du gérant (pendant les tests, c'était celle de l'agence).
+const DESTINATAIRE = "bessasoso@gmail.com";
 
 // Garde-fou : l'URL du script est publique par nécessité (le navigateur du
 // visiteur doit pouvoir l'appeler). Sans plafond, quelqu'un qui la découvre

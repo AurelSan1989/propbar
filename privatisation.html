@@ -176,8 +176,9 @@
             <h2 data-i18n="formulaire_h2">Votre demande</h2>
 
             <form id="form-privatisation" novalidate>
+                <p class="formulaire-legende" data-i18n="formulaire_legende">Les champs marqués d'un astérisque (*) sont obligatoires.</p>
                 <div class="champ">
-                    <label for="nom" data-i18n="champ_nom">Nom</label>
+                    <label for="nom"><span data-i18n="champ_nom">Nom</span> <span class="obligatoire" aria-hidden="true">*</span></label>
                     <input type="text" id="nom" name="nom" required autocomplete="name" aria-describedby="erreur-nom">
                     <p class="champ-erreur" id="erreur-nom" aria-live="polite"></p>
                 </div>
@@ -196,13 +197,13 @@
                 <p class="champ-aide" id="aide-contact" data-i18n="champ_aide_contact">Renseignez au moins l'un des deux.</p>
 
                 <div class="champ">
-                    <label for="date" data-i18n="champ_date">Date souhaitée (du lundi au samedi)</label>
+                    <label for="date"><span data-i18n="champ_date">Date souhaitée (du lundi au samedi)</span> <span class="obligatoire" aria-hidden="true">*</span></label>
                     <input type="date" id="date" name="date" required aria-describedby="erreur-date">
                     <p class="champ-erreur" id="erreur-date" aria-live="polite"></p>
                 </div>
 
                 <div class="champ">
-                    <label for="convives" data-i18n="champ_convives">Nombre de convives</label>
+                    <label for="convives"><span data-i18n="champ_convives">Nombre de convives</span> <span class="obligatoire" aria-hidden="true">*</span></label>
                     <input type="number" id="convives" name="convives" min="1" required inputmode="numeric" aria-describedby="erreur-convives">
                     <p class="champ-erreur" id="erreur-convives" aria-live="polite"></p>
                 </div>

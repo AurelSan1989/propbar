@@ -69,7 +69,19 @@ if (boutonMenu && navPrincipale) {
         return window.I18N ? window.I18N.t(cle) : repli;
     }
 
+    // Le panneau recouvre la page, mais Tab continuait vers le contenu caché
+    // dessous. inert retire ce contenu du parcours clavier et des lecteurs
+    // d'écran le temps que le menu est ouvert ; l'en-tête reste accessible.
+    const derriereLeMenu = document.querySelectorAll(".lien-evitement, main, footer, .barre-flottante");
+
+    function rendreInerte(actif) {
+        derriereLeMenu.forEach(function (element) {
+            element.inert = actif;
+        });
+    }
+
     function ouvrirMenu() {
+        rendreInerte(true);
         navPrincipale.classList.add("est-ouvert");
         document.body.classList.add("menu-ouvert");
         boutonMenu.setAttribute("aria-expanded", "true");
@@ -80,6 +92,7 @@ if (boutonMenu && navPrincipale) {
     }
 
     function fermerMenu() {
+        rendreInerte(false);
         navPrincipale.classList.remove("est-ouvert");
         document.body.classList.remove("menu-ouvert");
         boutonMenu.setAttribute("aria-expanded", "false");

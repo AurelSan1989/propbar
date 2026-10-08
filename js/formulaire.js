@@ -92,6 +92,13 @@ if (formulaire) {
         return champ.value.trim() !== "";
     }
 
+    // Volontairement permissif : quelque chose@quelque-chose.extension, sans
+    // espace. Le but est d'attraper les fautes de frappe, pas de juger
+    // la validité d'une adresse (seul un envoi réel le peut).
+    function emailPlausible(valeur) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeur.trim());
+    }
+
     // Chaque erreur porte le champ à mettre en évidence, l'id de son
     // conteneur de message, et le texte à afficher.
     function traduire(cle) {
@@ -109,6 +116,10 @@ if (formulaire) {
         // cette règle ne peut être vérifiée qu'ici.
         if (!champRempli(champEmail) && !champRempli(champTelephone)) {
             erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_contact") });
+        } else if (champRempli(champEmail) && !emailPlausible(champEmail.value)) {
+            // L'adresse sert d'adresse de réponse au mail envoyé au gérant :
+            // mal formée, elle fait échouer l'envoi côté Apps Script.
+            erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_email_format") });
         }
 
         if (!champRempli(champDate)) {
@@ -195,9 +206,14 @@ if (formulaire) {
         bouton.addEventListener("click", function () {
             const panneau = bouton.closest(".formulaire-panel");
             panneau.hidden = true;
+            // Le bouton cliqué vient de disparaître avec son panneau : sans
+            // point de chute, le focus repartirait du haut de la page.
             if (panneau === blocConfirmation) {
                 formulaire.hidden = false;
                 formulaire.reset();
+                champNom.focus();
+            } else {
+                boutonEnvoyer.focus();
             }
         });
     });
