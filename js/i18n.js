@@ -41,7 +41,7 @@
             mode_auto_titre: "Mode automatique, réglé sur le coucher du soleil",
             mode_manuel_titre: "Mode choisi manuellement",
             aller_au_contenu: "Aller au contenu",
-            itineraire: "Itinéraire",
+            adresse_itineraire_aria: "320 rue des Pyrénées, 75020 Paris : itinéraire sur Google Maps (nouvel onglet)",
 
             // Pied de page, commun aux trois pages
             footer_horaires_titre: "Horaires",
@@ -183,7 +183,7 @@
             mode_auto_titre: "Automatic mode, follows the sunset",
             mode_manuel_titre: "Mode chosen manually",
             aller_au_contenu: "Skip to content",
-            itineraire: "Get directions",
+            adresse_itineraire_aria: "320 rue des Pyrénées, 75020 Paris: directions on Google Maps (opens in a new tab)",
 
             footer_horaires_titre: "Opening hours",
             footer_horaires_habituels: "Every day: 9am – 2am",

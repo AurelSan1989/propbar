@@ -728,16 +728,44 @@ body.menu-ouvert {
     font-weight: 600;
 }
 
-.hero .info-text span {
+.hero .info-text > span {
     display: block;
     font-size: var(--t-petit);
     color: #C5BCAE;
 }
 
-.hero .info-text .lien-itineraire {
+/* L'adresse ouvre l'itinéraire dans Google Maps. Sur téléphone il n'y a
+   pas de survol : le souligné et la flèche restent donc visibles en
+   permanence, ce sont eux qui disent « cliquable ». */
+.lien-adresse {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    transition: text-decoration-color 0.2s ease;
+}
+
+.lien-adresse:hover,
+.lien-adresse:focus-visible {
+    text-decoration-color: currentColor;
+}
+
+/* La flèche ne doit jamais partir seule à la ligne. */
+.lien-adresse-fin {
+    white-space: nowrap;
+}
+
+.lien-adresse svg {
     display: inline-block;
-    margin-top: 2px;
-    font-size: var(--t-petit);
+    width: 0.85em;
+    height: 0.85em;
+    margin-left: 0.2em;
+    vertical-align: -0.05em;
+    color: var(--accent-doux);
+}
+
+.hero .lien-adresse svg {
     color: #F2C9A0;
 }
 
