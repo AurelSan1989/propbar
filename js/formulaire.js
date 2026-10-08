@@ -99,6 +99,24 @@ if (formulaire) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeur.trim());
     }
 
+    // Accepte les écritures courantes (espaces, points, tirets, parenthèses)
+    // puis vérifie le nombre de chiffres : 10 chiffres commençant par 0 pour
+    // un numéro français (06 12 34 56 78), ou un indicatif international
+    // (+33 6 12 34 56 78, 0033…, +44…) suivi de 8 à 15 chiffres.
+    function telephonePlausible(valeur) {
+        const brut = valeur.trim().replace(/[\s.\-()]/g, "");
+        if (/^0[1-9]\d{8}$/.test(brut)) {
+            return true;
+        }
+        // « +33 (0)6… » et « +33 06… » : le 0 national est en trop après
+        // l'indicatif, mais l'écriture est courante, on le retire.
+        const international = brut.replace(/^00/, "+").replace(/^\+330/, "+33");
+        if (/^\+33/.test(international)) {
+            return /^\+33[1-9]\d{8}$/.test(international);
+        }
+        return /^\+[1-9]\d{7,14}$/.test(international);
+    }
+
     // Chaque erreur porte le champ à mettre en évidence, l'id de son
     // conteneur de message, et le texte à afficher.
     function traduire(cle) {
@@ -116,10 +134,17 @@ if (formulaire) {
         // cette règle ne peut être vérifiée qu'ici.
         if (!champRempli(champEmail) && !champRempli(champTelephone)) {
             erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_contact") });
-        } else if (champRempli(champEmail) && !emailPlausible(champEmail.value)) {
-            // L'adresse sert d'adresse de réponse au mail envoyé au gérant :
-            // mal formée, elle fait échouer l'envoi côté Apps Script.
-            erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_email_format") });
+        } else {
+            // Chaque champ rempli doit être exploitable : un numéro faux ne
+            // permettrait pas au gérant de rappeler, même si l'e-mail est bon.
+            if (champRempli(champEmail) && !emailPlausible(champEmail.value)) {
+                // L'adresse sert d'adresse de réponse au mail envoyé au gérant :
+                // mal formée, elle fait échouer l'envoi côté Apps Script.
+                erreurs.push({ champ: champEmail, id: "erreur-email", message: traduire("erreur_email_format") });
+            }
+            if (champRempli(champTelephone) && !telephonePlausible(champTelephone.value)) {
+                erreurs.push({ champ: champTelephone, id: "erreur-telephone", message: traduire("erreur_telephone_format") });
+            }
         }
 
         if (!champRempli(champDate)) {
