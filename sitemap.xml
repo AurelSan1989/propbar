@@ -30,6 +30,10 @@
             <image:title>Couscous du chef de L'impondérable</image:title>
         </image:image>
         <image:image>
+            <image:loc>https://TODO-DOMAINE/img/planche-mixte.webp</image:loc>
+            <image:title>Planche mixte de L'impondérable</image:title>
+        </image:image>
+        <image:image>
             <image:loc>https://TODO-DOMAINE/img/terrasse-cocktail.webp</image:loc>
             <image:title>Cocktail sur la terrasse de L'impondérable, rue des Pyrénées</image:title>
         </image:image>
@@ -54,6 +58,14 @@
         <image:image>
             <image:loc>https://TODO-DOMAINE/img/plateau-cocktails.webp</image:loc>
             <image:title>Cocktails servis en soirée à L'impondérable</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/megaplanche.webp</image:loc>
+            <image:title>Plateau de charcuterie à partager, L'impondérable</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://TODO-DOMAINE/img/finger-food.webp</image:loc>
+            <image:title>Finger food à partager, L'impondérable</image:title>
         </image:image>
     </url>
     <url>

@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Plus grand élément du premier écran : c'est lui que mesure le LCP. -->
-    <link rel="preload" href="img/terrasse-jour.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="img/terrasse-jour.webp" imagesrcset="img/terrasse-jour-1200.webp 1200w, img/terrasse-jour.webp 1600w" imagesizes="100vw" as="image" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
     <!-- Données structurées (schema.org). Elles ne changent rien à l'affichage :
@@ -187,7 +187,7 @@
     <main id="contenu" tabindex="-1">
         <section class="hero">
         <div class="hero-media">
-            <img src="img/terrasse-jour.webp" alt="Devanture et terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="hero_photo_alt" width="1158" height="896" fetchpriority="high">
+            <img src="img/terrasse-jour.webp" srcset="img/terrasse-jour-1200.webp 1200w, img/terrasse-jour.webp 1600w" sizes="100vw" alt="Devanture et terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="hero_photo_alt" width="1600" height="1362" fetchpriority="high">
         </div>
         <div class="hero-content">
             <p class="eyebrow" data-i18n="hero_eyebrow">Bar restaurant, terrasse toute l'année, ouvert 7j/7</p>
@@ -271,6 +271,16 @@
                 <div class="card-body">
                     <h3 data-i18n="ambiance_couscous_titre">Les couscous</h3>
                     <span class="card-prix" data-prix-min="couscous"></span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-media">
+                    <img src="img/planche-mixte.webp" alt="Planche mixte de L'impondérable : jambon, chorizo, fromages, salade, tomates cerises et cornichons" data-i18n-alt="ambiance_tapas_alt" width="922" height="692" loading="lazy" decoding="async">
+                    <span class="tag-picture" data-i18n="ambiance_tapas_tag">À partager</span>
+                </div>
+                <div class="card-body">
+                    <h3 data-i18n="ambiance_tapas_titre">Tapas et planches</h3>
+                    <span class="card-prix" data-prix-min="tapas"></span>
                 </div>
             </div>
             <div class="card">

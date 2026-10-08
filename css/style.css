@@ -661,6 +661,8 @@ body.menu-ouvert {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Cadrage remonté : garde l'enseigne « L'IMPOND' » dans le champ. */
+    object-position: center 15%;
     filter: var(--photo-filtre);
 }
 

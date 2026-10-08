@@ -14,18 +14,18 @@
 -->
 <style>
     @font-face {
-        font-family: "Barlow Condensed";
-        src: url("../fonts/barlow-condensed-700.woff2") format("woff2");
+        font-family: "Fraunces";
+        src: url("../fonts/fraunces-700.woff2") format("woff2");
         font-weight: 700;
     }
     @font-face {
-        font-family: "Plus Jakarta Sans";
-        src: url("../fonts/plus-jakarta-sans-400.woff2") format("woff2");
+        font-family: "Archivo";
+        src: url("../fonts/archivo-400.woff2") format("woff2");
         font-weight: 400;
     }
     @font-face {
-        font-family: "Plus Jakarta Sans";
-        src: url("../fonts/plus-jakarta-sans-600.woff2") format("woff2");
+        font-family: "Archivo";
+        src: url("../fonts/archivo-600.woff2") format("woff2");
         font-weight: 600;
     }
 
@@ -36,7 +36,7 @@
         height: 630px;
         overflow: hidden;
         position: relative;
-        background-color: #121A2B;
+        background-color: #0C1A14;
     }
 
     .photo {
@@ -45,6 +45,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        /* Remonte le cadrage pour garder l'enseigne « L'IMPOND' » visible. */
+        object-position: center 12%;
     }
 
     /* Voile dégradé : la photo reste lisible en haut, le texte détaché en bas. */
@@ -52,9 +54,9 @@
         position: absolute;
         inset: 0;
         background: linear-gradient(to bottom,
-            rgba(18, 26, 43, 0.25) 0%,
-            rgba(18, 26, 43, 0.75) 55%,
-            rgba(18, 26, 43, 0.96) 100%);
+            rgba(18, 14, 10, 0.15) 0%,
+            rgba(18, 14, 10, 0.70) 50%,
+            rgba(18, 14, 10, 0.94) 100%);
     }
 
     .contenu {
@@ -65,7 +67,7 @@
     }
 
     .eyebrow {
-        font-family: "Plus Jakarta Sans", sans-serif;
+        font-family: "Archivo", sans-serif;
         font-weight: 600;
         font-size: 24px;
         letter-spacing: 0.16em;
@@ -75,21 +77,20 @@
     }
 
     h1 {
-        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-family: "Fraunces", Georgia, serif;
         font-weight: 700;
-        font-size: 104px;
-        line-height: 0.95;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        color: #F2EBDD;
+        font-size: 108px;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: #FBF6EE;
         margin-bottom: 18px;
     }
 
     .infos {
-        font-family: "Plus Jakarta Sans", sans-serif;
+        font-family: "Archivo", sans-serif;
         font-size: 27px;
         line-height: 1.5;
-        color: #C3CAD8;
+        color: #EFE7DA;
     }
 
     /* Filet d'accent, repris de l'identité du site. */
@@ -102,7 +103,7 @@
 </style>
 </head>
 <body>
-    <img class="photo" src="../img/terrasse-hiver.webp" alt="">
+    <img class="photo" src="../img/terrasse-jour.webp" alt="">
     <div class="voile"></div>
     <div class="contenu">
         <div class="filet"></div>
