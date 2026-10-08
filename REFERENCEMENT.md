@@ -42,71 +42,91 @@ risquerait une pénalité, pas un gain.
 
 ## 2. À faire le jour de la mise en ligne
 
-Dans cet ordre.
+Dans cet ordre. Hébergement retenu : **Cloudflare Pages** (plan gratuit),
+domaine acheté chez **OVHcloud** (Cloudflare ne vend pas de `.fr`).
 
-### 2.1 Remplacer le domaine
+### 2.1 Domaine et compte Cloudflare
 
-Le marqueur `TODO-DOMAINE` apparaît dans les balises canoniques, les
-données structurées, le sitemap et robots.txt.
+1. Acheter `limponderable.fr` chez OVHcloud **au nom de la SARL LE MODERNE**
+   (contact : l'adresse du gérant). En option, `imponderable.fr` pour le
+   rediriger vers le premier.
+2. Créer le compte Cloudflare (au nom du client, ou au sien avec un accès
+   partagé), puis *Ajouter un domaine* › `limponderable.fr` › plan **Free**.
+   Cloudflare affiche deux serveurs de noms (`xxx.ns.cloudflare.com`).
+3. Dans l'espace OVH : *Noms de domaine* › `limponderable.fr` ›
+   *Serveurs DNS* › *Modifier* › remplacer par les deux serveurs Cloudflare.
+   La bascule prend de quelques minutes à 24 h ; Cloudflare envoie un mail
+   quand le domaine est actif.
 
-**Pendant la phase de test**, les balises `og:url` et `og:image` pointent
-déjà vers l'adresse provisoire `aurelsan1989.github.io/propbar`, pour que
-l'aperçu WhatsApp/Facebook fonctionne. Elles sont donc à remplacer aussi,
-tout comme la balise `<base href="/propbar/">` de `404.html`, qui devient
-`<base href="/">`.
+### 2.2 Publier le site sur Cloudflare Pages
 
-Une seule commande pour le marqueur :
+1. *Workers & Pages* › *Créer* › *Pages* › *Se connecter à Git* › dépôt
+   `propbar`, branche `main`.
+2. Réglages de build : aucun framework, **commande de build vide**, dossier
+   de sortie vide (la racine). Le site est statique, il n'y a rien à
+   compiler.
+3. Vérifier le site sur l'adresse de test fournie (`xxx.pages.dev`) :
+   pages, photos, formulaire.
+
+Chaque `git push` sur `main` redéploie ensuite le site automatiquement.
+
+### 2.3 Basculer le code sur le vrai domaine
+
+Un seul script fait tout : remplace l'adresse de test GitHub et le marqueur
+`TODO-DOMAINE` (balises canoniques, aperçu de partage, données
+structurées, sitemap) en retirant au passage l'extension `.html`
+(Cloudflare Pages sert `/tarifs` et redirige `/tarifs.html` vers cette
+adresse), ancre la page 404 à la racine, ouvre `robots.txt`
+aux moteurs et retire les balises `noindex` des quatre pages publiques
+(la 404 garde la sienne). Il vérifie ensuite qu'il ne reste rien.
 
 ```powershell
 # PowerShell, à la racine du projet
-Get-ChildItem -Include *.html,*.xml,*.txt -Recurse |
-  ForEach-Object {
-    (Get-Content $_ -Raw -Encoding UTF8) -replace 'TODO-DOMAINE','www.exemple.fr' |
-      Set-Content $_ -NoNewline -Encoding UTF8
-  }
+.\outils\mise-en-ligne.ps1 -Domaine limponderable.fr -Simulation   # montre sans rien écrire
+.\outils\mise-en-ligne.ps1 -Domaine limponderable.fr               # applique
 ```
 
-Vérifier ensuite qu'il n'en reste aucun :
+Si Windows refuse d'exécuter le script :
+`powershell -ExecutionPolicy Bypass -File .\outils\mise-en-ligne.ps1 -Domaine limponderable.fr`
 
-```powershell
-Select-String -Path *.html,*.xml,*.txt -Pattern 'TODO-DOMAINE','github.io','/propbar/'
-```
+Puis committer et pousser : Cloudflare publie la nouvelle version.
 
-### 2.2 Ouvrir le site aux moteurs
+### 2.4 Brancher le domaine et régler l'hébergement
 
-Deux verrous ont été posés pendant le développement. **Les deux** doivent
-sauter, sinon le site reste invisible.
+1. Projet Pages › *Domaines personnalisés* › ajouter `limponderable.fr`,
+   puis `www.limponderable.fr`.
+2. **Une seule adresse** : *Règles* › *Redirect Rules* › modèle « Redirect
+   from WWW to root » (301 de `www` vers `limponderable.fr`). Faire de même
+   pour `imponderable.fr` s'il a été acheté.
+3. *SSL/TLS* › *Edge Certificates* › activer **Always Use HTTPS**.
+   La compression et le cache sont actifs par défaut.
+4. **Désactiver GitHub Pages** sur le dépôt (*Settings* › *Pages* ›
+   *Unpublish*) : une fois le `noindex` retiré, cette copie de test serait
+   un doublon du site aux yeux de Google.
 
-1. `robots.txt` : remplacer le contenu par la version commentée à l'intérieur
-   du fichier (`Allow: /` + ligne `Sitemap:`).
-2. Retirer `<meta name="robots" content="noindex, nofollow">` des quatre
-   pages : `index.html`, `tarifs.html`, `privatisation.html`,
-   `mentions-legales.html`.
+### 2.5 Vérifier en ligne
 
-```powershell
-Get-ChildItem -Include *.html -Recurse |
-  ForEach-Object {
-    (Get-Content $_ -Raw -Encoding UTF8) -replace '\s*<meta name="robots" content="noindex, nofollow">','' |
-      Set-Content $_ -NoNewline -Encoding UTF8
-  }
-```
+- `https://limponderable.fr` s'ouvre en HTTPS, et `http://` ou `www.`
+  redirigent vers cette adresse.
+- `https://limponderable.fr/robots.txt` affiche `Allow: /` et le sitemap.
+- Une adresse inventée (`/test/inexistant`) affiche la page 404 **avec
+  ses styles**.
+- Une demande de privatisation de test arrive bien au gérant.
+- L'aperçu WhatsApp du lien affiche l'image (ajouter `?v=1` au lien si
+  WhatsApp a gardé un ancien aperçu en mémoire).
 
-### 2.3 Compléter les mentions légales
+À savoir : le dépôt est publié tel quel. `REFERENCEMENT.md`, `outils/` et
+`apps-script/` sont donc lisibles par qui connaît leur adresse. Rien de
+sensible n'y figure, mais c'est à garder en tête avant d'y ajouter quoi
+que ce soit.
 
-Le nom, l'adresse et le téléphone de l'hébergeur sont obligatoires et encore
-marqués `TODO`. Un site sans mentions légales complètes est hors la loi, et
-Google tient compte de la fiabilité affichée d'un site.
+### 2.6 Compléter les mentions légales
 
-### 2.4 Réglages d'hébergement
+L'hébergeur est renseigné (Cloudflare). **Le médiateur de la consommation
+reste à compléter** dès que le gérant l'a désigné : c'est une obligation
+légale pour tout commerce qui vend à des particuliers.
 
-- **HTTPS** obligatoire, avec redirection automatique depuis `http://`.
-- **Une seule adresse canonique** : choisir `www` ou sans `www`, et rediriger
-  l'autre en 301. Deux adresses accessibles = contenu dupliqué.
-- **Compression** (gzip ou brotli) et **cache** sur les fichiers statiques.
-- Vérifier que `404.html` est bien servi sur les adresses inexistantes. Netlify
-  le fait seul ; d'autres hébergeurs demandent un réglage.
-
-### 2.5 Déclarer le site à Google
+### 2.7 Déclarer le site à Google
 
 1. Créer une propriété dans la **Search Console**, valider la propriété du
    domaine (enregistrement DNS).

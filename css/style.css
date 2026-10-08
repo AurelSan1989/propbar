@@ -232,7 +232,12 @@ body::before {
     z-index: 1;
     pointer-events: none;
     opacity: var(--grain-opacite);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+    /* Texture précalculée (img/grain.webp, 14 Ko). C'était un filtre SVG
+       feTurbulence recalculé à chaque chargement : il retardait le premier
+       affichage d'environ une seconde. Pour la régénérer, capturer en
+       180 × 180, fond transparent, ce SVG : fractalNoise, baseFrequency 0.85,
+       numOctaves 3, stitchTiles stitch. */
+    background-image: url("../img/grain.webp");
 }
 
 /* La nuit, une lueur très diffuse en haut de page : la pièce est éclairée

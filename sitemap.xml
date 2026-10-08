@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Liste des pages à proposer aux moteurs de recherche.
 
-     TODO-DOMAINE est à remplacer partout par le nom de domaine réel au
-     moment de la mise en ligne (voir aussi les balises canonical et og:url
-     de chaque page, les données structurées, et robots.txt).
+     Le domaine provisoire des adresses ci-dessous est remplacé par le vrai
+     au moment de la mise en ligne, avec le reste du site, par le script
+     outils/mise-en-ligne.ps1.
 
      <lastmod> n'est utile que s'il est sincère : Google cesse d'en tenir
      compte quand il ne correspond pas aux modifications réelles. À mettre à

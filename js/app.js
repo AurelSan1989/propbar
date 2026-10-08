@@ -26,7 +26,10 @@ if ("IntersectionObserver" in window) {
 const preferenceReduite = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!preferenceReduite && "IntersectionObserver" in window) {
-    const sections = document.querySelectorAll("main > section");
+    // La première section (le premier écran) est exclue : elle est visible
+    // dès l'arrivée, et la masquer retardait d'une seconde l'affichage de la
+    // photo d'en-tête, l'élément que Google mesure pour juger la vitesse.
+    const sections = document.querySelectorAll("main > section:not(:first-child)");
 
     const observateurSections = new IntersectionObserver(function (entrees) {
         entrees.forEach(function (entree) {
