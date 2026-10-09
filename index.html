@@ -29,7 +29,7 @@
     <link rel="preload" href="fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Plus grand élément du premier écran : c'est lui que mesure le LCP. -->
-    <link rel="preload" href="img/terrasse-jour.webp" imagesrcset="img/terrasse-jour-1200.webp 1200w, img/terrasse-jour.webp 1600w" imagesizes="100vw" as="image" fetchpriority="high">
+    <link rel="preload" href="img/devanture.webp" imagesrcset="img/devanture-800.webp 800w, img/devanture-1200.webp 1200w, img/devanture.webp 1530w" imagesizes="100vw" as="image" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jour-nuit.js"></script>
     <!-- Données structurées (schema.org). Elles ne changent rien à l'affichage :
@@ -54,9 +54,9 @@
                 "logo": "https://TODO-DOMAINE/img/logo.svg",
                 "image": [
                     "https://TODO-DOMAINE/img/partage.jpg",
-                    "https://TODO-DOMAINE/img/terrasse-jour.webp",
+                    "https://TODO-DOMAINE/img/devanture.webp",
                     "https://TODO-DOMAINE/img/bar.webp",
-                    "https://TODO-DOMAINE/img/pizza.webp"
+                    "https://TODO-DOMAINE/img/pizzas-affiche.webp"
                 ],
                 "address": {
                     "@type": "PostalAddress",
@@ -187,7 +187,8 @@
     <main id="contenu" tabindex="-1">
         <section class="hero">
         <div class="hero-media">
-            <img src="img/terrasse-jour.webp" srcset="img/terrasse-jour-1200.webp 1200w, img/terrasse-jour.webp 1600w" sizes="100vw" alt="Devanture et terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="hero_photo_alt" width="1600" height="1362" fetchpriority="high">
+            <!-- Photo du gérant ; les visages des deux clients attablés sont floutés (droit à l'image). -->
+            <img src="img/devanture.webp" srcset="img/devanture-800.webp 800w, img/devanture-1200.webp 1200w, img/devanture.webp 1530w" sizes="100vw" alt="Devanture et terrasse de L'impondérable, rue des Pyrénées à Paris 20e" data-i18n-alt="hero_photo_alt" width="1530" height="1750" fetchpriority="high">
         </div>
         <div class="hero-content">
             <p class="eyebrow" data-i18n="hero_eyebrow">Bar restaurant, terrasse toute l'année, ouvert 7j/7</p>
@@ -254,7 +255,14 @@
             </div>
             <div class="card">
                 <div class="card-media">
-                    <img src="img/pizza.webp" alt="Pizza cuite au four, garnie de mozzarella, salami, poivrons et oignons rouges" data-i18n-alt="ambiance_pizzas_alt" width="900" height="675" loading="lazy" decoding="async">
+                    <!-- Vidéo sans son, en boucle, lancée par js/animations.js quand la
+                         carte arrive à l'écran (preload="none" : rien n'est téléchargé
+                         avant). Sans JavaScript ou avec animations réduites, l'affiche
+                         reste affichée seule. -->
+                    <video class="video-ambiance" muted loop playsinline preload="none" poster="img/pizzas-affiche.webp" width="576" height="432" aria-label="Calzone et pizza Regina servies à L'impondérable" data-i18n-aria-label="ambiance_pizzas_video_aria">
+                        <source src="video/pizzas.webm" type="video/webm">
+                        <source src="video/pizzas.mp4" type="video/mp4">
+                    </video>
                     <span class="tag-picture" data-i18n="ambiance_pizzas_tag">À emporter</span>
                 </div>
                 <div class="card-body">

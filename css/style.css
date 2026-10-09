@@ -100,7 +100,7 @@
     --ombre-bloc: 0 1px 2px rgba(30, 25, 19, 0.05), 0 4px 14px rgba(30, 25, 19, 0.06);
     --lueur: none;
     --grain-opacite: 0.05;
-    --voile-photo: linear-gradient(to top, rgba(18, 14, 10, 0.92) 0%, rgba(18, 14, 10, 0.68) 45%, rgba(18, 14, 10, 0.12) 75%);
+    --voile-photo: linear-gradient(to top, rgba(18, 14, 10, 0.92) 0%, rgba(18, 14, 10, 0.78) 45%, rgba(18, 14, 10, 0.66) 65%, rgba(18, 14, 10, 0.12) 90%);
     --photo-filtre: none;
 
     color-scheme: light;
@@ -131,7 +131,7 @@
     --ombre-bloc: none;
     --lueur: 0 0 34px rgba(240, 75, 51, 0.28);
     --grain-opacite: 0.028;
-    --voile-photo: linear-gradient(to top, rgba(4, 12, 8, 0.94) 0%, rgba(4, 12, 8, 0.6) 40%, rgba(4, 12, 8, 0.15) 72%);
+    --voile-photo: linear-gradient(to top, rgba(4, 12, 8, 0.94) 0%, rgba(4, 12, 8, 0.8) 45%, rgba(4, 12, 8, 0.66) 65%, rgba(4, 12, 8, 0.15) 90%);
     --photo-filtre: contrast(1.08) saturate(1.05) brightness(0.92);
 
     color-scheme: dark;
@@ -669,8 +669,9 @@ body.menu-ouvert {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Cadrage remonté : garde l'enseigne « L'IMPOND' » dans le champ. */
-    object-position: center 15%;
+    /* Photo verticale : sur écran large, seule une bande horizontale est
+       visible. Centrée, elle va de l'enseigne « L'IMPOND' » à la terrasse. */
+    object-position: center 50%;
     filter: var(--photo-filtre);
 }
 
@@ -883,7 +884,9 @@ body.menu-ouvert {
     box-shadow: var(--ombre-photo);
 }
 
-.card-media img {
+.card-media img,
+.card-media video {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -891,12 +894,13 @@ body.menu-ouvert {
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card:hover .card-media img {
+.card:hover .card-media img,
+.card:hover .card-media video {
     transform: scale(1.04);
 }
 
 /* Emplacement encore sans photo : une trame discrète plutôt qu'un trou. */
-.card-media:not(:has(img)) {
+.card-media:not(:has(img, video)) {
     background-image: repeating-linear-gradient(
         135deg,
         var(--fond-carte),
@@ -906,7 +910,7 @@ body.menu-ouvert {
     );
 }
 
-.card-media:not(:has(img))::after {
+.card-media:not(:has(img, video))::after {
     content: "Photo à venir";
     position: absolute;
     inset: 0;
