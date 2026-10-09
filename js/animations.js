@@ -11,33 +11,6 @@
         return;
     }
 
-    // Vidéos d'ambiance : lancées seulement quand elles entrent à l'écran
-    // (preload="none" dans le HTML), mises en pause quand elles en sortent.
-    // Placé après le test d'animations réduites : dans ce cas, l'affiche
-    // reste seule, sans mouvement.
-    if ("IntersectionObserver" in window) {
-        var observateurVideos = new IntersectionObserver(function (entrees) {
-            entrees.forEach(function (entree) {
-                var video = entree.target;
-                if (entree.isIntersecting) {
-                    // play() renvoie une promesse rejetée si le navigateur
-                    // refuse la lecture (mode économie d'énergie) : l'affiche
-                    // reste alors en place, sans erreur dans la console.
-                    var lecture = video.play();
-                    if (lecture && lecture.catch) {
-                        lecture.catch(function () {});
-                    }
-                } else {
-                    video.pause();
-                }
-            });
-        }, { threshold: 0.25 });
-
-        document.querySelectorAll("video.video-ambiance").forEach(function (video) {
-            observateurVideos.observe(video);
-        });
-    }
-
     // Amplitude du décalage, en pixels, de part et d'autre du centre.
     var AMPLITUDE = 28;
 

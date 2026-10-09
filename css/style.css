@@ -884,8 +884,7 @@ body.menu-ouvert {
     box-shadow: var(--ombre-photo);
 }
 
-.card-media img,
-.card-media video {
+.card-media img {
     display: block;
     width: 100%;
     height: 100%;
@@ -894,13 +893,12 @@ body.menu-ouvert {
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card:hover .card-media img,
-.card:hover .card-media video {
+.card:hover .card-media img {
     transform: scale(1.04);
 }
 
 /* Emplacement encore sans photo : une trame discrète plutôt qu'un trou. */
-.card-media:not(:has(img, video)) {
+.card-media:not(:has(img)) {
     background-image: repeating-linear-gradient(
         135deg,
         var(--fond-carte),
@@ -910,7 +908,7 @@ body.menu-ouvert {
     );
 }
 
-.card-media:not(:has(img, video))::after {
+.card-media:not(:has(img))::after {
     content: "Photo à venir";
     position: absolute;
     inset: 0;
