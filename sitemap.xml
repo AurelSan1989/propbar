@@ -18,58 +18,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-        <loc>https://TODO-DOMAINE/index.html</loc>
+        <loc>https://limponderable.fr/</loc>
         <lastmod>2026-10-09</lastmod>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/devanture.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/devanture.webp</image:loc>
             <image:title>Devanture et terrasse de L'impondérable, Paris 20e</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/couscous.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/couscous.webp</image:loc>
             <image:title>Couscous du chef de L'impondérable</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/planche-mixte.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/planche-mixte.webp</image:loc>
             <image:title>Planche mixte de L'impondérable</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/terrasse-cocktail.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/terrasse-cocktail.webp</image:loc>
             <image:title>Cocktail sur la terrasse de L'impondérable, rue des Pyrénées</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/pizza-buffala.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/pizza-buffala.webp</image:loc>
             <image:title>Pizza Buffala à la burrata de L'impondérable</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://TODO-DOMAINE/tarifs.html</loc>
+        <loc>https://limponderable.fr/tarifs</loc>
         <lastmod>2026-10-01</lastmod>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://TODO-DOMAINE/privatisation.html</loc>
+        <loc>https://limponderable.fr/privatisation</loc>
         <lastmod>2026-10-01</lastmod>
         <priority>0.9</priority>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/bar.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/bar.webp</image:loc>
             <image:title>Salle privatisable de L'impondérable, Paris 20e</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/plateau-cocktails.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/plateau-cocktails.webp</image:loc>
             <image:title>Cocktails servis en soirée à L'impondérable</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/megaplanche.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/megaplanche.webp</image:loc>
             <image:title>Plateau de charcuterie à partager, L'impondérable</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://TODO-DOMAINE/img/finger-food.webp</image:loc>
+            <image:loc>https://limponderable.fr/img/finger-food.webp</image:loc>
             <image:title>Finger food à partager, L'impondérable</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://TODO-DOMAINE/mentions-legales.html</loc>
+        <loc>https://limponderable.fr/mentions-legales</loc>
         <lastmod>2026-10-01</lastmod>
         <priority>0.1</priority>
     </url>
