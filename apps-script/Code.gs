@@ -206,7 +206,7 @@ function corpsHtml(demande) {
 
         + '<div style="padding:16px 24px;background-color:#F3EEE1;border-top:1px solid #E5DAC4;'
         + 'font-size:13px;color:#6B6257;text-align:center;">'
-        + 'Message automatique envoyé depuis le site de L\'Impondérable.'
+        + 'Message automatique envoyé depuis le site de L\'impondérable.'
         + '</div>'
 
         + '</div></div>';

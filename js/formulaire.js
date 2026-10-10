@@ -12,7 +12,7 @@
 // termine par /exec — une URL en /dev ne répond qu'au compte qui l'a créée.
 // Cette URL n'est pas un secret : elle vit forcément dans le code envoyé au
 // navigateur du visiteur, au même titre qu'une clé d'API Google Maps.
-const URL_FORMULAIRE = "https://script.google.com/macros/s/AKfycbzY9pStdESVvmM23W33BCeeiYNr4w1CtZB2HYGqhys6PQJU-fSs9RamUiZzFhxDflbIJw/exec";
+const URL_FORMULAIRE = "https://script.google.com/macros/s/AKfycbxHbdHwSFyQj87btdwUOAFj5lbQLuLPqrG1NKstMWATA8JJf4SmjlMenV1qhvOfTFa2wg/exec";
 
 // Capacité maximale du bar. Sert à la fois à la validation et à l'attribut
 // max du champ. À tenir cohérent avec la clé privatisation_capacite de
